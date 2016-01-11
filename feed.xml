@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Different in a good way.</title>
+    <description>Different in a good way.</description>
+    <link>http://paragasu.github.io/</link>
+    <atom:link href="http://paragasu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 11 Jan 2016 16:07:51 +0800</pubDate>
+    <lastBuildDate>Mon, 11 Jan 2016 16:07:51 +0800</lastBuildDate>
+    <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Migration from wordpress.com to github.io in Debian</title>
+        <description>&lt;p&gt;Login to wordpress and export all pages&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+#aptitude install ruby ruby-dev
+#gem install jekyll jekyll-import hpricot open_uri_redirections
+$jekyll serve
+&lt;/code&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 11 Jan 2016 11:18:30 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/01/11/migrating-to-github-io</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/01/11/migrating-to-github-io</guid>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>git change author info</title>
+        <description>&lt;p&gt;Edit the commit author and email name in github&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://help.github.com/articles/changing-author-info/&quot;&gt;change author info&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 28 Dec 2015 03:42:27 +0800</pubDate>
+        <link>http://paragasu.github.io/2015/12/28/git-change-author-info</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2015/12/28/git-change-author-info</guid>
+        
+        <category>git</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Disable ipv6 in debian</title>
+        <description>&lt;p&gt;edit /etc/sysctl.conf and add config&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&lt;br /&gt;
+net.ipv6.conf.all.disable_ipv6 = 1&lt;br /&gt;
+net.ipv6.conf.default.disable_ipv6 = 1&lt;br /&gt;
+net.ipv6.conf.lo.disable_ipv6 = 1&lt;br /&gt;
+net.ipv6.conf.eth0.disable_ipv6 = 1&lt;br /&gt;
+&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&lt;br /&gt;
+#sysctl -p&lt;br /&gt;
+&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://wiki.debian.org/DebianIPv6&quot;&gt;Debian IPv6&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 29 Nov 2015 09:46:43 +0800</pubDate>
+        <link>http://paragasu.github.io/2015/11/29/disable-ipv6-in-debian</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2015/11/29/disable-ipv6-in-debian</guid>
+        
+        <category>debian</category>
+        
+        <category>ipv6</category>
+        
+        <category>Linux</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Reactjs Fixed Data Table callback function onRowDoubleClick function</title>
+        <description>&lt;p&gt;The callback function for onRowDoubleClick for &lt;a href=&quot;https://facebook.github.io/fixed-data-table&quot;&gt;Fixed data table&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&lt;br /&gt;
+rowClicked: function(event, rowIndex, rowData){&lt;br /&gt;
+//code here&lt;br /&gt;
+}&lt;br /&gt;
+..&lt;/p&gt;
+&lt;table&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;/code&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 09 Nov 2015 06:53:08 +0800</pubDate>
+        <link>http://paragasu.github.io/2015/11/09/reactjs-fixed-data-table-callback-function-onrowdoubleclick-function</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2015/11/09/reactjs-fixed-data-table-callback-function-onrowdoubleclick-function</guid>
+        
+        <category>facebook</category>
+        
+        <category>fixed-data-table</category>
+        
+        <category>reactjs</category>
+        
+        
+        <category>javascript</category>
+        
+      </item>
+    
+      <item>
+        <title>setting up nfs in debian stretch</title>
+        <description>&lt;p&gt;On nfs server&lt;br /&gt;
+&lt;code&gt;&lt;br /&gt;
+#aptitude install nfs-kernel-server&lt;br /&gt;
+&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Edit /etc/exports configuration file&lt;br /&gt;
+&lt;code&gt;&lt;br /&gt;
+/home/me/public 192.168.1.2(rw,no_root_squash,subtree_check)&lt;br /&gt;
+&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Restart nfs&lt;br /&gt;
+&lt;code&gt;&lt;br /&gt;
+#exportfs -a&lt;br /&gt;
+#/etc/init.d/nfs-kernel-server start&lt;br /&gt;
+&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;On nfs client&lt;br /&gt;
+&lt;code&gt;&lt;br /&gt;
+#aptitude install nfs-common&lt;br /&gt;
+#/etc/init.d/nfs-common start&lt;br /&gt;
+&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;To list available nfs&lt;br /&gt;
+&lt;code&gt;&lt;br /&gt;
+#showmount -e 192.168.1.2&lt;br /&gt;
+&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;To mount nfs&lt;br /&gt;
+&lt;code&gt;&lt;br /&gt;
+#mount -t nfs /home/me/public /mnt/public&lt;br /&gt;
+&lt;/code&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.linode.com/docs/networking/basic-nfs-configuration-on-debian-7/&quot;&gt;more info&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 08 Nov 2015 01:57:58 +0800</pubDate>
+        <link>http://paragasu.github.io/2015/11/08/setting-up-nfs-in-debian-stretch</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2015/11/08/setting-up-nfs-in-debian-stretch</guid>
+        
+        <category>debian stretch</category>
+        
+        <category>Linux</category>
+        
+        <category>nfs</category>
+        
+        
+        <category>Linux</category>
+        
+      </item>
+    
+      <item>
+        <title>Docker error System error in /sys/fs/cgroup/cpu,cpuactt in debian</title>
+        <description>&lt;p&gt;
+&lt;a href=&quot;https://github.com/docker/docker/issues/16256&quot;&gt;https://github.com/docker/docker/issues/16256&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 30 Oct 2015 05:33:40 +0800</pubDate>
+        <link>http://paragasu.github.io/2015/10/30/docker-error-system-error-in-sysfscgroupcpucpuactt-in-debian</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2015/10/30/docker-error-system-error-in-sysfscgroupcpucpuactt-in-debian</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Basic tmux command</title>
+        <description>&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Ctrl+b &quot;&lt;/code&gt; - split pane horizontally.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl+b %&lt;/code&gt; - split pane vertically.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl+b arrow key&lt;/code&gt; - switch pane.&lt;/li&gt;
+&lt;li&gt;Hold &lt;code&gt;Ctrl+b&lt;/code&gt;, don&#39;t release it and hold one of the arrow keys - resize pane.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl+b c&lt;/code&gt; - (c)reate a new window.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl+b n&lt;/code&gt; - move to the (n)ext window.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl+b p&lt;/code&gt; - move to the (p)revious window.\&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;http://lukaszwrobel.pl/blog/tmux-tutorial-split-terminal-windows-easily&quot;&gt; Tmux tutorial&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://blog.hawkhost.com/2010/06/28/tmux-the-terminal-multiplexer/&quot;&gt;Tmux the terminal multiplexer&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 29 Oct 2015 05:36:29 +0800</pubDate>
+        <link>http://paragasu.github.io/2015/10/29/basic-tmux-command</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2015/10/29/basic-tmux-command</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Calculate distance between two point on earth in PostgreSQL</title>
+        <description>&lt;p&gt;Come across nice function by Merlin Moncure posted on grokbase&lt;br /&gt;
+&lt;code&gt;&lt;br /&gt;
+CREATE OR REPLACE FUNCTION calculate_distance(lat1 float8, lon1 float8, lat2 float8, lon2 float8)&lt;br /&gt;
+RETURNS float8 AS&lt;br /&gt;
+$$&lt;br /&gt;
+SELECT ACOS(SIN(RADIANS($1)) * SIN(RADIANS($3)) + COS(RADIANS($1)) * COS(RADIANS($3)) * COS(RADIANS($4) - RADIANS($2))) * 6371;&lt;br /&gt;
+$$ LANGUAGE &#39;sql&#39; IMMUTABLE;&lt;br /&gt;
+&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;More details&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://grokbase.com/t/postgresql/pgsql-general/1069rn3ca0/calculating-distance-between-longitude-and-latitude&quot;&gt;http://grokbase.com/t/postgresql/pgsql-general/1069rn3ca0/calculating-distance-between-longitude-and-latitude&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.movable-type.co.uk/scripts/latlong.html&quot;&gt;http://www.movable-type.co.uk/scripts/latlong.html&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 29 Oct 2015 02:54:15 +0800</pubDate>
+        <link>http://paragasu.github.io/2015/10/29/calculate-distance-between-two-point-on-earth-in-postgresql</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2015/10/29/calculate-distance-between-two-point-on-earth-in-postgresql</guid>
+        
+        <category>calculate distance</category>
+        
+        <category>postgresql</category>
+        
+        
+        <category>database</category>
+        
+      </item>
+    
+      <item>
+        <title>Migrating from MySQL to PostgreSQL</title>
+        <description>&lt;p&gt;Encounter some issue along the way&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1.MySQL DATE_SUB &amp;amp; DATE_ADD&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;(DATE_ADD(NOW(), INTERVAL 30 MINUTES)&lt;/p&gt;
+&lt;p&gt;(DATE_SUB(NOW(), INTERVAL 30 MINUTES)&lt;/p&gt;
+&lt;p&gt;(NOW() - INTERVAL &#39;30&#39; MINUTE)&lt;/p&gt;
+&lt;p&gt;(NOW() - INTERVAL &#39;30&#39; MINUTE) or&lt;/p&gt;
+&lt;p&gt;(NOW() - INTERVAL &#39;30 MINUTES&#39;) or&lt;/p&gt;
+&lt;p&gt;(NOW() - &#39;30 MINUTES&#39;::INTERVAL)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. MySQL RADIANS&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Need to cast to real&lt;/p&gt;
+&lt;p&gt;SELECT RADIANS(lat::real);&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. DISTINCT on json field (v9.4.5)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&lt;br /&gt;
+SELECT DISTINCT id, json_field FROM driver;&lt;br /&gt;
+&lt;/code&gt;&lt;br /&gt;
+Throw could not identify an equality operator for type json error.&lt;br /&gt;
+Converting the json field to jsonb solve the problem&lt;/p&gt;
+</description>
+        <pubDate>Thu, 29 Oct 2015 02:50:01 +0800</pubDate>
+        <link>http://paragasu.github.io/2015/10/29/migrating-from-mysql-to-postgresql</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2015/10/29/migrating-from-mysql-to-postgresql</guid>
+        
+        <category>migrating</category>
+        
+        <category>mysql</category>
+        
+        <category>postgresql</category>
+        
+        
+        <category>database</category>
+        
+        <category>postgresql</category>
+        
+      </item>
+    
+      <item>
+        <title>Install mysql 5.6 in debian 8 jessie</title>
+        <description>&lt;p&gt;The replication performance leap from MySQL 5.5 to MySQL 5.6 is more than 4x.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://blogs.oracle.com/MySQL/entry/mysql_5_6_replication_performance&quot;&gt;https://blogs.oracle.com/MySQL/entry/mysql_5_6_replication_performance&lt;/a&gt;&lt;br /&gt;
+&lt;code&gt;&lt;br /&gt;
+#wget http://dev.mysql.com/get/mysql-apt-config_0.3.5-1debian8_all.deb&lt;br /&gt;
+#dpkg -i mysql-apt-config_0.3.5-1debian7_all.deb&lt;br /&gt;
+#apt-get update&lt;br /&gt;
+#apt-get install mysql-community-server&lt;br /&gt;
+&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.debiantutorials.com/install-mysql-server-5-6-debian-7-8/&quot;&gt;More info&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 09 Oct 2015 02:30:44 +0800</pubDate>
+        <link>http://paragasu.github.io/2015/10/09/install-mysql-5-6-in-debian-8-jessie</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2015/10/09/install-mysql-5-6-in-debian-8-jessie</guid>
+        
+        <category>debian jessie</category>
+        
+        <category>install</category>
+        
+        <category>mysql</category>
+        
+        <category>mysql 5.5</category>
+        
+        <category>mysql 5.6</category>
+        
+        
+        <category>database</category>
+        
+        <category>Linux</category>
+        
+      </item>
+    
+  </channel>
+</rss>

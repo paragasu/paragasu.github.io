@@ -1,0 +1,5355 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Different in a good way.</title>
+  <meta name="description" content="Different in a good way.">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://paragasu.github.io/">
+  <link rel="alternate" type="application/rss+xml" title="Different in a good way." href="http://paragasu.github.io/feed.xml">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Different in a good way.</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="home">
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/01/11/migrating-to-github-io">
+      Migration from wordpress.com to github.io in Debian
+    </a>
+  </h1>
+  <div class="post-date">Jan 11, 2016</div>
+  <p>Login to wordpress and export all pages</p>
+
+<p><code class="highlighter-rouge">
+#aptitude install ruby ruby-dev
+#gem install jekyll jekyll-import hpricot open_uri_redirections
+$jekyll serve
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/12/28/git-change-author-info">
+      git change author info
+    </a>
+  </h1>
+  <div class="post-date">Dec 28, 2015</div>
+  <p>Edit the commit author and email name in github</p>
+<p><a href="https://help.github.com/articles/changing-author-info/">change author info</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/11/29/disable-ipv6-in-debian">
+      Disable ipv6 in debian
+    </a>
+  </h1>
+  <div class="post-date">Nov 29, 2015</div>
+  <p>edit /etc/sysctl.conf and add config</p>
+<p><code><br />
+net.ipv6.conf.all.disable_ipv6 = 1<br />
+net.ipv6.conf.default.disable_ipv6 = 1<br />
+net.ipv6.conf.lo.disable_ipv6 = 1<br />
+net.ipv6.conf.eth0.disable_ipv6 = 1<br />
+</code></p>
+<p><code><br />
+#sysctl -p<br />
+</code></p>
+<p><a href="https://wiki.debian.org/DebianIPv6">Debian IPv6</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/11/09/reactjs-fixed-data-table-callback-function-onrowdoubleclick-function">
+      Reactjs Fixed Data Table callback function onRowDoubleClick function
+    </a>
+  </h1>
+  <div class="post-date">Nov 9, 2015</div>
+  <p>The callback function for onRowDoubleClick for <a href="https://facebook.github.io/fixed-data-table">Fixed data table</a>.</p>
+<p><code><br />
+rowClicked: function(event, rowIndex, rowData){<br />
+//code here<br />
+}<br />
+..</p>
+<table>
+</table>
+<p></code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/11/08/setting-up-nfs-in-debian-stretch">
+      setting up nfs in debian stretch
+    </a>
+  </h1>
+  <div class="post-date">Nov 8, 2015</div>
+  <p>On nfs server<br />
+<code><br />
+#aptitude install nfs-kernel-server<br />
+</code></p>
+<p>Edit /etc/exports configuration file<br />
+<code><br />
+/home/me/public 192.168.1.2(rw,no_root_squash,subtree_check)<br />
+</code></p>
+<p>Restart nfs<br />
+<code><br />
+#exportfs -a<br />
+#/etc/init.d/nfs-kernel-server start<br />
+</code></p>
+<p>On nfs client<br />
+<code><br />
+#aptitude install nfs-common<br />
+#/etc/init.d/nfs-common start<br />
+</code></p>
+<p>To list available nfs<br />
+<code><br />
+#showmount -e 192.168.1.2<br />
+</code></p>
+<p>To mount nfs<br />
+<code><br />
+#mount -t nfs /home/me/public /mnt/public<br />
+</code><br />
+<a href="https://www.linode.com/docs/networking/basic-nfs-configuration-on-debian-7/">more info</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/10/30/docker-error-system-error-in-sysfscgroupcpucpuactt-in-debian">
+      Docker error System error in /sys/fs/cgroup/cpu,cpuactt in debian
+    </a>
+  </h1>
+  <div class="post-date">Oct 30, 2015</div>
+  <p>
+<a href="https://github.com/docker/docker/issues/16256">https://github.com/docker/docker/issues/16256</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/10/29/basic-tmux-command">
+      Basic tmux command
+    </a>
+  </h1>
+  <div class="post-date">Oct 29, 2015</div>
+  <ul>
+<li><code>Ctrl+b "</code> - split pane horizontally.</li>
+<li><code>Ctrl+b %</code> - split pane vertically.</li>
+<li><code>Ctrl+b arrow key</code> - switch pane.</li>
+<li>Hold <code>Ctrl+b</code>, don't release it and hold one of the arrow keys - resize pane.</li>
+<li><code>Ctrl+b c</code> - (c)reate a new window.</li>
+<li><code>Ctrl+b n</code> - move to the (n)ext window.</li>
+<li><code>Ctrl+b p</code> - move to the (p)revious window.\</li>
+</ul>
+<p><a href="http://lukaszwrobel.pl/blog/tmux-tutorial-split-terminal-windows-easily"> Tmux tutorial</a><br />
+<a href="http://blog.hawkhost.com/2010/06/28/tmux-the-terminal-multiplexer/">Tmux the terminal multiplexer</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/10/29/calculate-distance-between-two-point-on-earth-in-postgresql">
+      Calculate distance between two point on earth in PostgreSQL
+    </a>
+  </h1>
+  <div class="post-date">Oct 29, 2015</div>
+  <p>Come across nice function by Merlin Moncure posted on grokbase<br />
+<code><br />
+CREATE OR REPLACE FUNCTION calculate_distance(lat1 float8, lon1 float8, lat2 float8, lon2 float8)<br />
+RETURNS float8 AS<br />
+$$<br />
+SELECT ACOS(SIN(RADIANS($1)) * SIN(RADIANS($3)) + COS(RADIANS($1)) * COS(RADIANS($3)) * COS(RADIANS($4) - RADIANS($2))) * 6371;<br />
+$$ LANGUAGE 'sql' IMMUTABLE;<br />
+</code></p>
+<p>More details</p>
+<p><a href="http://grokbase.com/t/postgresql/pgsql-general/1069rn3ca0/calculating-distance-between-longitude-and-latitude">http://grokbase.com/t/postgresql/pgsql-general/1069rn3ca0/calculating-distance-between-longitude-and-latitude</a><br />
+<a href="http://www.movable-type.co.uk/scripts/latlong.html">http://www.movable-type.co.uk/scripts/latlong.html</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/10/29/migrating-from-mysql-to-postgresql">
+      Migrating from MySQL to PostgreSQL
+    </a>
+  </h1>
+  <div class="post-date">Oct 29, 2015</div>
+  <p>Encounter some issue along the way</p>
+<p><strong>1.MySQL DATE_SUB &amp; DATE_ADD</strong></p>
+<p>(DATE_ADD(NOW(), INTERVAL 30 MINUTES)</p>
+<p>(DATE_SUB(NOW(), INTERVAL 30 MINUTES)</p>
+<p>(NOW() - INTERVAL '30' MINUTE)</p>
+<p>(NOW() - INTERVAL '30' MINUTE) or</p>
+<p>(NOW() - INTERVAL '30 MINUTES') or</p>
+<p>(NOW() - '30 MINUTES'::INTERVAL)</p>
+<p><strong>2. MySQL RADIANS</strong></p>
+<p>Need to cast to real</p>
+<p>SELECT RADIANS(lat::real);</p>
+<p><strong>3. DISTINCT on json field (v9.4.5)</strong></p>
+<p><code><br />
+SELECT DISTINCT id, json_field FROM driver;<br />
+</code><br />
+Throw could not identify an equality operator for type json error.<br />
+Converting the json field to jsonb solve the problem</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/10/09/install-mysql-5-6-in-debian-8-jessie">
+      Install mysql 5.6 in debian 8 jessie
+    </a>
+  </h1>
+  <div class="post-date">Oct 9, 2015</div>
+  <p>The replication performance leap from MySQL 5.5 to MySQL 5.6 is more than 4x.</p>
+<p><a href="https://blogs.oracle.com/MySQL/entry/mysql_5_6_replication_performance">https://blogs.oracle.com/MySQL/entry/mysql_5_6_replication_performance</a><br />
+<code><br />
+#wget http://dev.mysql.com/get/mysql-apt-config_0.3.5-1debian8_all.deb<br />
+#dpkg -i mysql-apt-config_0.3.5-1debian7_all.deb<br />
+#apt-get update<br />
+#apt-get install mysql-community-server<br />
+</code></p>
+<p><a href="http://www.debiantutorials.com/install-mysql-server-5-6-debian-7-8/">More info</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/09/26/firefox-40-slow-right-click-in-debian-linux">
+      Firefox 40+ slow right click in Debian Linux
+    </a>
+  </h1>
+  <div class="post-date">Sep 26, 2015</div>
+  <p>Just installed latest firefox on debian linux streetch.<br />
+Right click on link popup very slow.</p>
+<blockquote><p>SOLVED: [blfs-support] Firefox - slow menu and right-click response</p>
+<p>The right click menu in Firefox is now fast again. I disabled Pulseaudio which<br />
+tried to load ConsoleKit. This did not work sine I have unstalled ConsoleKit.</p>
+<p>=== details ===</p>
+<p>I found this:</p>
+<p>/var/log/sys.log<br />
+Jan 25 09:13:47 lfs pulseaudio[2565]: [pulseaudio] module-console-kit.c:<br />
+GetSessionsForUnixUser() call failed:<br />
+org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.ConsoleKit<br />
+was not provided by any .service files<br />
+Jan 25 09:13:47 lfs pulseaudio[2565]: [pulseaudio] module.c: Failed to load<br />
+module "module-console-kit" (argument: ""): initialization failed.<br />
+Jan 25 09:13:47 lfs pulseaudio[2565]: [pulseaudio] main.c: Module load failed.<br />
+Jan 25 09:13:47 lfs pulseaudio[2565]: [pulseaudio] main.c: Failed to<br />
+initialize daemon.<br />
+Jan 25 09:13:47 lfs pulseaudio[2562]: [pulseaudio] main.c: Daemon startup<br />
+failed.</p>
+<p>I commented out the text below in /etc/pulse/default.pa<br />
+#.ifexists module-console-kit.so<br />
+#load-module module-console-kit<br />
+#.endif</p>
+<p>I restarted and then the problem with the Firefox menus disappeared.</p>
+<p>The root cause is probably that I uninstalled ConsoleKit. This was<br />
+intentional, but I failed to recognize the side effects.</p>
+<p>Magnus</p></blockquote>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/06/29/qooxdoo-change-global-application-font-size">
+      Qooxdoo change global application font size
+    </a>
+  </h1>
+  <div class="post-date">Jun 29, 2015</div>
+  <p><code><br />
+         setFontSize: function(size)<br />
+         {<br />
+             var doc         = this.getRoot();<br />
+             var manager     = qx.theme.manager.Font.getInstance();<br />
+             var defaultFont = manager.resolve(doc.getFont());<br />
+             var newFont     = defaultFont.clone().setSize(parseInt(size));</p>
+<p>             doc.setFont(newFont);<br />
+         },<br />
+<code /></code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/06/05/how-to-use-genymotion-emulator">
+      How to use genymotion emulator
+    </a>
+  </h1>
+  <div class="post-date">Jun 5, 2015</div>
+  <p>Start the emulator. Then find out the genymotion assigned IP address</p>
+<p><code><br />
+$ps ax | grep geny<br />
+</code></p>
+<p>Then connect using adb<br />
+<code><br />
+$adb connect 192.168.1.3<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/06/05/adb-android-over-wireless-connection">
+      ADB android over wireless connection
+    </a>
+  </h1>
+  <div class="post-date">Jun 5, 2015</div>
+  <p>1. Connect using USB<br />
+<code><br />
+$adb tcpip 5555<br />
+</code></p>
+<p>2. Disconnect USB<br />
+3. Reconnect using wireless connection. You can find out the IP address from wireless config<br />
+<code><br />
+$adb connect 192.168.1.3:5555<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/06/05/genymotion-fatal-cannot-mix-incompatible-qt-library-version-0x40806-with-this-library-version-0x40802">
+      [Genymotion] [Fatal] Cannot mix incompatible Qt library (version 0x40806) with this library (version 0x40802)
+    </a>
+  </h1>
+  <div class="post-date">Jun 5, 2015</div>
+  <p>Go into genymotion installation directory<br />
+<code><br />
+#cd /opt/genymotion<br />
+</code><code><br />
+#aptitude install libxi-dev libxmu-dev<br />
+#mkdir QtLibs<br />
+#mv *Qt*.so* QtLibs<br />
+<code></code></code></p>
+<p>for more info <a title="Ubuntu Forums" href="http://ubuntuforums.org/showthread.php?t=2207219&amp;p=13048000#post13048000"> Ubuntu Forums </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/06/04/splash-screen-in-nativescript">
+      Splash screen in nativescript
+    </a>
+  </h1>
+  <div class="post-date">Jun 4, 2015</div>
+  <p>More info on this post</p>
+<p><a title="https://www.nativescript.org/blog/splash-screen-for-your-android-applications" href="https://www.nativescript.org/blog/splash-screen-for-your-android-applications">https://www.nativescript.org/blog/splash-screen-for-your-android-applications</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/06/04/tns-debug-android-debug-brk-in-linux">
+      tns debug android --debug-brk in linux
+    </a>
+  </h1>
+  <div class="post-date">Jun 4, 2015</div>
+  <p>the nativescript cli<br />
+<code><br />
+$tns debug android --debug-brk<br />
+</code></p>
+<p>The command expect your google chrome executable name is "chrome".<br />
+But in my debian jessie workstation. The executable name is "google-chrome"</p>
+<p><code><br />
+$ln -s /usr/bin/google-chrome ~/bin/chrome<br />
+</code></p>
+<p>will fix the problem.</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/05/27/how-to-uninstall-cpanel-from-centos-6-server">
+      How to uninstall Cpanel from Centos 6 server
+    </a>
+  </h1>
+  <div class="post-date">May 27, 2015</div>
+  <p><code><br />
+#yum erase 'centos*'<br />
+<code></p>
+<p>make sure to edit the /etc/yum.conf to remove the packages listed in the exclude section<br />
+<code><br />
+[main]<br />
+exclude= ..<br />
+</code></code></code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/05/27/centos-6-no-package-php-fpm-available">
+      Centos 6 No package php-fpm available
+    </a>
+  </h1>
+  <div class="post-date">May 27, 2015</div>
+  <p>After installing epel and remi repository and enable remi-php56, the php packages still not available. The issue is i just uninstall Cpanel from my Centos 6 server. Cpanel disable php packages from showing up in you</p>
+<p><code><br />
+#vim /etc/yum.conf<br />
+[main]<br />
+exclude=php* ..<br />
+</code></p>
+<p>Just remove php packages from the exclude section of the /etc/yum.conf</p>
+<p>It waste 3 hours of my time to figure this out.. :(</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/05/17/powerdns-unable-to-find-backend-willing-to-host-for-potential-supermaster">
+      powerdns unable to find backend willing to host for potential supermaster
+    </a>
+  </h1>
+  <div class="post-date">May 17, 2015</div>
+  <p>I got this error when i setup powerdns superslave in debian using sqlite3 backend. The condition to get the superslave working.</p>
+<ul>
+<li>The supermaster must carry a SOA record for the notified domain</li>
+<li>The supermaster IP must be present in the 'supermaster' table</li>
+<li>The set of NS records for the domain, as retrieved by the slave from the supermaster, <strong>must include the nameserver</strong> that goes with the IP address in the supermaster table</li>
+</ul>
+<p>A very usefull command to test if the setup is working</p>
+<p>to send the notification to the slave and<br />
+<code>#pdns_control notify mydomain.com<br />
+</code></p>
+<p>to request for supermasters zone<br />
+<code>#pdns_control retrieve mydomain.com<br />
+</code></p>
+<p><a href="https://doc.powerdns.com/md/authoritative/modes-of-operation/#slave-operation">More</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2015/04/07/postgresql-remove-not-null-constraints">
+      PostgreSQL remove not null constraints
+    </a>
+  </h1>
+  <div class="post-date">Apr 7, 2015</div>
+  <p><code><br />
+ALTER TABLE booking ALTER nationality DROP not null;<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2014/10/09/foundation-logo-align-centre-on-small-screen">
+      Foundation logo align centre on small screen
+    </a>
+  </h1>
+  <div class="post-date">Oct 9, 2014</div>
+  <p>[code]<br />
+&lt;div class=&quot;row&quot;&gt;<br />
+&lt;div class=&quot;small-8 small-centered large-4 large-uncentered columns&quot;&gt;<br />
+ &lt;img src=&quot;logo.png&quot; /&gt;<br />
+&lt;/div&gt;<br />
+&lt;/div&gt;<br />
+[/code]</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2014/09/11/javascript-get-the-last-value-of-an-array">
+      javascript get the last value of an array
+    </a>
+  </h1>
+  <div class="post-date">Sep 11, 2014</div>
+  <p>the value of the last item in a javascript array</p>
+<p><code><br />
+arr.split(-1)[0]<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2014/06/08/set-ux31e-lcd-brightness-to-the-minimum">
+      Set ux31e LCD brightness to the minimum
+    </a>
+  </h1>
+  <div class="post-date">Jun 8, 2014</div>
+  <p>add the following line to the /etc/rc.local</p>
+<p><code><br />
+echo 0 &gt; /sys/class/backlight/acpi_video0/brightness<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2014/04/15/phonegap-add-android-error">
+      phonegap add android error
+    </a>
+  </h1>
+  <div class="post-date">Apr 15, 2014</div>
+  <p>on the phonegap 3.4 running to command<br />
+<code><br />
+$phonegap add android<br />
+</code></p>
+<p>give an error like this<br />
+<code><br />
+/bin/node_modules/q/q.js:126<br />
+                    throw e;<br />
+                          ^<br />
+</code></p>
+<p>the problem is the android sdk still not configured properly<br />
+you need to configure the environment ANDROID_HOME, ANDROID_HOME/tools and ANDROID_HOME/platform-tools<br />
+add this in your ~/.bash_profile<br />
+<code><br />
+export ANDROID_HOME=$HOME/android-sdk-linux<br />
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2014/03/19/alsa-lib-ctl_oss-c-cannot-open-device-devmixer">
+      ALSA lib ctl_oss.c Cannot open device /dev/mixer
+    </a>
+  </h1>
+  <div class="post-date">Mar 19, 2014</div>
+  <p>It happen recently on my debian workstation<br />
+<code><br />
+ALSA lib ctl_oss.c:398 (_snd_ctl_oss_open) Cannot open device /dev/mixer<br />
+Cannot open mixer: No such file or directory<br />
+</code> </p>
+<p>When you try to run alsamixer. The reason is the the module snd-pcm-oss not loaded. To fix<br />
+<code><br />
+#modprobe snd-pcm-oss<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2014/03/12/qooxdoo-wrong-icon-path-after-migrate-from-2-0-to-3-5">
+      qooxdoo wrong icon path after  migrate from 2.0 to 3.5
+    </a>
+  </h1>
+  <div class="post-date">Mar 12, 2014</div>
+  <p>It must be in the form below, start by "/**" and end by "*/" and in between start by "*".<br />
+<code><br />
+/**<br />
+* @assert(sumisi/*)<br />
+*/<br />
+</code></p>
+<p>Otherwise assert will not be read by JsDoc and give an error<br />
+<code><br />
+qx.ui.basic.Image[90-0]: Image could not be loaded: sumisi/login.png<br />
+ImageLoader: Not recognized format of external image 'sumisi/login.png'<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/08/13/mssql-not-a-valid-ss_sqlsrv_stmt-resource">
+      mssql not a valid ss_sqlsrv_stmt resource
+    </a>
+  </h1>
+  <div class="post-date">Aug 13, 2013</div>
+  <p>It happen when i have a code like below<br />
+<code><br />
+function connect()<br />
+{<br />
+     return sqlsrv_connect(..);<br />
+}<br />
+..<br />
+$result = sqlsrv_query(connect(), $sql);<br />
+</code></p>
+<p>The error mysteriously went away when i change the code to this<br />
+<code><br />
+$connect = connect();<br />
+$result  = sqlsrv_query($connec, $sql);<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/08/13/nokia-n9-no-mobile-network-error">
+      nokia n9 no mobile network error
+    </a>
+  </h1>
+  <div class="post-date">Aug 13, 2013</div>
+  <p>It happen when i put my DiGi simcard with the original number switch from Maxis network. Fix the problem when i swith my phone number back to Maxis.</p>
+<p>Maybe there N9 not compatible with Mobile Number Portability implementation in Malaysia.</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/06/15/powerdns-unexisting-parameter-bind-config">
+      powerdns unexisting parameter 'bind-config'
+    </a>
+  </h1>
+  <div class="post-date">Jun 15, 2013</div>
+  <p>It happen when there is two 'launch' configuration in powerdns configuration.<br />
+Delete one of it to solve the problem.</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/05/24/change-amazon-ec2-debian-ami-image-hostname">
+      change amazon ec2 debian AMI image hostname
+    </a>
+  </h1>
+  <div class="post-date">May 24, 2013</div>
+  <p><code><br />
+$sudo -i<br />
+#hostname -b<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/04/04/enable-ctrlaltbackspace-to-kill-xorg-in-debian">
+      Enable ctrl+alt+backspace to kill xorg in debian
+    </a>
+  </h1>
+  <div class="post-date">Apr 4, 2013</div>
+  <p>Add this into ~/.bash_profile<br />
+<code><br />
+setxkbmap -option terminate:ctrl_alt_bksp<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/03/10/nginx-php-cgi-on-window-server-2008">
+      nginx + php-cgi on window server 2008
+    </a>
+  </h1>
+  <div class="post-date">Mar 10, 2013</div>
+  <p>php-cgi.php just hang and die on a very low load.</p>
+<p>To fix this, use <a href="https://bitbucket.org/cybergene/spawn-php/wiki/Home">spawn-php</a></p>
+<p>Install<br />
+<code><br />
+ActivePython-2.7.2.5-win64-x64.msi<br />
+pywin32-217.win-amd64-py2.7.exe<br />
+</code></p>
+<p>Change nginx configuration<br />
+<code><br />
+worker_processes  1;</p>
+<p>events {<br />
+    worker_connections  1024;<br />
+}</p>
+<p>http {<br />
+   include       mime.types;<br />
+   default_type  application/octet-stream;</p>
+<p>   sendfile        on;<br />
+   keepalive_timeout  65;</p>
+<p>   upstream php_farm {<br />
+       server 127.0.0.1:9000 weight=1;<br />
+       server 127.0.0.1:9001 weight=1;<br />
+       server 127.0.0.1:9002 weight=1;<br />
+       server 127.0.0.1:9003 weight=1;<br />
+       server 127.0.0.1:9004 weight=1;<br />
+       server 127.0.0.1:9005 weight=1;<br />
+       server 127.0.0.1:9006 weight=1;<br />
+       server 127.0.0.1:9007 weight=1;<br />
+       server 127.0.0.1:9008 weight=1;<br />
+       server 127.0.0.1:9009 weight=1;<br />
+    }</p>
+<p>    server {<br />
+       listen       80;<br />
+       server_name  localhost;<br />
+       location / {<br />
+            root   html;<br />
+            index  index.php index.html index.htm;<br />
+        }</p>
+<p>        error_page   500 502 503 504  /50x.html;<br />
+        location = /50x.html {<br />
+            root   html;<br />
+        }   </p>
+<p>        location ~ \.php$ {<br />
+            root           html;<br />
+            fastcgi_pass   php_farm;<br />
+            fastcgi_index  index.php;<br />
+            fastcgi_param  SCRIPT_FILENAME  c:/nginx/html/$fastcgi_script_name;<br />
+            include        fastcgi_params;<br />
+        }<br />
+    }<br />
+}<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/03/10/change-default-browser">
+      change default browser
+    </a>
+  </h1>
+  <div class="post-date">Mar 10, 2013</div>
+  <p><code><br />
+#update-alternatives --config x-www-browser<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/02/28/php-linux-vs-window-version">
+      php linux vs window version
+    </a>
+  </h1>
+  <div class="post-date">Feb 28, 2013</div>
+  <p>Come across interesting fact;</p>
+<p>In linux<br />
+<code><br />
+echo $_SERVER['SERVER_NAME']; //somedomain.org<br />
+echo $_SERVER['HTTP_HOST']; //somedomain.org<br />
+</code></p>
+<p>In window<br />
+<code><br />
+echo $_SERVER['SERVER_NAME']; //localhost<br />
+echo $_SERVER['HTTP_HOST']; //somedomain.org<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/02/24/change-associated-array-to-indexed-array">
+      change associated array to indexed array
+    </a>
+  </h1>
+  <div class="post-date">Feb 24, 2013</div>
+  <p>sometimes i want to change this form of array<br />
+<code><br />
+array('position'=&gt; array('data1', 'data2'..)<br />
+       'year'   =&gt; array('year1', 'year2'..)<br />
+)<br />
+</code></p>
+<p>to this<br />
+<code><br />
+array(0 =&gt; array('position'=&gt; 'data1',<br />
+                 'year' =&gt; 'year1'),<br />
+      1 =&gt; array('position' =&gt; 'data2',<br />
+                 'year' =&gt; 'year2')<br />
+</code></p>
+<p>here is how i do it.<br />
+<code><br />
+function array_group($data)<br />
+{<br />
+     $result = array();<br />
+     foreach($data as $key=&gt;$rows)<br />
+         foreach($rows as $i=&gt;$value)<br />
+             $result[$i][$key] = $value; </p>
+<p>     return $result;<br />
+}<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/02/20/virtualbox-look-ugly">
+      virtualbox look ugly
+    </a>
+  </h1>
+  <div class="post-date">Feb 20, 2013</div>
+  <p>virtualbox made with qt library. To fix the ugly win95 looking theme,<br />
+<code><br />
+#aptitude install qt4-qtconfig<br />
+$qtconfig<br />
+</code></p>
+<p>and change the Gui Style to GTK+</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/02/20/710">
+      
+    </a>
+  </h1>
+  <div class="post-date">Feb 20, 2013</div>
+  <p><img src="/assets/untitled.png?w=300" alt="Vim" width="300" height="190" class="alignnone size-medium wp-image-711" /></p>
+<p>edit the configuration files _vimrc</p>
+<p><code><br />
+set tabstop=4<br />
+set shiftwidth=4<br />
+set expandtab<br />
+set autoindent<br />
+set smartindent<br />
+set textwidth=0<br />
+set nowrap<br />
+set number<br />
+set scrolljump=5<br />
+colorscheme koehler<br />
+set guifont=Consolas<br />
+set guioptions-=m "remove menubar<br />
+set guioptions-=T "remove toolbar<br />
+set guioptions-=r "remove scrollbar<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/02/17/mssql-last-insert-id">
+      MSSQL last insert id
+    </a>
+  </h1>
+  <div class="post-date">Feb 17, 2013</div>
+  <p>Using SCOPE_IDENTITY(), </p>
+<p><code><br />
+$result = sqlsrv_query($conn, 'INSERT INTO mytable(name) values ('hello world') ; SELECT SCOPE_IDENTITY() AS ID', array(), $option);<br />
+sqlsrv_next_result();<br />
+$row = sqlsrv_fetch_object($result);</p>
+<p>echo $row-&gt;ID; //last insert id<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/02/17/php-gotcha">
+      PHP gotcha
+    </a>
+  </h1>
+  <div class="post-date">Feb 17, 2013</div>
+  <p>some unexpected stuff</p>
+<p><code><br />
+var_dump('f' == 0); //bool(true)<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/02/17/sqlsrv_rows_affected-weirdness">
+      mssql sqlsrv_rows_affected() weirdness
+    </a>
+  </h1>
+  <div class="post-date">Feb 17, 2013</div>
+  <p>The documentation says that sqlsrv_rows_affected() returned mixed values.<br />
+But it keep returning FALSE even the query executed succesfully.</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/02/17/from-postgresql-to-mssql">
+      From PostgreSQL to MSSQL
+    </a>
+  </h1>
+  <div class="post-date">Feb 17, 2013</div>
+  <p>I love postgresql but my client request specifically for MSSQL. </p>
+<p>1. PGSQL boolean column return 't' and 'f' for true and false<br />
+   MSSQL bit column return 1 and 0 for truen and false </p>
+<p>2. PGSQL text column is special it can be use for any size of text<br />
+   MSSQL varchar column to be able to use operator in where clause and varchar(max) for long string</p>
+<p>3. PGSQL use pg_* functions<br />
+   MSSQL use sqlsrv_* driver supplied by Microsoft and this driver can only be use in windows.</p>
+<p>4. PGSQL pg_fetch_object return string for datetime column value<br />
+   MSSQL sqlsrv_fetch_object return DateTime object for datetime column value.<br />
+   I have to pass 'ReturnDatesAsString' option in the connection string to turn if off.</p>
+<p>5. Paging in PGSQL is straight forward using LIMIT .. OFFSET<br />
+   In MSSQL i have to use CTE function to enable to use my existing paging library.</p>
+<p>6. PGSQL pg_affected_rows()<br />
+   MSSQL sqlsrv_rows_affected()</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/02/17/mssql-paging-with-cte-2">
+      MSSQL paging with CTE
+    </a>
+  </h1>
+  <div class="post-date">Feb 17, 2013</div>
+  <p>No LIMIT OFFSET as in PostgreSQL or MySQL.<br />
+<code><br />
+WITH cte AS<br />
+(<br />
+      SELECT ROW_NUMBER() OVER(ORDER BY country ASC) AS RowNumber<br />
+      FROM company WHERE country='Malaysia'<br />
+)<br />
+SELECT * FROM cte<br />
+WHERE RowNumber &gt; 0 AND RowNumber &lt; 100 </p>
+<p></code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/02/17/mssql-paging-with-cte">
+      sqlsrv driver return datetime colum as datetime object
+    </a>
+  </h1>
+  <div class="post-date">Feb 17, 2013</div>
+  <p>MSSQL's PHP driver sqlsrv_fetch_object return DateTime object by default. To disable this, pass parameter ReturnDatesAsString on the connection string</p>
+<p><code><br />
+$param = array('Database' = &gt; 'db',<br />
+               'UID' =&gt; 'uname',<br />
+               'PWD' =&gt; 'secret',<br />
+               'ReturnDatesAsStrings' =&gt; 'true');</p>
+<p>$conn = sqlsrv_connect('localhost\sqlexpress', $param);<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2013/01/03/qooxdoo-datefield-value-less-one-day">
+      qooxdoo datefield value less one day
+    </a>
+  </h1>
+  <div class="post-date">Jan 3, 2013</div>
+  <p>For example the user choose the date 2012-12-31 but the value submitted is 2012-12-30. It has something to do with timezone as explained<br />
+on<a href="http://qooxdoo.678.n2.nabble.com/Problem-with-qx-ui-form-DateField-vs-qx-lang-Json-stringify-td7582108.html"> this post</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/09/29/disable-tabview-page">
+      disable tabview page
+    </a>
+  </h1>
+  <div class="post-date">Sep 29, 2012</div>
+  <p>Here is a way to disable the tabview page. Turn it grey and unclickable.</p>
+<p><code><br />
+var page = new qx.ui.tabview.Page("page");<br />
+page.set({enabled: false});<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/09/20/wheezy-php5-fpm-and-nginx">
+      wheezy php5-fpm and nginx
+    </a>
+  </h1>
+  <div class="post-date">Sep 20, 2012</div>
+  <p>Debian wheezy version of php5-fpm (5.4.4-7) using socket instead of server running on local port 9000.<br />
+Need to update nginx configuration files to point to php5-fpm socket.</p>
+<p><code><br />
+location ~.\.php$ {<br />
+   #fastcgi_pass 127.0.0.1:9000;<br />
+    fastcgi_pass unix:/var/run/php5-fpm.sock;<br />
+}<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/09/19/openerp-set-default-value-of-popup-form-from-one2many-field-parent">
+      Openerp set default value of popup form from one2many field parent
+    </a>
+  </h1>
+  <div class="post-date">Sep 19, 2012</div>
+  <p>class definition (shop.py), please note the magic active_id</p>
+<p><code><br />
+class item(osv.osv):<br />
+_name = "shop.item"<br />
+_columns = {<br />
+"item_id": fields.many2one("shop.cart", "Cart"),<br />
+}<br />
+_defaults = {<br />
+"item_id": lambda self, cr, uid, c: c.get('item_id', False),<br />
+}</code></p>
+<p>class cart(osv.osv):<br />
+_name = "shop.cart"<br />
+_columns = {<br />
+"item_ids": one2many("shop.item", "item_id", "Items"),<br />
+}</p>
+<p>In the view definition for the one2many field (shop_view.xml)<br />
+<code></code></p>
+<p>&lt;field name="item_ids" domain="['item_id', '=', active_id]" context="{'item_id': active_id}" /&gt;</p>
+<p>&nbsp;</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/09/17/oss4-no-sound-in-iceweasel-flash">
+      oss4 no sound in iceweasel flash
+    </a>
+  </h1>
+  <div class="post-date">Sep 17, 2012</div>
+  <p>flashplugin-nonfree only support Alsa. Thus, extra package required to support OSS4</p>
+<p><code><br />
+#aptitude install flashplugin-nonfree-extrasound<br />
+#mkdir /usr/lib/oss/lib<br />
+#cd /usr/lib/oss/lib<br />
+#ln -s /usr/lib/flashplugin-nonfree-extrasound/libflashsupport.so .<br />
+</code></p>
+<p>Restart iceweasel</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/09/03/cloning-object-in-qooxdoo">
+      cloning object in qooxdoo
+    </a>
+  </h1>
+  <div class="post-date">Sep 3, 2012</div>
+  <p>Object<br />
+<code><br />
+var a = {};<br />
+var b = qx.lang.Object.clone(a);<br />
+</code></p>
+<p>Array<br />
+<code><br />
+var a = [];<br />
+var b = a.slice()<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/07/19/backend-error-database-error-trying-to-insert-new-slave-domain-tld-error-while-retrieving-sqlite-query-results">
+      Backend error: Database error trying to insert new slave 'domain.tld': Error while retrieving SQLite query results
+    </a>
+  </h1>
+  <div class="post-date">Jul 19, 2012</div>
+  <p><code><br />
+Backend error: Database error trying to insert new slave 'domain.tld': Error while retrieving SQLite query results<br />
+</code></p>
+<p>Related to debian bug #565516<br />
+The directory and file where the sqlite3 file must be writeable by pdns</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/05/15/search-for-file-that-contain-particular-string">
+      search for file that contain particular string
+    </a>
+  </h1>
+  <div class="post-date">May 15, 2012</div>
+  <p><code><br />
+$grep -r "i am looking for you" /home/rogon/*php </code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/05/15/delete-file-with-0-size">
+      delete file with 0 size
+    </a>
+  </h1>
+  <div class="post-date">May 15, 2012</div>
+  <p><code><br />
+$find /home/paragasu/myfile -type f -size 0 -exec rm -f {} \;<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/04/06/qooxdoo-typeerror-is-not-a-constructor">
+      qooxdoo typeerror .. is not a constructor
+    </a>
+  </h1>
+  <div class="post-date">Apr 6, 2012</div>
+  <p>very tricky error. the problem lies somewhere in the defined class structure. in my case, i put the function inside the <em>main method</em> instead inside the <em>members method </em>.</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/03/17/output-csv-from-postgresql">
+      output  csv from postgresql
+    </a>
+  </h1>
+  <div class="post-date">Mar 17, 2012</div>
+  <p><code><br />
+psql&gt; COPY (SELECT * FROM tablename) TO '/tmp/filename.csv' WITH CSV HEADER;<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/03/06/qooxdoo-execute-callback-function-on-this-scope">
+      qooxdoo execute callback function on this scope
+    </a>
+  </h1>
+  <div class="post-date">Mar 6, 2012</div>
+  <p><code><br />
+rpc.callAsync(qx.lang.Function.bind(this._responseReceived, that));<br />
+</code></p>
+<p>now you can refer this in _responseReceived Functions.</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/02/28/global-variables-in-qooxdoo">
+      global variables in qooxdoo
+    </a>
+  </h1>
+  <div class="post-date">Feb 28, 2012</div>
+  <p><code><br />
+Declare the variables in your Application class:</p>
+<p> qx.Class.define("custom.Application",<br />
+{<br />
+  extend  : qx.application.Standalone,</p>
+<p>  members :<br />
+  {<br />
+    /** My global variable */<br />
+    bGlobal : true</p>
+<p>    main : function()<br />
+    {<br />
+      // access to global variable from within this class using "this"<br />
+      this.bGlobal = false;<br />
+    }<br />
+  }<br />
+}</p>
+<p>Then you can access that main application class using qx.core.Init.getApplication() so in some other class, you can read  the global like this:</p>
+<p> qx.Class.define("custom.SomeArbitraryClass",<br />
+{<br />
+  extend  : qx.core.Object,</p>
+<p>  construct : function()<br />
+  {<br />
+    /** Access the global variable */<br />
+    if (qx.core.Init.getApplication().bGlobal)<br />
+    {<br />
+      alert("The global is TRUE");<br />
+    }<br />
+}</p>
+<p>You could also have made that global be a property of the Application class:<br />
+ qx.Class.define("custom.Application",<br />
+{<br />
+  extend  : qx.application.Standalone,</p>
+<p>  properties :<br />
+  {<br />
+    /** My global variable */<br />
+    global : true<br />
+    ...</p>
+<p>in which case you'd reference it from the other class using the property's getter:</p>
+<p>  qx.core.Init.getApplicaiton().getGlobal()</p>
+<p>Hope that helps.</p>
+<p>Derrell<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/01/12/install-sun-java6-jdk-in-debian-wheezy">
+      Install sun-java6-jdk in debian wheezy
+    </a>
+  </h1>
+  <div class="post-date">Jan 12, 2012</div>
+  <p>Install sun-java6-jdk in debian wheezy</p>
+<p>sun-java6-jdk no longer available in debian wheezy due to some licencing issues.</p>
+<p>Download the binary called Java SE 6 Update 30 at<br />
+http://www.oracle.com/technetwork/java/javase/downloads/index.html</p>
+<p>unpack it to /opt/jvm/<br />
+<code><br />
+#update-alternatives --install /usr/bin/java java  /opt/jvm/jdk1.6.0_30/jre/bin/java 3<br />
+#update-alternatives --config java<br />
+</code></p>
+<p>select the option 3 and you are done</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/01/12/common-openerp-beginner-error">
+      common openerp beginner error
+    </a>
+  </h1>
+  <div class="post-date">Jan 12, 2012</div>
+  <p><code>This code &lt;field name="type"&gt; form&lt;/field&gt; produce the error below</code></p>
+<p><code><br />
+The value " form " for the field "type" is not in the selection<br />
+</code></p>
+<p>make sure no space between "form"<code></code></p>
+<p><code><br />
+the field(s) res_model,src_model: Invalid model name in the action definition.</code></p>
+<p><code>if the code seem rights. restart the openerp-server.</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/01/09/add-menu-on-fbpanel">
+      Add menu on fbpanel
+    </a>
+  </h1>
+  <div class="post-date">Jan 9, 2012</div>
+  <p>If you install binary manually eg: eclipse. Most likely you end up without entries in FBpanel the start menu.</p>
+<p>Just create a file appname.desktop in then ~/.local/share/applications<br />
+<code><br />
+[Desktop Entry]<br />
+Type=Application<br />
+Name=Eclipse<br />
+Exec=/opt/eclipse/eclipse<br />
+Icon=/opt/eclipse/icon.xpm<br />
+NoDisplay=false<br />
+Categories=Development<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2012/01/07/clearlooks-configuration-option-sunkenmenu-is-not-supported-and-will-be-ignored">
+      Clearlooks configuration option "sunkenmenu" is not supported and will be ignored.
+    </a>
+  </h1>
+  <div class="post-date">Jan 7, 2012</div>
+  <p><code><br />
+$android<br />
+/usr/share/themes/Taqua/gtk-2.0/gtkrc:55: Clearlooks configuration option "sunkenmenubar" is not supported and will be ignored.<br />
+/usr/share/themes/Taqua/gtk-2.0/gtkrc:56: Clearlooks configuration option "menuitemstyle" is not supported and will be ignored.<br />
+/usr/share/themes/Taqua/gtk-2.0/gtkrc:57: Clearlooks configuration option "listviewitemstyle" is not supported and will be ignored</code></p>
+<p>To fix it, uncomment the sunkenmenubar, menuitemstyle and lastviewitemstyle in the /usr/share/themes/Taqua/gtk-2.0/gtkrc<br />
+<code><br />
+engine "clearlooks"<br />
+{<br />
+#sunkenmenubar = 0<br />
+#menuitemstyle = 0<br />
+#listviewitemstyle =0<br />
+}<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2011/10/02/e220-digi-broadband-in-linux-debian-wheezy">
+      e220 digi broadband in linux debian wheezy
+    </a>
+  </h1>
+  <div class="post-date">Oct 2, 2011</div>
+  <p>I am using debian Wheezy<br />
+Linux 2.6.32-5-686</p>
+<p><code><br />
+#aptitude install usb-modeswitch<br />
+#aptitude install wvdial<br />
+</code></p>
+<p>edit the /etc/wvdial.conf<br />
+<code><br />
+[Dialer defaults]<br />
+Phone=*99#<br />
+Stupid Mode=1<br />
+Dial Command=ATDT<br />
+Modem=/dev/ttyUSB0<br />
+Baud=230400<br />
+Init2=AT+CGDCONT=1, "IP", 3gdgnet"<br />
+Init3=<br />
+Username=digi<br />
+Password=digi<br />
+AskPassword=0<br />
+ISDN=0<br />
+Compuserve=0<br />
+Force Address =0<br />
+Idle Seconds=0<br />
+Auto DNS=1<br />
+Check Def dRoute=1<br />
+</code></p>
+<p>plug in the Huawei E220<br />
+<code><br />
+#wvdial<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2011/10/02/resume-transfer-of-large-ssh-file">
+      resume transfer of large ssh file
+    </a>
+  </h1>
+  <div class="post-date">Oct 2, 2011</div>
+  <p>you need to install rsync on both client and server</p>
+<p><code><br />
+apt-get install rsync<br />
+rsync -P -r -e ssh username@server: &lt;serverfile&gt; &lt;localfile&gt;</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2011/08/27/php-pitfall">
+      PHP pitfall
+    </a>
+  </h1>
+  <div class="post-date">Aug 27, 2011</div>
+  <p><a href="http://phabricator.com/docs/phabricator/article/PHP_Pitfalls.html" title="php pitfalls">a very interesting articles for PHP programmers </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2011/08/22/pcmanfm-not-authorized">
+      PCManfm Not Authorized
+    </a>
+  </h1>
+  <div class="post-date">Aug 22, 2011</div>
+  <p>create a file /etc/polkit-1/localauthority/50-local.d/55-storage.pkla</p>
+<p>with the content<br />
+<code><br />
+[Storage Permissions]<br />
+Identity=unix-group:plugdev<br />
+Action=org.freedesktop.udisks.filesystem-mount;org.freedesktop.udisks.drive-eject;org.freedesktop.udisks.drive-detach;org.freedesktop.udisks.luks-unlock;org.freedesktop.udisks.inhibit-polling;org.freedesktop.udisks.drive-set-spindown<br />
+ResultAny=yes<br />
+ResultActive=yes<br />
+ResultInactive=no<br />
+</code></p>
+<p><a href="http://blog.dale.id.au/archives/1068">more info</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2011/08/22/postgresql-8-4-could-not-create-listen-socket-for-localhost">
+      postgresql 8.4 could not create listen socket for localhost
+    </a>
+  </h1>
+  <div class="post-date">Aug 22, 2011</div>
+  <p>fixed this error by adding the</p>
+<p><code><br />
+auto lo<br />
+iface lo inet loopback<br />
+</code></p>
+<p>in /etc/network/interfaces</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2011/04/04/a-c2-a9">
+      Â©
+    </a>
+  </h1>
+  <div class="post-date">Apr 4, 2011</div>
+  <p>It happen when the page is in UTF8 but the browser display in iso-8859-1.<br />
+Add this meta on the head to fix this.</p>
+<p><code></p>
+<p></code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2011/03/16/install-iceweasel-4-in-debian-squeeze">
+      install iceweasel 4 in debian squeeze
+    </a>
+  </h1>
+  <div class="post-date">Mar 16, 2011</div>
+  <p>A detailed instruction</p>
+<p><a href="http://mozilla.debian.net/">http://mozilla.debian.net/</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2011/03/13/acer-aspire-d255e-card-reader-driver-in-debian-squeeze">
+      acer aspire d255e card reader driver in debian squeeze
+    </a>
+  </h1>
+  <div class="post-date">Mar 13, 2011</div>
+  <p>Build in multi card reader in acer aspire one is from ENE Technology.<br />
+Here is an instruction to compile the kernel module driver</p>
+<p><a href="http://ftp.twaren.net/Linux/Linpus/Acer_Linpus_Moblin_Lite/srpms/linpus-customize/kernel/driver-src/cardreader/ENE/R100_02_ene_card_reader.zip">Download the driver </a></p>
+<p>unzip to /usr/src/keucr-0.0.1<br />
+create /usr/src/keucr-0.0.1/dkms.conf file<br />
+<code><br />
+PACKAGE_NAME="keucr"<br />
+PACKAGE_VERSION="0.0.1"<br />
+CLEAN="rm -f *.*o"<br />
+BUILT_MODULE_NAME[0]="keucr"<br />
+MAKE[0]="make -C $kernel_source_dir M=$dkms_tree/$PACKAGE_NAME/$PACKAGE_VERSION/build"<br />
+DEST_MODULE_LOCATION[0]="/extra"<br />
+AUTOINSTALL="yes"<br />
+</code></p>
+<p><code><br />
+#dkms add -m keucr -v 0.0.1<br />
+#dkms build -m keucr -v 0.0.1<br />
+#dkms install -m keucr -v 0.0.1<br />
+#cat keucr &gt;&gt; /etc/modules<br />
+</code></p>
+<p><a href="http://ubuntuforums.org/showpost.php?p=10466418&amp;postcount=36"><br />
+more info</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2011/03/13/ake-dh_testdir-command-not-found">
+      ake: dh_testdir: Command not found
+    </a>
+  </h1>
+  <div class="post-date">Mar 13, 2011</div>
+  <p><code><br />
+aptitude install debhelper bzip2<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2011/03/11/debian-lenny-and-canon-canoscan-lide-110">
+      debian lenny and canon canoscan lide 110
+    </a>
+  </h1>
+  <div class="post-date">Mar 11, 2011</div>
+  <p>Installing canoscan lide 110 scanner in debian</p>
+<p><code><br />
+#cd /usr/src<br />
+#git clone git://git.debian.org/sane/sane-backends.git<br />
+#cd sane-backends<br />
+#./configure --prefix=/usr --sysconfdir=/etc/ --localstatedir=/var<br />
+#make<br />
+#make install<br />
+#adduser  scanner<br />
+</code></p>
+<p>edit /etc/udev/rules.d/z60_libsane.rules</p>
+<p><code><br />
+# Canon CanoScan Lide 110<br />
+ATTRS{idVendor}=="04a9", MODE="0664", GROUP="scanner", ATTRS{idProduct}=="1909", ENV{libsane_matched}="yes"<br />
+</code></p>
+<p>make sure you put the scanner to unlock mode (there is a button on the bottom) otherwise it make a loud cracking sound and it is not working.</p>
+<p><code> </code></p>
+<p><code>#aptitude install xsane </code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2011/03/10/debian-squeeze-red-youtube-video">
+      debian squeeze red youtube video
+    </a>
+  </h1>
+  <div class="post-date">Mar 10, 2011</div>
+  <p>solution</p>
+<p>go to other website with flash video , right click and uncheck the video acceleration</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2011/02/17/make-ie-compatible-with-html5">
+      make IE compatible with HTML5
+    </a>
+  </h1>
+  <div class="post-date">Feb 17, 2011</div>
+  <p>include this script in the HTML file<br />
+<code><br />
+<!--[if IE]&gt;-->  </p>
+<p></code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2011/02/10/595">
+      
+    </a>
+  </h1>
+  <div class="post-date">Feb 10, 2011</div>
+  <p>mount directory over ssh<br />
+<code><br />
+#aptitude install sshfs<br />
+#modprobe fuse<br />
+#sshfs user@server:/remote/dir /local/dir/<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2011/01/29/error-wireless-request-set-encode-8b2a">
+      Error wireless request set encode 8b2a
+    </a>
+  </h1>
+  <div class="post-date">Jan 29, 2011</div>
+  <p><code><br />
+iwconfig wlan0 set s:passphrase<br />
+<code></p>
+<p>It only works on WEP. WPA is not supported.<br />
+You need to install wicd or wpa_supplicant.<br />
+Edit the /etc/network/interfaces and remove any references to wlan0</p>
+<p><code><br />
+#apt-get install wicd<br />
+$wicd-client<br />
+</code></p>
+<p><a href="http://wiki.debian.org/WiFi/HowToUse">more</a></code></code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/10/26/linux-convert-youtube-to-mp3">
+      linux convert youtube to mp3
+    </a>
+  </h1>
+  <div class="post-date">Oct 26, 2010</div>
+  <p><code><br />
+#aptitude install youtube-dl ffmpeg libmp3lame </code></p>
+<p>a simple bash script called youtube<br />
+<code><br />
+#!/bin/bash<br />
+x=/tmp/youtube-dl-$RANDOM-$RANDOM.flv<br />
+youtube-dl --output=$x --format=18 "http://www.youtube.com/watch?v=$1"<br />
+echo "convert flv to mp3"<br />
+ffmpeg -i $x -acodec libmp3lame -ac 2 -ab 128k -vn -y "/home/paragasu/mp3/youtube/$2"<br />
+rm $x<br />
+echo "done" </code></p>
+<p>the fun begin<br />
+<code><br />
+$youtube linkname fileoutput.mp3</code></p>
+<p><a href="http://hubpages.com/hub/Youtube-to-MP3-on-Ubuntu-Linux"><br />
+more</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/10/21/pdns-sqlite3-error-while-retrieving-sqlite-query-results">
+      pdns + sqlite3: Error while retrieving SQLite query results
+    </a>
+  </h1>
+  <div class="post-date">Oct 21, 2010</div>
+  <p>The directory and file where the sqlite3 database files must be belong to pdns.</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/10/11/burn-cd">
+      burn cd
+    </a>
+  </h1>
+  <div class="post-date">Oct 11, 2010</div>
+  <p><code><br />
+$genisoimage -vJV "name" -o isoname.iso list_folder_or_file<br />
+$wodim -v isoname.iso<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/09/23/set-wallpaper-in-openbox-debian">
+      set wallpaper in openbox + debian
+    </a>
+  </h1>
+  <div class="post-date">Sep 23, 2010</div>
+  <p><code><br />
+#aptitude install feh </code></p>
+<p>add the following code to /etc/xdg/openbox/autostart.sh<br />
+<code><br />
+feh --big-scale my-wallpaper.jpg </code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/09/20/upgrade-debian-etch-4-0-to-lenny-5-0">
+      upgrade debian etch 4.0 to lenny 5.0
+    </a>
+  </h1>
+  <div class="post-date">Sep 20, 2010</div>
+  <p>Debian drop security support for etch.<br />
+Edit /etc/apt/sources.list &amp; change all etch to lenny</p>
+<p><code><br />
+#apt-get update<br />
+#apt-get install apt dpkg aptitude<br />
+#aptitude keep-all<br />
+#aptitude full-upgrade<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/08/04/fatal-module-fbcon-not-found">
+      FATAL: module fbcon not found
+    </a>
+  </h1>
+  <div class="post-date">Aug 4, 2010</div>
+  <p>Recent debian upgrade cause my X server failed to start.<br />
+<code><br />
+linux-image-2.6.32<br />
+xserver-xorg 7.5<br />
+i915 intel graphics<br />
+</code></p>
+<p>you can ignore the error FATAL: module fbcon not found.<br />
+the real problem might be in<br />
+<code><br />
+$cat ~/.xsession-errors<br />
+</code></p>
+<p>In my case the problem is the im-switch missing default configuration files.<br />
+reinstalling im-switch solved the problem.</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/07/27/php-anonymous-object">
+      php anonymous object
+    </a>
+  </h1>
+  <div class="post-date">Jul 27, 2010</div>
+  <p><code><br />
+$obj = (object) array('hello' =&gt; 'world', 'sumandak' =&gt; 'tamparuli');</p>
+<p>echo $obj-&gt;hello; //world<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/07/24/creating-a-pdf-preview">
+      creating a pdf preview
+    </a>
+  </h1>
+  <div class="post-date">Jul 24, 2010</div>
+  <p><code><br />
+$im = new imagick('test.pdf[0]'); //1st page<br />
+$im-&gt;setImageFormat('png');<br />
+header('Content-Type: image/png');<br />
+echo $im;<br />
+</code><br />
+<a href="http://valokuva.org/?p=7"><br />
+more</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/07/24/preload-images-with-jquery">
+      preload images with jQuery
+    </a>
+  </h1>
+  <div class="post-date">Jul 24, 2010</div>
+  <p><code><br />
+var photos = [ {img:'img1.jpg'}, {img: 'img2.jpg'}];</p>
+<p>$(photos).each(function() {<br />
+  (new Image()).src = this.img;<br />
+});<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/06/28/pdns-fatal-error-trying-to-set-unexisting-parameter-receiver-threads">
+      pdns Fatal Error:  Trying to set unexisting parameter 'receiver-threads'
+    </a>
+  </h1>
+  <div class="post-date">Jun 28, 2010</div>
+  <p>I got this error from syslog.<br />
+<code><br />
+ $vim /etc/powerdns/pdns.conf </code></p>
+<p>comment out the receiver-threads<br />
+<code><br />
+#receiver-threads number of receiver threads to launch<br />
+#receiver-threads=1 </code></p>
+<p>some people report this as bug. this one works at least for me ;)</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/06/28/postgresql-group-concat">
+      postgresql group concat
+    </a>
+  </h1>
+  <div class="post-date">Jun 28, 2010</div>
+  <p><code><br />
+select array_to_string(<br />
+         array(select name from tbl_user), ',');<br />
+</code><a href="http://www.designmagick.com/article/38/Group-Concat-In-PostgreSQL"></p>
+<p>group concat in postgresql</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/06/24/centos-5-4-mysql-error-errmsg-sys-should-contain-481-errors-messages">
+      Centos 5.4 MySQL only 480 error messages, but it should contain at least 641 error messages.
+    </a>
+  </h1>
+  <div class="post-date">Jun 24, 2010</div>
+  <p><code><br />
+Error message file '/usr/share/mysql/english/errmsg.sys' had only 480 error messages,<br />
+but it should contain at least 641 error messages.<br />
+</code></p>
+<p><code><br />
+#yum list installed | grep mysql </code></p>
+<p>In my case, the both package mysql.i386 and mysql.x86_64 is installed. So, i have to remove the mysql.i386 package (old version) and reinstall mysql.x86_64.</p>
+<p><code><br />
+#yum remove mysql.i386<br />
+#yum install --enablerepo=remi mysql.x86_64<br />
+#service mysqld start</code></p>
+<p>problem solved</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/06/15/postfix-execute-external-command-on-every-new-email">
+      postfix execute external command on every new email
+    </a>
+  </h1>
+  <div class="post-date">Jun 15, 2010</div>
+  <p>edit /etc/postfix/master.cf</p>
+<p><code><br />
+smtp    inet  n       -       -       -       -       smtpd  -o content_filter=my_scripts:<br />
+my_scripts unix -     n       n       -       -       pipe<br />
+         flags=Xhq user=username argv=/usr/bin/php /my_scripts.php<br />
+</code></p>
+<p>X - perform final delivery<br />
+h - set the domain &amp; recipient to lowercase<br />
+q - quote white space &amp; other special characters</p>
+<p><a href="http://jasonseifer.com/2009/04/24/receving-email-with-rails"><br />
+more info</a><a href="http://www.evolt.org/incoming_mail_and_php"><br />
+incoming mail and php</a><a href="http://jeroensmeets.net/setup-postfix-to-forward-incoming-email-to-php/"><br />
+setup postfix to forward incoming email to php</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/06/07/truncate-files">
+      truncate files
+    </a>
+  </h1>
+  <div class="post-date">Jun 7, 2010</div>
+  <p><code><br />
+$cat /dev/null &gt; filename.log<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/05/15/how-to-install-postgresql-8-3-into-centos-5-4">
+      How to install PostgreSQL 8.3 into CentOS 5.4
+    </a>
+  </h1>
+  <div class="post-date">May 15, 2010</div>
+  <p>PostgreSQL 8.1 is currently the default version in CentOS 5.4 which do not support INSERT.. RETURNING</p>
+<p>remove PostgreSQL 8.1<br />
+<code><br />
+#yum remove postgresql postgresql-server<br />
+</code></p>
+<p><code><br />
+# vi /etc/yum.repos.d/CentOS-Base.repo<br />
+[base]<br />
+exclude=postgresql*<br />
+[updates]<br />
+exclude=postgresql*<br />
+</code></p>
+<p><code><br />
+#wget http://yum.pgsqlrpms.org/reporpms/8.3/pgdg-centos-8.3-7.noarch.rpm<br />
+#rpm -ivh pgdg-centos-8.3-6.noarch.rpm<br />
+#yum install postgresql postgresql-server<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/04/27/debian-etch-pg_dumpall-cron-problem">
+      Debian Etch pg_dumpall cron problem
+    </a>
+  </h1>
+  <div class="post-date">Apr 27, 2010</div>
+  <p>Debian Etch default postgresql's superuser is postgres. And cron run as root.<br />
+Hence, pg_dumpall not working as expected in cron job. Workaround is to create user name root with superuser privilege.</p>
+<p><code><br />
+postgres# create role root with superuser login<br />
+</code></p>
+<p>p/s: you have to create database root</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/04/27/backup-on-debian-etch-with-s3">
+      backup on debian etch with s3
+    </a>
+  </h1>
+  <div class="post-date">Apr 27, 2010</div>
+  <p><a href="http://linux.justinhartman.com/Automated_Backup_to_Amazon_S3_with_Duplicity_on_Debian_Etch"><br />
+</a>The current version of duplicity in Debian Etch is a bit outdated and do not support s3.</p>
+<p><a href="http://linux.justinhartman.com/Automated_Backup_to_Amazon_S3_with_Duplicity_on_Debian_Etch">Automated Backup  to  Amazon S3 with Duplicity on Debian Etch</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/04/01/firefox-flashing-black-fix">
+      firefox flashing black fix
+    </a>
+  </h1>
+  <div class="post-date">Apr 1, 2010</div>
+  <p>in the about:config<br />
+<code><br />
+accessibillity.browsewithcaret  false<br />
+</code></p>
+<p><a href="http://linuxgator.org/forums/viewtopic.php?f=24&amp;t=2162">more</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/03/31/debug-php-file_get_contentsurl">
+      debug php file_get_contents($url)
+    </a>
+  </h1>
+  <div class="post-date">Mar 31, 2010</div>
+  <p>there is one special variable available $http_response_header.<br />
+the output is the header array reply by the server</p>
+<p><code><br />
+$r = file_get_contents($url);<br />
+var_dump($http_response_header);<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/03/11/openbox-key-binding">
+      openbox print screen key binding
+    </a>
+  </h1>
+  <div class="post-date">Mar 11, 2010</div>
+  <p>the original distribution configuration set the PrtScrn to gnome-screenshot.</p>
+<p><code><br />
+#apt-get install gnome-utils<br />
+</code></p>
+<p><a href="http://openbox.org/wiki/Help:Bindings">openbox bindings</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/03/05/openoffice-how-to-print-pps-file">
+      Openoffice how to print pps file
+    </a>
+  </h1>
+  <div class="post-date">Mar 5, 2010</div>
+  <p>
+To edit or print the PPS file.<br />
+Rename PPS to PPT extension.</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/03/01/xul-close-window-from-javascript">
+      XUL close window from javascript
+    </a>
+  </h1>
+  <div class="post-date">Mar 1, 2010</div>
+  <p><code><br />
+pref("dom.allow_scripts_to_close_windows", true);<br />
+pref("dom.allow_scripts_to_close_windows", false);<br />
+</code></p>
+<p><a href="http://forums.mozillazine.org/viewtopic.php?f=27&amp;t=816895">close xul window from javascript</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/02/26/postgresql-security">
+      Postgresql Security
+    </a>
+  </h1>
+  <div class="post-date">Feb 26, 2010</div>
+  <p><a href="http://www.leidecker.info/pgshell/Having_Fun_With_PostgreSQL.txt">http://www.leidecker.info/pgshell/Having_Fun_With_PostgreSQL.txt</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/02/23/jquery-how-to-the-the-value-of-id">
+      jquery how to the the value of id
+    </a>
+  </h1>
+  <div class="post-date">Feb 23, 2010</div>
+  <p>supposed we have<br />
+<code> &lt;a href=# id="5"&gt; hello world &lt;/a&gt;<br />
+</code><br />
+to get the value of id<br />
+<code><br />
+$('a').each(function(){alert(this.id);});<br />
+//5<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/02/18/javascript-refresh-a-page">
+      javascript refresh a page
+    </a>
+  </h1>
+  <div class="post-date">Feb 18, 2010</div>
+  <p><code><br />
+/* reload every 5 minutes, in milisec */<br />
+setTimeout('location.reload(true);', 300000);<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/02/03/iceweasel-3-fix-high-cpu-usage">
+      Iceweasel 3, fix high CPU usage
+    </a>
+  </h1>
+  <div class="post-date">Feb 3, 2010</div>
+  <p>type about:config, and change the <strong>browser.cache.memory.enable</strong> value to <strong>false</strong></p>
+<p><a href="http://just-thinkin.net/2008/05/firefox-3-rc1-high-cpu-and-memory-use-try-this-fix/">firefox 3 RC1 high cpu and memory usage</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/02/02/jquery-check-if-element-exists">
+      jQuery, check if element exists
+    </a>
+  </h1>
+  <div class="post-date">Feb 2, 2010</div>
+  <p><code><br />
+if($('#some-div').length)){ /* exists */}<br />
+</code></p>
+<p><a href="http://jqueryfordesigners.com/element-exists/">how to tell if an element exists</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/01/29/postgresql-dblink-query-across-database">
+      postgresql dblink query across database
+    </a>
+  </h1>
+  <div class="post-date">Jan 29, 2010</div>
+  <p><a href="http://www.postgresql.org/docs/current/static/dblink.html">postgresql dblink doc</a><br />
+<a href="http://www.postgresonline.com/journal/index.php?/archives/44-Using-DbLink-to-access-other-PostgreSQL-Databases-and-Servers.html">using dblink to query other postgresql database and server</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/01/28/google-apps-spf-records">
+      google apps spf records
+    </a>
+  </h1>
+  <div class="post-date">Jan 28, 2010</div>
+  <p>type TXT<br />
+value<br />
+<code><br />
+v=spf1 a mx include:aspmx.googlemail.com include:_spf.google.com ~all<br />
+</code><br />
+<a href="http://www.hybrid6.com/webgeek/2009/03/google-provides-incorrect-spf-record-info-for-google-apps.php"><br />
+google incorrect spf records</a><br />
+<a href="http://www.vamsoft.com/spfcheck.asp">spf checker</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/01/22/ckeditor-how-to-make-simple-uploader-work">
+      ckeditor - how to make simple uploader work
+    </a>
+  </h1>
+  <div class="post-date">Jan 22, 2010</div>
+  <p>edit the html page where you call the ckeditor instance.<br />
+<code><br />
+CKEDITOR.replace('editor',<br />
+{<br />
+filebrowserUploadUrl:'/path/to/upload/script.php';<br />
+}); </code></p>
+<p>the line above will display the upload from whenever user click on the image icon.<br />
+the upload script should return<br />
+<code><br />
+&lt;script type="text/javascript"&gt;<br />
+window.parent.CKEDITOR.tools.callFunction(1, '&lt;url of uploaded file&gt;', '');&lt;/script&gt;</code></p>
+<p><a href="http://cksource.com/forums/viewtopic.php?f=11&amp;t=15700"><br />
+ckeditor external file uploader</a><br />
+<a href="http://cksource.com/forums/viewtopic.php?f=6&amp;t=15624">ckeditor image uploader problem</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/01/07/xfce4-enable-restart-and-shut-down-for-normal-user">
+      xfce4 enable restart and shut down for normal user
+    </a>
+  </h1>
+  <div class="post-date">Jan 7, 2010</div>
+  <p><code><br />
+#apt-get install sudo<br />
+#visudo </code><br />
+add the following<br />
+<code><br />
+your_username ALL=NOPASSWD:/usr/sbin/xfsm-shutdown-helper</code><br />
+<a href="http://forums.debian.net/viewtopic.php?f=6&amp;t=46058"><br />
+enable restart and shutdown from xfce4</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/01/06/xul-is-interesting">
+      XUL is interesting
+    </a>
+  </h1>
+  <div class="post-date">Jan 6, 2010</div>
+  <p><a href="http://www.phppatterns.com/docs/develop/xul_rendering_guis_with_php">xul rendering gui with php</a><br />
+<a href="https://developer.mozilla.org/En/XUL">https://developer.mozilla.org/En/XUL</a><br />
+<a href="http://blog.mozilla.com/addons/2009/01/28/how-to-develop-a-firefox-extension/">how to develop a firefox extension</a><br />
+<a href="https://developer.mozilla.org/en/Getting_started_with_XULRunner">getting started with xulrunner</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/01/06/multiseat-system">
+      multiseat system
+    </a>
+  </h1>
+  <div class="post-date">Jan 6, 2010</div>
+  <p>very interesting article<br />
+<a href="http://wiki.x.org/wiki/Development/Documentation/Multiseat">http://wiki.x.org/wiki/Development/Documentation/Multiseat</a></p>
+<p><a href="http://wiki.debian.org/Multi_Seat_Debian_HOWTO">debian multiset howto</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/01/06/how-to-save-file-into-postgresql-database">
+      how to save file into postgresql database
+    </a>
+  </h1>
+  <div class="post-date">Jan 6, 2010</div>
+  <p>you need a column in a postgresql table with the type OID<br />
+<code><br />
+create table files(<br />
+file_id serial primary key,<br />
+file oid not null<br />
+);</code><br />
+to insert file<br />
+<code><br />
+INSERT INTO files(file) values(lo_import('/tmp/filename.ext'); </code><br />
+to read the file<br />
+<code><br />
+SELECT lo_export(file, '/tmp/filename.ext') WHERE file_id=2;</code><br />
+you can get the file in the /tmp/filename.ex<a href="http://www.sumedh.info/articles/store-upload-image-postgres-php.html">t.</p>
+<p>store upload image postgresql</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/01/06/autologin-with-startx">
+      autologin with startx
+    </a>
+  </h1>
+  <div class="post-date">Jan 6, 2010</div>
+  <p>edit /etc/inittab<br />
+comment out the line<br />
+<code><br />
+#1:2345:respawn:/sbin/getty 38400 tty1 </code><br />
+add the line<br />
+<code><br />
+1:2345:respawn:/bin/login -f YOUR_USER_NAME tty1 /dev/tty1 2&gt;&amp;1</code></p>
+<p>edit the .bash_profile and add<br />
+<code><br />
+startx</code><a href="http://www.debianadmin.com/how-to-auto-login-and-startx-without-a-display-manager-in-debian.html"></p>
+<p>autologin in debian</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2010/01/01/jquery-click-doesnt-work-after-dom-update-on-ajax-call">
+      jquery click() doesn't work after dom update on ajax call.
+    </a>
+  </h1>
+  <div class="post-date">Jan 1, 2010</div>
+  <p><code><br />
+&lt;a class="clickme" href=#&gt;clickme&lt;/a&gt; </code></p>
+<p><code><br />
+$('a.clickme').click(function(){ alert('hello')}); </code><br />
+only work on DOM that already exists. it is not working.if the html above injected on existing DOM.<br />
+in this case you have to use.</p>
+<p><code><br />
+$('a.clickme').live('click', function(){alert('hello')});</code></p>
+<p><a href="http://docs.jquery.com/Events/live">jquery live</a><br />
+<a href="http://spreadyourwealth.blogspot.com/2009/04/jquery-events-not-firing-for-dynamic.html">jquery events not firing on dynamics</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/12/22/bug-comparison-in-php">
+      bug comparison in PHP
+    </a>
+  </h1>
+  <div class="post-date">Dec 22, 2009</div>
+  <p>php do not be able to compare large int and float reliably.</p>
+<p><code><br />
+$val1 = 0.2; $val2 = 0.2;<br />
+if($val1 &lt; $val2){ echo &#039;it is true&#039;;} </code></p>
+<p>one workaround for equal comparison is to cast the value to string type.</p>
+<p><a href="http://patchlog.com/php/comparing-float-values-in-php/"><br />
+comparison of float value in PHP</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/11/30/compile-midlet-j2me-in-debian-linux">
+      compile midlet j2me in debian linux
+    </a>
+  </h1>
+  <div class="post-date">Nov 30, 2009</div>
+  <p>I can't get the ktoolbar running on my debian squeeze. Found a very good makefile from Hexist</p>
+<p><a href="http://hexist.com/?p=29">J2ME Midlet Programming on Linux</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/11/24/php-get-file-extension">
+      PHP get file extension
+    </a>
+  </h1>
+  <div class="post-date">Nov 24, 2009</div>
+  <p><code><br />
+$ext = pathinfo($filename, PATHINFO_EXTENSION);<br />
+</code></p>
+<p><a href="http://cowburn.info/2008/01/13/get-file-extension-comparison/"><br />
+get file extension comparison</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/11/11/debian-testing-iceweasel-install-flash-player">
+      debian testing + iceweasel install flash player
+    </a>
+  </h1>
+  <div class="post-date">Nov 11, 2009</div>
+  <p><code><br />
+#apt-get install flashplugin-nonfree </code><br />
+should be working. but in my debian testing it isn't. I have to manually create a symlinks </p>
+<p><code><br />
+#ln -s /usr/lib/flashplugin-nonfree/libflashplayer.so /usr/lib/iceweasel/plugins/libflashplayer.so <code></p>
+<p>to make it work. </code></code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/11/06/jquery-click-li-to-activate-a">
+      jquery click li to activate a
+    </a>
+  </h1>
+  <div class="post-date">Nov 6, 2009</div>
+  <p><code>&lt;ul class="menu"&gt;<br />
+&lt;li&gt;&lt;a href="/"&gt; Home &lt;/a&gt;&lt;/li&gt;<br />
+&lt;/ul&gt;</code></p>
+<p>to activate the link when user click on li<br />
+<code><br />
+$('.menu li').click(function(e){<br />
+location.href = $(this).find('a').attr('href');<br />
+});</code></p>
+<p>Now, user doesn't have to click on the "Home" to activate the link.</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/11/03/mysql-cache-sql_no_cache">
+      mysql cache SQL_NO_CACHE
+    </a>
+  </h1>
+  <div class="post-date">Nov 3, 2009</div>
+  <p>enable query cache (maybe default depends of the server configuration)<br />
+<code><br />
+SELECT SQL_CACHE SUM(points) FROM account; </code></p>
+<p>turn off mysql query cach<br />
+<code><br />
+SELECT SQL_NO_CACHE SUM(points) FROM account; </code></p>
+<p><a href="http://www.petefreitag.com/item/390.cfm"><br />
+the mysql query cache</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/11/03/javascript-disable-back-button">
+      javascript disable back button
+    </a>
+  </h1>
+  <div class="post-date">Nov 3, 2009</div>
+  <p>add this code in the HTML head section</p>
+<p><code><br />
+&lt;script type="text/javascript"&gt;<br />
+history.forward();<br />
+&lt;/script&gt;﻿<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/10/25/php-how-to-replace-many-space-with-one-space">
+      php how to replace many space with one space
+    </a>
+  </h1>
+  <div class="post-date">Oct 25, 2009</div>
+  <p><code><br />
+$str = preg_replace('/\s+/', ' ', $str); //"     \n\n\n" will end up as " \n"<br />
+$str = preg_replace('/\x20+/', ' ', $str); //only space </code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/10/20/how-to-detect-ajax-request">
+      how to detect ajax request
+    </a>
+  </h1>
+  <div class="post-date">Oct 20, 2009</div>
+  <p>ajax request will send additional header<br />
+<code><br />
+if($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest')<br />
+echo 'ajax';</code></p>
+<p><a href="http://stackoverflow.com/questions/1482086/is-there-a-way-in-php-of-detecting-if-the-script-was-called-by-jquery-load-or-n">stackoverflow</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/10/14/the-page-you-are-looking-for-is-temporarily-unavailable-please-try-again-later">
+      The page you are looking for is temporarily unavailable. Please try again later.
+    </a>
+  </h1>
+  <div class="post-date">Oct 14, 2009</div>
+  <p>server configuration php5-cgi, php5-tidy nginx, debian etch.<br />
+Tidy configuration tab-size=&gt;0 can trigger this error. Just change the tab-size value to be greater than 0 to fix<br />
+<code><br />
+tab-size =&gt; 1 </code> </p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/10/05/debian-usb-mouse-freeze">
+      Debian usb mouse freeze
+    </a>
+  </h1>
+  <div class="post-date">Oct 5, 2009</div>
+  <p>you should have<br />
+<code><br />
+Option  "SendCoreEvents"  "true" </code></p>
+<p>inside the Section "Input Device", Driver "mouse"</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/10/03/php-add-leading-zero">
+      php add leading zero
+    </a>
+  </h1>
+  <div class="post-date">Oct 3, 2009</div>
+  <p><code><br />
+echo $num; // 1<br />
+$str = sprintf('%02d', $num, 2);<br />
+echo $str; //01 </code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/10/02/php-get-the-number-of-days-between-two-dates">
+      php get the number of days between two dates
+    </a>
+  </h1>
+  <div class="post-date">Oct 2, 2009</div>
+  <p><code><br />
+$timestamp = strtotime($end_date) - strtotime($start_date);<br />
+$days = round($timestamp / 86400); </code></p>
+<p>this code only works on linux box.</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/10/01/global-distribution-system-cds">
+      global distribution system (CDS)
+    </a>
+  </h1>
+  <div class="post-date">Oct 1, 2009</div>
+  <p>many website like tripadvisor.com or lastminutes.com pull the information from CDS. One free provider is Kayak.com but usage is restricted to 1000 queries/day.</p>
+<p><a href="http://www.kayak.com/labs/api/search/">kayak.com</a><br />
+<a href="http://stackoverflow.com/questions/527007/airline-reservation-systems">airline reservation system </a><br />
+<a href="http://stackoverflow.com/questions/959386/hotel-booking-system">Hotel booking system</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/09/30/jquery-open-new-window-on-external-links">
+      jquery open new window on external links
+    </a>
+  </h1>
+  <div class="post-date">Sep 30, 2009</div>
+  <p><code>$("a:not([href^='http://www.exampleuri.com']): not([href^='#']):not([href^='/'])").attr("target","_blank");</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/09/25/ncftp-upload-recrusive-files">
+      ncftp - upload recrusive files
+    </a>
+  </h1>
+  <div class="post-date">Sep 25, 2009</div>
+  <p>to upload the whole directory and subdirectory</p>
+<p><code><br />
+$ncftpput -u &lt;username&gt;  -p  &lt;password&gt; -R &lt;host&gt; &lt;remotedir&gt; &lt;localdir&gt; </code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/09/25/bucardo-asynchronous-postgresql-replication-system">
+      Bucardo - Asynchronous PostgreSQL Replication System
+    </a>
+  </h1>
+  <div class="post-date">Sep 25, 2009</div>
+  <blockquote>
+Bucardo is an asynchronous PostgreSQL replication system, allowing for both multi-master and multi-slave operations. It was developed at Backcountry.com by Jon Jensen and Greg Sabino Mullane of End Point Corporation, and is now in use at many other organizations.
+</p></blockquote>
+<p><a href="http://bucardo.org/wiki/Main_Page"><br />
+bucardo</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/09/24/postgresql-version-of-mysql-unix_timestamp">
+      postgresql version of mysql UNIX_TIMESTAMP()
+    </a>
+  </h1>
+  <div class="post-date">Sep 24, 2009</div>
+  <p>MySQL<br />
+<code><br />
+mysql&gt; SELECT UNIX_TIMESTAMP();<br />
+mysql&gt; SELECT UNIX_TIMESTAMP('1973-11-29 21:33:09');</code></p>
+<p>PostgreSQL<br />
+<code><br />
+postgres=&gt; SELECT EXTRACT(EPOCH FROM CURRENT_TIMESTAMP(0));<br />
+postgres=&gt; SELECT EXTRACT(EPOCH FROM TIMESTAMP '1973-11-29 21:33:09');</code></p>
+<p><a href="http://janusz.slota.name/blog/2009/06/mysql-from_unixtime-and-unix_timestamp-functions-in-postgresql/">MySQL from_unixtime and unix_timestamp</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/09/07/e319-sorry-the-command-is-not-available-in-this-version-syntax-on">
+      E319: Sorry, the command is not available in this version: syntax on
+    </a>
+  </h1>
+  <div class="post-date">Sep 7, 2009</div>
+  <p>if you get this error when trying to enable syntax highlighting in vim,</p>
+<p><code><br />
+#apt-get install vim</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/09/03/css-rounded-corner">
+      css rounded corner
+    </a>
+  </h1>
+  <div class="post-date">Sep 3, 2009</div>
+  <p><code><br />
+.roundcorner{<br />
+ border-radius:6px; /*css3 - but not supported yet*/<br />
+-webkit-border-radius: 6px; /*mozila - firefox, iceweasel */<br />
+-moz-border-radius: 6px; /*webkit - google crome, midori, safari */<br />
+}</code></p>
+<p>and more</p>
+<p> -moz-border-radius-topleft  / -webkit-border-top-left-radius</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/09/02/postgresql-add-on-delete-cascade-to-foreign-key">
+      postgresql add on delete cascade to foreign key
+    </a>
+  </h1>
+  <div class="post-date">Sep 2, 2009</div>
+  <p><code><br />
+ERROR: update or delete on table "page" violates foreign key constraint "info_page_id_fkey" on table "info" DETAIL: Key (page_id)=(106) is still referenced from table "info"</code></p>
+<p>you have to drop cascade and recreating the new one.<br />
+<code><br />
+psql&gt; \d info </code><br />
+<code><br />
+psql&gt; alter table info drop constraint info_page_id_fkey;<br />
+psql&gt; alter table info add constraint "info_page_id_fkey" foreign key(page_id) references page on delete cascade;</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/08/09/chess-in-debian">
+      chess in debian
+    </a>
+  </h1>
+  <div class="post-date">Aug 9, 2009</div>
+  <p>Crafty, developed by Robert Hyatt, is a descendant of the Cray Blitz chess engine that was the World Computer Chess Champion from 1983 to 1989.</p>
+<p>to install<br />
+<code><br />
+#apt-get install crafty xboard</code></p>
+<p>start the game with<br />
+<code><br />
+$xboard -fcb 'crafty' -fd crafty_directory </code></p>
+<p>book off -- This options disables the use of opening book for crafty.<br />
+ponder off - Crafty can't think while you are playing your move.<br />
+st 1 -- Make the maximum thinking time for Crafty just one second.<br />
+sd n -- Crafty won't think more than n moves ahead.<br />
+If you are able to beat crafty too often, you can also make it more stronger with these options:<br />
+hash nK -- Makes the hash table bigger<br />
+hashp n -- Makes the hash table for pawns as large as possible</p>
+<p>it hard to bet.</p>
+<p><a href="http://www.craftychess.com/"><br />
+more info</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/08/06/login-to-ssh-with-keys">
+      login to SSH with keys
+    </a>
+  </h1>
+  <div class="post-date">Aug 6, 2009</div>
+  <p><code><br />
+$ssh-gen -t rsa<br />
+$ssh-copy-id username@server<br />
+$ssh-add ~/.ssh/id_rsa </code></p>
+<p><a href="http://ditesh.gathani.org/blog/2009/01/09/that-bag-of-ssh-tips-and-tricks/">the bags of SSH tips and tricks</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/08/04/fix-firefox-3-jquery-bug">
+      fix Firefox 3 & jquery bug
+    </a>
+  </h1>
+  <div class="post-date">Aug 4, 2009</div>
+  <p>It is the problem when the $(document).ready() executed before the CSS loaded.<br />
+Make sure all CSS come before the scripts</p>
+<p><code><br />
+&lt;script type="text/javascript" src=""&gt;<br />
+&lt;link rel="stylesheet" type="text/css" href=""&gt;</code></p>
+<p>to</p>
+<p><code><br />
+&lt;link rel="stylesheet" type="text/css" href=""&gt;<br />
+&lt;script type="text/javascript" src=""&gt;</code></p>
+<p><a href="http://groups.google.com/group/jquery-en/browse_thread/thread/95465c4025cfd73d">fix ff3 issues </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/07/27/css-remove-dotted-border-on-a-active">
+      css - remove dotted border on a active
+    </a>
+  </h1>
+  <div class="post-date">Jul 27, 2009</div>
+  <p><code><br />
+a {<br />
+outline-style:none;<br />
+outline-width:0;<br />
+}<br />
+</code></p>
+<p>or </p>
+<p><code> a {outline: 0 none;}</code></p>
+<p><a href="http://www.elctech.com/snippets/css-remove-dotted-outline-border-from-active-links">css remove dotted outline border from a active links</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/07/26/fix-pidgin-yahoo-messenger-error-1013">
+      fix pidgin & yahoo messenger Error 1013
+    </a>
+  </h1>
+  <div class="post-date">Jul 26, 2009</div>
+  <p>you must upgrade to pidgin 2.5.8 which is available in debian unstable (sid).<br />
+add to /etc/apt/sources.list<br />
+<code><br />
+deb http://ftp.debian.org/debian/ sid main contrib non-free</code><br />
+<code><br />
+#apt-get update<br />
+#apt-get install -t sid pidgin</code></p>
+<p>change the pager server to<br />
+<code><br />
+scsa.msg.yahoo.com</code></p>
+<p>Error 1013 - just remove the @yahoo.com on your pidgin login username</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/06/29/how-to-simulate-slow-internet-connection">
+      how to simulate slow internet connection
+    </a>
+  </h1>
+  <div class="post-date">Jun 29, 2009</div>
+  <p><code><br />
+#apt-get install iprelay<br />
+$iprelay -b 2500 8000:localhost:80</code></p>
+<p>point the browser to localhost:8000<br />
+you can see how website look like with connection speed of 2.5Kbps.<br />
+<a href="http://stackoverflow.com/questions/473465/firefox-plugin-to-simulate-slow-internet-connection"><br />
+simulate slow internet connection</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/06/23/debian-changing-eth-name">
+      debian changing eth* name
+    </a>
+  </h1>
+  <div class="post-date">Jun 23, 2009</div>
+  <p>changing eth0 name to eth1 and eth2 after each reboot. it is a bug in udev package.</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/06/06/make-all-image-clickable">
+      make all image clickable
+    </a>
+  </h1>
+  <div class="post-date">Jun 6, 2009</div>
+  <p>make all image in a page to have a direct link.</p>
+<p><code><br />
+$content = ''; //content of a page with &lt;img tag<br />
+$content =  preg_replace('/&lt;img alt=".*" \/&gt;/',<br />
+'&lt;a href="\\1"&gt;\&lt;/a&gt;', $content);<br />
+</code></p>
+<p><a href="http://www.php.net/preg_replace">preg_replace manual</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/06/05/dns-with-minimum-downtime">
+      dns with minimum downtime
+    </a>
+  </h1>
+  <div class="post-date">Jun 5, 2009</div>
+  <p>it is important to change the TTL setting of the domain to a short time (60s) before migrating to new server.<br />
+and wait for the dns record to propagate before changing the dns records. </p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/06/05/how-to-check-what-debian-version">
+      how to check what debian version
+    </a>
+  </h1>
+  <div class="post-date">Jun 5, 2009</div>
+  <p><code><br />
+$cat /etc/debian_version</code></p>
+<p>or</p>
+<p><code><br />
+$lsb_release -a </code></p>
+<p><a href="http://forums.debian.net/viewtopic.php?f=10&amp;t=38815">check debian version</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/06/05/sdlmame-new-game-emulator-for-linux">
+      sdlmame - new game emulator for linux
+    </a>
+  </h1>
+  <div class="post-date">Jun 5, 2009</div>
+  <p>sdlmame is a new alternative that replace the old xmame</p>
+<p><a href="http://apt.ludomatic.fr/?hl=en">sdlmame installation howto</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/06/04/not-clickable-link-in-ie">
+      not clickable link in IE
+    </a>
+  </h1>
+  <div class="post-date">Jun 4, 2009</div>
+  <p>one of my client complaining to me about this problem (using IE 7). another hasLayout problem</p>
+<p>not sure which one really fix the problem. But avoiding<br />
+&lt;div&gt;and &lt;span&gt; tags inside &lt;a&gt; tags might help.</p>
+<p><a href="http://robertnyman.com/2008/01/22/cant-make-links-appear-clickable-in-ie/">can't make links appear clickable in IE</a></p>
+<p><a href="http://www.brunildo.org/test/IEaL.html">not clickable image in a link</a></p>
+<p><a href="http://www.brunildo.org/test/">css tests and experiments</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/05/19/find-all-setuid-or-setgid-files">
+      find all setuid or setgid files
+    </a>
+  </h1>
+  <div class="post-date">May 19, 2009</div>
+  <p><code><br />
+#find / -type f \( -perm -4000 -o -perm -2000 \) -exec ls -ld '{}' \;</code></p>
+<p><a href="http://www.faqs.org/faqs/computer-security/most-common-qs/section-15.html">How do I find all setuid and setgid files?</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/05/19/wget-download-the-whole-website">
+      wget download the whole website
+    </a>
+  </h1>
+  <div class="post-date">May 19, 2009</div>
+  <p><code><br />
+$wget -r --level=1 -k -p http://websiteurl.com/ </code></p>
+<p><a href="http://linuxreviews.org/quicktips/wget/">wget tips</a><a href="http://lifehacker.com/software/downloads/geek-to-live-mastering-wget-161202.php"><br />
+mastering wget</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/05/17/debian-iceweasel-chinese-language-support">
+      debian iceweasel chinese language support
+    </a>
+  </h1>
+  <div class="post-date">May 17, 2009</div>
+  <p>Practically, just need it so the webpage with chinese writing in it doesn't look ugly<br />
+<code><br />
+#apt-get install iceweasel-l10n-zh-cn</code></p>
+<p><a href="http://isis.poly.edu/~qiming/chinese-debian-mini-howto.html"><br />
+chinese debian mini howto</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/05/08/powerdns-postgresql-on-debian">
+      powerdns + postgresql on debian
+    </a>
+  </h1>
+  <div class="post-date">May 8, 2009</div>
+  <p><code><br />
+#apt-get install pdns-server<br />
+#apt-get install pdns-backend-pgsql</code></p>
+<p>install required postgresql database table. <br />
+using  /usr/share/doc/pdns-backend/pgsql/pgsql.sql </p>
+<p>edit /etc/powerdns/pdns.d/pdns.local ( /usr/share/doc/pdns-backend-pgsql/examples/pdns.local.pgsql)<br />
+<code><br />
+gpgsql-host=localhost<br />
+gpgsql-port=5432<br />
+gpgsql-dbname=powerdns<br />
+gpgsql-user=<br />
+gpgsql-password=</code></p>
+<p>edit /etc/powerdns/pdns.conf<br />
+<code><br />
+launch=gpgsql</code></p>
+<p><a href="http://blog.nachtarbeiter.net/2009/04/23/powerdns-on-debian-lenny-sarge-or-woody-2/"><br />
+postgresql + mysql</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/05/08/pdns-everydns-net-as-secondary-dns">
+      pdns everydns.net as secondary dns
+    </a>
+  </h1>
+  <div class="post-date">May 8, 2009</div>
+  <p>in /etc/powerdns/pdns.conf<br />
+<code><br />
+allow-axfr-ips=71.6.202.218,66.240.223.182<br />
+disable-axfr=no<br />
+disable-tcp=no<br />
+master=yes</code></p>
+<p>make sure you insert the value 'MASTER' on the column 'type' in the domains table </p>
+<p>add the domain with advance option "make secondary using", and specify the primary dns (server ip where you install powerdns).</p>
+<p>the last thing to do is to modify the domain dns records to<br />
+<code><br />
+ns1.everydns.net<br />
+ns2.everydns.net<br />
+ns3.everydns.net<br />
+ns4.everydns.net<br />
+</code></p>
+<p><a href="http://blog.nachtarbeiter.net/2009/04/23/powerdns-on-debian-lenny-sarge-or-woody-2/"><br />
+powerdns on debian lenny</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/05/08/pdns-secondary-dns-not-updated">
+      pdns secondary dns not updated
+    </a>
+  </h1>
+  <div class="post-date">May 8, 2009</div>
+  <p>you must update the serial number in SOA records every time you update domains records.</p>
+<p><a href="http://rscott.org/dns/soa.html">SOA spec</a><br />
+<a href="http://whatexit.org/tal/mywritings/dnssoa.html">dns soa records</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/05/04/nginx-www-to-non-www">
+      nginx www to non www
+    </a>
+  </h1>
+  <div class="post-date">May 4, 2009</div>
+  <p>redirect url with www to non www. edit /etc/nginx/nginx.conf or /etc/nginx/sites-enabled/default<br />
+<code><br />
+if ($host ~* www\.(.*)){<br />
+     set $host_without_www $1;<br />
+     rewrite ^(.*)$ http://$host_without_www$1 permanent;<br />
+}<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/04/26/how-to-change-timezone-and-utc-in-debian">
+      how to change timezone and UTC in debian
+    </a>
+  </h1>
+  <div class="post-date">Apr 26, 2009</div>
+  <p>to change timezone<br />
+<code><br />
+#dpkg-reconfigure tzdata</code></p>
+<p>UTC time mean, you computer will display time related to GMT. To use local time instead of UTC<br />
+edit /etc/default/rcS<br />
+<code><br />
+UTC=no</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/04/26/iptables-flush-to-reset-iptables">
+      #iptables --flush to reset iptables
+    </a>
+  </h1>
+  <div class="post-date">Apr 26, 2009</div>
+  <p>You must reset the iptables policies before you issue #iptables -F .</p>
+<p><a href="http://iptables-tutorial.frozentux.net/scripts/rc.flush-iptables.txt">rc.flush-iptables - Resets iptables to default values. </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/04/25/ssh-iptable-rule-to-accept-only-streamyx-users">
+      ssh - iptable rule to accept only streamyx users.
+    </a>
+  </h1>
+  <div class="post-date">Apr 25, 2009</div>
+  <p>I got ssh brute force attack almost every day :p, which is almost all originated from somewhere outside malaysia (china, taiwan etc).  A simple iptables rules that only allowed tcp traffic from streamyx IP range.<br />
+<code><br />
+#iptables -P INPUT DROP<br />
+#iptables -A INPUT -p tcp --dport 80 -j ACCEPT<br />
+#iptables -A INPUT -p tcp --dport 22 -m iprange --src-range 60.0.0.0-60.255.255.255 -j ACCEPT</code></p>
+<p><a href="http://www.cyberciti.biz/tips/linux-iptables-how-to-specify-a-range-of-ip-addresses-or-ports.html"><br />
+iptables - how to specify a range of ip address </a><br />
+<a href="http://www.linuxhomenetworking.com/wiki/index.php/Quick_HOWTO_:_Ch14_:_Linux_Firewalls_Using_iptables">iptables quick howto</a>-</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/04/23/php-cgi-process-hang-problem">
+      php-cgi process hang problem
+    </a>
+  </h1>
+  <div class="post-date">Apr 23, 2009</div>
+  <p><code><br />
+$export PHP_FCGI_MAX_REQUESTS=1000<br />
+$spawn-fcgi -a 127.0.0.1 -p 9000 -u www-data -g www-data /usr/bin/php5-cgi </code><br />
+<a href="http://blog.taragana.com/index.php/archive/how-to-stop-crashing-hanging-of-php-cgi-spawn-fcgi-with-nginx-lighttpd/"><br />
+hanging of php-cgi</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/04/22/fatal-error-class-tidy-not-found">
+      Fatal Error: Class 'tidy' not found
+    </a>
+  </h1>
+  <div class="post-date">Apr 22, 2009</div>
+  <p>solution<br />
+<code><br />
+#pecl install tidy<br />
+#apt-get install php5-tidy</code><br />
+you might have to add extension=tidy.so into php.ini</p>
+<p><a href="http://blog.stevewhiteley.com/2009/02/13/php-tidy-extension-is-loaded-but-not-working/">php tidy extension loaded but not working</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/04/22/postgresql-complete-backup">
+      postgresql complete backup
+    </a>
+  </h1>
+  <div class="post-date">Apr 22, 2009</div>
+  <p>run command under user postgres</p>
+<p>to backup<br />
+<code><br />
+$pg_dumpall &gt; db.sql </code></p>
+<p>to restore<br />
+<code><br />
+$psql -f db.sql template1</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/04/18/lighttpd-symbol-famerrlist-e2-80-99-has-different-size-in-shared-object-consider-re-linking">
+      lighttpd: Symbol `FamErrlist’ has different size in shared object, consider re-linking
+    </a>
+  </h1>
+  <div class="post-date">Apr 18, 2009</div>
+  <p>to fix this<br />
+<code><br />
+#apt-get install libfam0<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/04/17/extract-date-and-time-from-timestamp-column-on-postgresql">
+      extract date and time from timestamp column on postgresql
+    </a>
+  </h1>
+  <div class="post-date">Apr 17, 2009</div>
+  <p>to extract date from coldate,<br />
+<code><br />
+SELECT date(coldate) FROM mytable;<br />
+</code></p>
+<p>to extract time, doing time(coldate) will give an error instead,<br />
+<code><br />
+SELECT "time"(coldate) FROM mytable<br />
+</code></p>
+<p>another way<br />
+<code><br />
+SELECT coldate::time FROM mytable</code></p>
+<p><a href="http://www.postgresql.org/docs/8.0/interactive/functions-datetime.html"><br />
+postgresql date/time doc</a><br />
+<a href="http://bytes.com/topic/postgresql/answers/689779-extract-date-timestamp">extract date from timestamp</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/04/16/simple-cut-command-tutorial">
+      simple cut command tutorial
+    </a>
+  </h1>
+  <div class="post-date">Apr 16, 2009</div>
+  <p>cut is quite handy when we do bash script. </p>
+<p>gobukgumuk.txt<br />
+<code>tomulikud om tuod, tomoguang om gobuk</code><br />
+<code><br />
+$cat gobukgumuk.txt | cut -d, -f2 </code><br />
+will give "tomoguang om gobuk"<br />
+<code><br />
+$cat gobukgumuk.txt | cut -c1-9 </code><br />
+will give "tumolikud"</p>
+<p>we can save the output to a variable name<br />
+<code><br />
+name=`who am i | cut -f1 -d' '` </code></p>
+<p><a href="http://www.hscripts.com/tutorials/linux-commands/cut.html">cut command tutorial</a><br />
+<a href="http://lowfatlinux.com/linux-columns-cut.html">how to select column from a file</a><br />
+<a href="http://www.computerhope.com/unix/ucut.htm">cut command</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/04/16/display-battery-information-on-fbpanel">
+      display battery information on fbpanel
+    </a>
+  </h1>
+  <div class="post-date">Apr 16, 2009</div>
+  <p>i wrote a simple plugin to display the percentage of battery on fbpanel (i am using openbox + debian)</p>
+<p>put this code inside ~/.config/fbpanel/default<br />
+<code><br />
+Plugin {<br />
+type=genmon<br />
+config {<br />
+Command =  echo $(acpi -b | cut -d, -f2)<br />
+PollingTime = 2<br />
+TextSize = small<br />
+TextColor = red<br />
+}<br />
+}<br />
+</code><br />
+this is how it look like<br />
+<img src="/assets/battery.jpg" alt="fbpanel battery status" title="battery" width="381" height="86" class="size-full wp-image-321" /></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/04/15/simple-iptables-rule-to-block-ip-address">
+      simple iptables rule to block ip address
+    </a>
+  </h1>
+  <div class="post-date">Apr 15, 2009</div>
+  <p>block an ip address<br />
+<code><br />
+#iptables -A INPUT -s 192.168.2.3 -j DROP<br />
+</code></p>
+<p>block outgoing TCP traffic from the server<br />
+<code><br />
+#iptables -A OUTPUT -p tcp -d 192.168.2.3 -j DROP<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/03/29/upgrade-postgresql-81-to-postgresql-83-in-debian-etch">
+      upgrade postgresql-8.1 to postgresql-8.3 in debian etch
+    </a>
+  </h1>
+  <div class="post-date">Mar 29, 2009</div>
+  <p>postgresql-8.3 available for etch on backports repositories. Add to /etc/apt/sources.list<br />
+<code><br />
+deb http://www.backports.org/debian etch-backports main contrib non-free<br />
+</code><br />
+then install postgresql-8.3<br />
+<code><br />
+#apt-get -t etch-backports install postgresql-8.3<br />
+#pg_dropcluster --stop 8.3 main<br />
+#pg_upgradecluster 8.1 main<br />
+#pg_dropcluster --stop 8.1 main<br />
+#apt-get remove postgresql-8.1<br />
+</code><br />
+<br />
+<a href="http://blog.tquadrado.com/?p=174">read more</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/03/08/php-include-vs-include_once-vs-require-vs-require_once">
+      php include vs include_once vs require vs require_once
+    </a>
+  </h1>
+  <div class="post-date">Mar 8, 2009</div>
+  <p>All work the same way. But require_once is the fastest in linux.</p>
+<p><a href="http://arin.me/php/php-require-vs-include-vs-require_once-vs-include_once-performance-test">PHP require vs. include vs. require_once vs. include_once Performance Test</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/02/25/install-canon-pixma-1880-in-debian">
+      Install Canon PIXMA 1880 in debian
+    </a>
+  </h1>
+  <div class="post-date">Feb 25, 2009</div>
+  <p><a href="http://home.btconnect.com/jerryf/">You need the driver here</a></p>
+<p><a href="http://home.btconnect.com/jerryf/cnijfilter-common_2.70-3_i386.deb">cnijfilter-common_2.70-3_i386.deb</a><br />
+<a href="http://home.btconnect.com/jerryf/cnijfilter-ip1800series_2.70-3_i386.deb">cnijfilter-ip1800series_2.70-3_i386.deb</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/02/24/extract-text-from-ms-office">
+      extract text from ms office
+    </a>
+  </h1>
+  <div class="post-date">Feb 24, 2009</div>
+  <p>Interesting program to extract text</p>
+<ul>
+<li> catdoc - extract text from ms word </li>
+<li> xls2cvs - extract text from ms excell </li>
+<li> pdftotext - extract text from pdf </li>
+<li> ppthtml - extract text from ms. power point </li>
+</ul>
+<p>Then a simple php function can capture the output eg:<br />
+<code><br />
+function extractWord($word_file)<br />
+{<br />
+    if (file_exists($word_file)<br />
+    {<br />
+        // prevent malicious command execution<br />
+        exec("/usr/bin/catdoc -w ' . escapeshellarg($word_file), $output);</p>
+<p>        // $output is an array corresponding to lines of output<br />
+        return join("\n", $output);<br />
+    }<br />
+}</p>
+<p></code></p>
+<p><a href="http://tech.forumone.com/archives/53-Extracting-text-from-Office-and-PDF-files.html">extracting text from office and pdf file</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/02/24/css-transparency">
+      css transparency
+    </a>
+  </h1>
+  <div class="post-date">Feb 24, 2009</div>
+  <p><code><br />
+.transparent_class {<br />
+filter:alpha(opacity=50); /*IE*/<br />
+-moz-opacity:0.5; /* mozilla old version*/<br />
+-khtml-opacity: 0.5; /* safari */<br />
+opacity: 0.5; /* standard */<br />
+}<br />
+</code></p>
+<p><a href="http://css-edge.blogspot.com/2009/02/css-transparency-settings-for-all.html">css transparency setting for all browsers</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/02/16/inverting-value-in-mysql-table">
+      inverting value in mysql table
+    </a>
+  </h1>
+  <div class="post-date">Feb 16, 2009</div>
+  <p>It is possible to invert the value in mysql table without knowing the present value. This working on mysql and may not work on postgresql.</p>
+<p><code><br />
+UPDATE table_name SET column = NOT column<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/02/14/ps2-emulator">
+      ps2 emulator
+    </a>
+  </h1>
+  <div class="post-date">Feb 14, 2009</div>
+  <p>there is an emulator for ps2</p>
+<p><a href="http://www.pcsx2.net/"><br />
+pcsx2 project</a><br />
+<a href="http://ubuntuforums.org/showthread.php?t=399165">pcsx2 on linux</a><br />
+<a href="http://forums.pcsx2.net/thread-2341.html">pcsx2 forum thread</a><br />
+<a href="http://ubuntuforums.org/showthread.php?t=631979">compiling PCSX2 from SVN</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/02/12/debian-installer-with-the-latest-kernel">
+      debian installer with the latest kernel
+    </a>
+  </h1>
+  <div class="post-date">Feb 12, 2009</div>
+  <p>It is pain dealing with not yet supported hardware especially Ethernet card. Because it is required to continue installation on debian netinst. Using custom kernel help a lot. </p>
+<p><a href="http://www.debianhelp.org/node/13047">Dell PowerEdge T105 - no ethernet card detected</a><br />
+<a href="http://kmuto.jp/debian/d-i/">Custom debian installer download</a><br />
+<a href="http://www.debian.org/releases/etch/debian-installer/etchnhalf">Etch-and-half installer<br />
+</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/02/12/importexport-csv">
+      import/export csv
+    </a>
+  </h1>
+  <div class="post-date">Feb 12, 2009</div>
+  <p>a very handy php function <a href="http://us2.php.net/manual/en/function.fgetcsv.php">fgetcsv</a> and<a href="http://us2.php.net/manual/en/function.fputcsv.php"> fputcsv</a></p>
+<p><code><br />
+  header("Content-type: application/vnd.ms-excel");<br />
+  header("Content-disposition: csv; filename=document_" . date("Ymd") .".csv");<br />
+</code></p>
+<p><a href="http://www.modwest.com/help/kb6-135.html">http://www.modwest.com/help/kb6-135.html</a><br />
+<a href="http://www.creativyst.com/Doc/Articles/CSV/CSV01.htm">http://www.creativyst.com/Doc/Articles/CSV/CSV01.htm</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/02/12/develop-system-base-on-mykad">
+      develop system base on mykad
+    </a>
+  </h1>
+  <div class="post-date">Feb 12, 2009</div>
+  <p>it is quite interesting to develop a software application base on mykad. </p>
+<p><a href="http://forum.lowyat.net/topic/355950"><br />
+interesting topic on lowyat</a><br />
+<a href="http://www.mykadpro.net/news.aspx">free mykad SDK for testing</a><br />
+<a href="http://www.iris.com.my/product/pro_detail.asp?id=5&amp;productType=2&amp;comparison=False&amp;productname=SCR21U">mykad reader</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/02/03/reset-root-password">
+      reset root password
+    </a>
+  </h1>
+  <div class="post-date">Feb 3, 2009</div>
+  <p>You must have physical access to the server. On booting, append to boot<br />
+<code><br />
+init=/bin/bash<br />
+</code><br />
+then<br />
+<code><br />
+#mount -o remount,rw /<br />
+#passwd<br />
+#exec init<br />
+</code></p>
+<p>done.<br />
+<a href="http://www.debianhelp.co.uk/root.htm">Forgot the root password in debian</a><br />
+<a href="http://forums.debian.net/viewtopic.php?t=672">Lost root password</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/01/28/ie6ie7-min-height-bug-and-margin-bug-fixed">
+      ie6,ie7 min-height bug and margin bug fixed
+    </a>
+  </h1>
+  <div class="post-date">Jan 28, 2009</div>
+  <p>I come across this stupid IE bug and it really waste a lot of my time. The worst thing is, my client use IE6 in his office computer and whenever i went to his office showing him his website. Everything look terrible.</p>
+<p style="text-align:center;">it should look like this<br />
+<img class="size-medium wp-image-280 aligncenter" title="iceweasel" src="/assets/iceweasel.png?w=300" alt="iceweasel" width="300" height="230" /></p>
+<p style="text-align:center;">Image offset to the right<br />
+<img class="size-medium wp-image-282 aligncenter" title="ie7" src="/assets/ie7.png?w=300" alt="ie7" width="300" height="225" /></p>
+<p style="text-align:center;">Image offset to the right and the web page is too short<br />
+<img class="size-medium wp-image-281 aligncenter" title="ie6" src="/assets/ie6.png?w=300" alt="ie6" width="300" height="229" /></p>
+<p>I am not sure it is fixed or it just a dirty workaround. But here it is<br />
+<code><br />
+ul.innerfade li {<br />
+_margin-left:-425px; /*ie6 fix*/<br />
+*margin-left:-425px; /*ie7 fix */<br />
+}<br />
+</code><br />
+and another one in the td (html)<br />
+<code><br />
+style="_height:350px;"<br />
+</code><br />
+<br />
+<a href="http://www.webdevout.net/css-hacks">CSS hacks</a><br />
+<a href="http://www.evotech.net/blog/2007/05/ie7-only-css-hacks-examples/">IE7 only hacks</a></p></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/01/27/ie-bug-fix">
+      IE bug fix
+    </a>
+  </h1>
+  <div class="post-date">Jan 27, 2009</div>
+  <p>IE bug fix </p>
+<p>1. <a href="http://www.dustindiaz.com/min-height-fast-hack/">no min-height </a><br />
+<code>  _height:auto !important; </code></p>
+<p>2. preventing <a href="http://css-tricks.com/prevent-menu-stepdown/">step down </a><br />
+<code> float:left; display:inline;</code></p>
+<p>3. <a href="http://www.satzansatz.de/cssd/onhavinglayout.html">haslayout</a><br />
+<code><br />
+<!--[if lt IE 7]&gt;--><br />
+/* style for IE6 + IE5.5 + IE5.0 */<br />
+  .gainlayout { height: 0; }<br />
+<!--[if IE 7]&gt;--><br />
+  .gainlayout { zoom: 1; }<br />
+</code></p>
+<p>4. <a href="http://www.brownbatterystudios.com/sixthings/2007/01/06/css-first-aid-for-ie-peekaboo-bug/">peekaboo bug fix</a><br />
+<code><br />
+position: relative; /* peekaboo bug fix for IE6 */<br />
+min-width: 0; /* peekaboo bug fix for IE7 */<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/01/27/list-of-ie7-bugs">
+      list of IE7 bugs
+    </a>
+  </h1>
+  <div class="post-date">Jan 27, 2009</div>
+  <p>i hate IE. it took me a week just to fix a web page that works perfectly fine on other browsers even my web page is already pass w3c xhtml validation tests. I come across this a page with complete detailed of all IE7 related problem. In case you don't know how terrible IE7 browser it. read<br />
+<a href="http://www.gtalbot.org/BrowserBugsSection/MSIE7Bugs/"><br />
+MSIE7 bugs</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/01/19/display-new-icon-based-on-db-timestamp">
+      display new icon based on db timestamp
+    </a>
+  </h1>
+  <div class="post-date">Jan 19, 2009</div>
+  <p>this works in mysql5+. we want to display a small icon if the post_date is less than 2 days old. Unix timestamp is second. so for 2 days<br />
+<code><br />
+60 * 60 * 24 * 2 = 172800<br />
+</code><br />
+SQL query<br />
+<code><br />
+SELECT IF((UNIX_TIMESTAMP() - UNIX_TIMESTAMP(post_date)) &lt; 172800, 1, 0) AS is_new FROM tbl_news<br />
+</code><br />
+then the php code will be<br />
+<code><br />
+$p = mysqli_fecth_object($sql)<br />
+$p-&gt;is_new ? echo '&lt;img src="new.gif"&gt;' : '';<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/01/18/discover-all-domain-hosted-on-ip-address">
+      discover all domain hosted on ip address
+    </a>
+  </h1>
+  <div class="post-date">Jan 18, 2009</div>
+  <p>it is a very useful and wonderful tools. You can use it to discover all website hosted on an IP address</p>
+<p><a href="http://www.yougetsignal.com/">yougetsignal.com</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/01/17/gui-wireless-utility">
+      gui wireless utility
+    </a>
+  </h1>
+  <div class="post-date">Jan 17, 2009</div>
+  <p>you may try  <a href="http://wicd.sourceforge.net/">wicd</a> as a wireless manager</p>
+<p>debian install howto<br />
+edit /etc/apt/sources.list and add<br />
+<code><br />
+deb http://apt.wicd.net lenny extras<br />
+</code><br />
+then<br />
+<code><br />
+#apt-get update<br />
+#apt-get install wicd<br />
+</code><br />
+to start simply<br />
+<code><br />
+#wicd-client</p>
+<p><a href="http://wicd.sourceforge.net/">wicd project homepage</a><br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/01/17/avoid-phrising-using-maradns">
+      avoid phrising using maradns
+    </a>
+  </h1>
+  <div class="post-date">Jan 17, 2009</div>
+  <p>someone wrote an howto <a href="http://www.mrgnetwork.com.br/wiki/doku.php/en/maradns_phishing">here </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/01/13/booting-debian-in-few-seconds">
+      booting debian in few seconds
+    </a>
+  </h1>
+  <div class="post-date">Jan 13, 2009</div>
+  <p>found very interesting articles on how to make debian boot faster.</p>
+<p><a href="http://www.debian-administration.org/articles/620">booting debian in 14 seconds</a><br />
+<a href="http://lwn.net/Articles/299483/">booting linux in 5 seconds</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/01/06/fckeditor-the-easy-way">
+      FCKEditor the easy way
+    </a>
+  </h1>
+  <div class="post-date">Jan 6, 2009</div>
+  <p>fckeditor not that hard to install, but you may need some time to figure it out. Life is easier if you use  <a href="http://www.fyneworks.com/jquery/FCKEditor/">FCKeditor jQuery way</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/01/05/alternate-table-row-color-the-easy-way">
+      alternate table row color. the easy way!
+    </a>
+  </h1>
+  <div class="post-date">Jan 5, 2009</div>
+  <p>it is very simple using jQuery.</p>
+<p><code><br />
+$(document).ready(function() {</p>
+<p> $('table.zebra tr:odd').addClass('odd');<br />
+ $('table.zebra tr:even').addClass('even');</p>
+<p>});<br />
+</code></p>
+<p>of course you have to create two css class with the name even and odd.</p>
+<p><a href="http://colorcharge.com/2007/12/13/jquery-alternate-table-rows/"><br />
+jquery alternate table rows</a><br />
+<a href="http://www.exforsys.com/tutorials/jquery/jquery-three-color-alternating-pattern.html">tree color alternating pattern</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/01/05/print-a-z">
+      print a-z
+    </a>
+  </h1>
+  <div class="post-date">Jan 5, 2009</div>
+  <p>I need to create a link from a to z. I come up with a simple way to do it.<br />
+<code><br />
+	/* a-z */<br />
+	$str = '';<br />
+	for($i = 65; $i &lt; 91; ++$i)<br />
+		echo '<a href="#">'.chr($i).'</a>';<br />
+</code><br />
+another way<br />
+<code><br />
+$a = range('a', 'z');<br />
+foreach($a as $chr) echo $chr;<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2009/01/01/managing-source-code-using-git">
+      managing source code using git
+    </a>
+  </h1>
+  <div class="post-date">Jan 1, 2009</div>
+  <p>git sound strange to me. But, as i learn more, it is a very good piece of software for any programmer to manage their code.<br />
+<code><br />
+#apt-get install git-core<br />
+</code></p>
+<p><a href="http://blog.xkoder.com/2008/08/13/git-tutorial-starting-with-git-using-just-10-commands/">starting with git with just 10 commands</a><br />
+<a href="http://www.ibm.com/developerworks/linux/library/l-git/">Manage source code using git</a><br />
+<a href="http://www.kernel.org/pub/software/scm/git/docs/user-manual.html">Git user manual</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/12/28/list-of-proxies-in-malaysia">
+      List of proxies in malaysia
+    </a>
+  </h1>
+  <div class="post-date">Dec 28, 2008</div>
+  <p>Just in case you are interested</p>
+<p><a href="http://www.aliveproxy.com/proxy-list/proxies.aspx/Malaysia-my">list of proxies server based in malaysia</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/12/28/mysql-prepared-statement">
+      mysql prepared statement
+    </a>
+  </h1>
+  <div class="post-date">Dec 28, 2008</div>
+  <p>Prepared statement is one good way to avoid sql injection.<br />
+<code><br />
+mysql&gt; PREPARE stmt_name FROM "SELECT name FROM Country WHERE code = ?";<br />
+Query OK, 0 rows affected (0.09 sec)<br />
+Statement prepared</p>
+<p>mysql&gt; SET @test_parm = "FIN";<br />
+Query OK, 0 rows affected (0.00 sec)</p>
+<p>mysql&gt; EXECUTE stmt_name USING @test_parm;<br />
++---------+<br />
+| name    |<br />
++---------+<br />
+| Finland |<br />
++---------+<br />
+1 row in set (0.03 sec)</p>
+<p>mysql&gt; DEALLOCATE PREPARE stmt_name;<br />
+Query OK, 0 rows affected (0.00 sec)<br />
+</code></p>
+<p><a href="http://dev.mysql.com/tech-resources/articles/4.1/prepared-statements.html"><br />
+More</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/12/28/copy-files-100-times">
+      copy files 100 times
+    </a>
+  </h1>
+  <div class="post-date">Dec 28, 2008</div>
+  <p>Some interesting question asked on mailing list. A few interesting solutions in bash script.<br />
+<code><br />
+$for x in $(seq -w 1 100); do cp file.jpg file${x}.jpg; done<br />
+</code><br />
+<code><br />
+for I in {1..100}; do cp file.jpg file$I.jpg ; done<br />
+</code><br />
+<code><br />
+$ seq -w 1 1 10 | xargs -i -n1 cp file.jpg file{}.jpg<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/12/21/how-to-increase-website-performance">
+      how to increase website performance
+    </a>
+  </h1>
+  <div class="post-date">Dec 21, 2008</div>
+  <p>Yahoo developer publish a very detailed information on this. <br />
+The best anwser is, simply Install the firebug extension YSlow.</p>
+<p><a href="http://stevesouders.com/hpws/rules.php">high performance website rules</a><br />
+<a href="http://developer.yahoo.com/performance/">exceptional performance</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/12/17/css-blueprint-generator">
+      css blueprint generator
+    </a>
+  </h1>
+  <div class="post-date">Dec 17, 2008</div>
+  <p>CSS is quite simple if you only use firefox. But, thing get complicated when you considering IE.<br />
+I found a very useful css grid generator.  <a href="http://kematzy.com/blueprint-generator/">click here</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/12/09/gtk-project-directory-structure">
+      gtk project directory structure
+    </a>
+  </h1>
+  <div class="post-date">Dec 9, 2008</div>
+  <p>every project share something in common. That something in common save us lazy programmer a lot of time. Here is a nice article about this </p>
+<p><a href="http://bo.majewski.name/bluear/gnu/GTK/plain/">common project directory structure</a><br />
+<a href="http://bo.majewski.name/bluear/gnu/GTK/i18n/">project with i18n</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/12/02/scalable-webserver">
+      scalable webserver
+    </a>
+  </h1>
+  <div class="post-date">Dec 2, 2008</div>
+  <p>i came across a blog about scalable server setup<br />
+<br />
+<a href="http://blog.thembid.com/2007/04/05/build-scalable-web-20-sites-with-ubuntu-symfony-and-lighttpd/">Read here</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/12/02/very-low-memory-mysql-5-mycnf-configuration">
+      very low memory mysql 5 my.cnf configuration
+    </a>
+  </h1>
+  <div class="post-date">Dec 2, 2008</div>
+  <p>on VPS server with very limited memory it is good to tweak mysql5. In /etc/mysql/my.cnf<br />
+<code><br />
+# Main MySQL server options<br />
+[mysqld]<br />
+port = 3306<br />
+socket = /var/run/mysqld/mysqld.sock</p>
+<p># No locking at all!<br />
+skip-locking</p>
+<p># Set internal buffers, caches and stacks very low<br />
+key_buffer = 16K<br />
+max_allowed_packet = 16K<br />
+table_cache = 1<br />
+sort_buffer_size = 16K<br />
+read_buffer_size = 16K<br />
+read_rnd_buffer_size = 1K<br />
+net_buffer_length = 1K<br />
+thread_stack = 16K</p>
+<p># Don't listen on a TCP/IP port at all.<br />
+# Will still work provided all access is done via localhost<br />
+skip-networking<br />
+server-id = 1</p>
+<p># Skip Berkley and Inno DB types<br />
+skip-bdb<br />
+skip-innodb</p>
+<p># Set the query cache low<br />
+query_cache_limit = 1048576<br />
+query_cache_size = 1048576<br />
+query_cache_type = 1</p>
+<p># Set various memory limits very low, disable memory-hogging extras<br />
+[mysqldump]<br />
+quick<br />
+max_allowed_packet = 16K<br />
+[mysql]<br />
+no-auto-rehash<br />
+[isamchk]<br />
+key_buffer = 16K<br />
+sort_buffer_size = 16K<br />
+[myisamchk]<br />
+key_buffer = 16K<br />
+sort_buffer_size = 16K<br />
+[mysqlhotcopy]<br />
+interactive-timeout<br />
+</code><br />
+<a href="http://www.aoakley.com/articles/2008-03-06-ubuntu-minimal-memory.php"><br />
+More info</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/27/hp-psc-1410-printer-installation">
+      HP PSC 1410 printer installation
+    </a>
+  </h1>
+  <div class="post-date">Nov 27, 2008</div>
+  <p><code><br />
+#apt-get install hpoj hpijs<br />
+</code></p>
+<p>then copy the ppd files to<br />
+<code><br />
+cp HP-PSC_1400-hpijs.ppd /usr/share/cups/model<br />
+</code></p>
+<p>add printer in http://localhost:631</p>
+<p><a href="http://ubuntuforums.org/showthread.php?t=66335">more info</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/25/wireless-in-linux">
+      Wireless in Linux
+    </a>
+  </h1>
+  <div class="post-date">Nov 25, 2008</div>
+  <p>you have to install the package <em>wireless-tools</em><br />
+<code><br />
+#apt-get install wireless-tools<br />
+</code></p>
+<p> iwconfig - manipulate the basic wireless parameters <br />
+ iwlist - allow to initiate scanning and list frequencies, bit-rates, encryption keys... <br />
+ iwspy - allow to get per node link quality <br />
+ iwpriv - allow to manipulate the Wireless Extensions specific to a driver (private) <br />
+ ifrename - allow to name interfaces based on various static criteria </p>
+<p><a href="http://ubuntuforums.org/archive/index.php/t-91439.html">Interesting wireless scripts</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/24/nec-versa-s5500-intel-prowireless-4695-ag-driver">
+      NEC Versa S5500 + Intel PRO/wireless 4695 AG driver
+    </a>
+  </h1>
+  <div class="post-date">Nov 24, 2008</div>
+  <p>you must install the <strong>kernel 2.6.26-1-686</strong>, <strong>wpasupplicant</strong> and <strong>firmware-iwlwifi</strong>, <strong>wireless-tools</strong> to get intel pro/wireless 4695 to work. </p>
+<p>then in /etc/network/interfaces<br />
+<code><br />
+#auto wlan0<br />
+iface wlan0 inet dhcp<br />
+pre-up (echo ‘Modprobing iwl4965′) &amp;&amp; /sbin/modprobe iwl4965<br />
+post-down (echo ‘Removing iwl4965′) &amp;&amp; /sbin/modprobe -r iwl4965<br />
+wpa-ssid YOURNETNAMEAKASID<br />
+wpa-key_mgmt WPA-PSK<br />
+wpa-proto WPA<br />
+wpa-pairwise TKIP<br />
+wpa-group TKIP<br />
+wpa-psk “yourpassphrase”<br />
+wpa-driver wext<br />
+</code></p>
+<p>to activate the wireless driver<br />
+<code><br />
+#ifup wlan0<br />
+</code> </p>
+<p><a href="http://blog.sviluppoweb.eu/2008/09/27/intel-corporation-prowireless-4965-ag-or-agn-hp-notebook-dv2690el-debian-linux/">more info </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/24/nec-versa-s5500-rt81118168b-ethernet-driver">
+      NEC Versa S5500 + RT8111/8168B ethernet driver
+    </a>
+  </h1>
+  <div class="post-date">Nov 24, 2008</div>
+  <p>In debian lenny, the default driver installed is r8169. It works, but sometime you will get an error </p>
+<p><code><br />
+ADDRCONF(NETDEV_UP): eth1: link is not ready<br />
+</code> </p>
+<p>you should install r8168 driver and upgrade the kernel to at least linux-image-2.6.26-1-686</p>
+<p><a href="http://www.jamesonwilliams.com/bin/r8168_scripts.tar.bz2">download r8168 driver</a><br />
+<a href="http://www.jamesonwilliams.com/hardy-r8168.html"><br />
+r8168 driver install instructio</a>n </p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/23/how-to-install-dig">
+      How to install dig?
+    </a>
+  </h1>
+  <div class="post-date">Nov 23, 2008</div>
+  <p>dig is a little program to query dns records. dig belong to the package dnsutils.<br />
+<code><br />
+#apt-get install dnsutils<br />
+</code><br /></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/22/installing-internet-explorer-on-debian-linux">
+      installing Internet Explorer on debian linux
+    </a>
+  </h1>
+  <div class="post-date">Nov 22, 2008</div>
+  <p>i hate microsoft! but i need to install IE for web testing purpose.<br />
+<code><br />
+#apt-get install wine cabextract<br />
+</code></p>
+<p><a href="http://www.tatanka.com.br/ies4linux/downloads/ies4linux-latest.tar.gz">ies4linux download</a><br />
+<a href="http://www.tatanka.com.br/ies4linux/page/Main_Page">IE4linux webpage</a> <br />
+<a href="http://www.tatanka.com.br/ies4linux/page/Main_Page">ies4linux Ubuntu install guide</a></p>
+<p>opps! i changed my mind. i don't want this crap inside my notebook!</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/22/usefull-x-window-utility">
+      usefull x window utility
+    </a>
+  </h1>
+  <div class="post-date">Nov 22, 2008</div>
+  <p>xdpyinfo - you can check resolutions <br />
+xrandr - check current screen resolution and refresh rate <br />
+lspci or lshw - check what is your graphic card <br />
+gtf - generate modeline for xorg.conf</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/22/lightweight-linux-workstation">
+      lightweight linux workstation
+    </a>
+  </h1>
+  <div class="post-date">Nov 22, 2008</div>
+  <p>doing some research on the fast and lightweight workstation, here is the package on my list</p>
+<ul>
+<li> <a href="http://wiki.debian.org/DebianLenny">Debian Lenny+Sid </a></li>
+<li><a href="http://icculus.org/openbox/2/">Openbox window manager</a></li>
+<li><a href="http://pcmanfm.sourceforge.net/screenshots.html">pcmanfm file manager</a> </li>
+<li><a href="http://www.emma-soft.com/projects/epdfview/">epdfview</a> </li>
+<li><a href="http://fbpanel.sourceforge.net/">fbpanel</a></li>
+<li><a href="http://projects.gnome.org/gedit/screenshots.html">gedit</a> </li>
+<li><a href="http://en.wikipedia.org/wiki/Xterm">xterm</a></li>
+<li><a href="http://www.gimp.org/screenshots/"> Gimp</a> </li>
+<li> <a href="http://lxde.sourceforge.net/gpicview/">gpicview </a></li>
+<li><a href="http://gnochm.sourceforge.net/sshots.html">gnochm </a></li>
+<li><a href="http://developer.imendio.com/projects/devhelp">devhelp</a></li>
+<li><a href="http://prematureoptimization.org/glista"> Glista </a></li>
+</ul>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/22/fast-debian-mirror">
+      fast debian mirror
+    </a>
+  </h1>
+  <div class="post-date">Nov 22, 2008</div>
+  <p>i found a fast debian mirror that can archive up to 160kBps (on peak time around 60kBps) compared to the ftp.debian.org (11kBps). I am using streamyx 1Mbps and staying in kota kinabalu. </p>
+<p><code><br />
+deb http://mirror.pacific.net.au/debian lenny main contrib non-free<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/20/how-to-avoid-ssh-timeout">
+      how to avoid ssh timeout
+    </a>
+  </h1>
+  <div class="post-date">Nov 20, 2008</div>
+  <p>i always face with this problem every time i use ssh client from new installed debian system. Edit the /etc/ssh/sshd_config </p>
+<p><code><br />
+ClientAliveInterval 300<br />
+ClientAliveCountMax 10<br />
+</code></p>
+<p>On client side, in $HOME/.ssh/config or /etc/ssh/ssh_config<br />
+<code><br />
+ServerAliveInterval 30<br />
+ServerAliveCountMax 10<br />
+</code></p>
+<p>Make sure the ssh server using <strong>Protocol 2</strong> <br />
+Check man ssh_config and sshd_config for more info</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/20/howto-install-window-codecs">
+      howto install window codecs
+    </a>
+  </h1>
+  <div class="post-date">Nov 20, 2008</div>
+  <p>You cannot play *.avi files with win32codecs. You definitely need one. </p>
+<p>edit you /etc/apt/sources.list<br />
+<code><br />
+ deb http://ftp.tw.debian.org/debian-multimedia/ stable main<br />
+</code></p>
+<p><code><br />
+#apt-get update<br />
+#apt-get install win32codecs<br />
+</code></p>
+<p>you can use any mirror from <a href="http://debian-multimedia.org/debian-m.php">debian-multimedia.org</a>. I am using Taiwan mirror servers because it is quite fast, considering that i am in kota kinabalu.</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/20/local-dns-cache-with-dnsmasq">
+      Local dns cache with dnsmasq
+    </a>
+  </h1>
+  <div class="post-date">Nov 20, 2008</div>
+  <p>local cache for faster internet browsing.</p>
+<p><code><br />
+#apt-get install dnsmasq<br />
+</code><br />
+in /etc/dnsmasq.conf<br />
+<code><br />
+listen-address=127.0.0.1<br />
+</code><br />
+in /etc/dhcp3/dhclient.conf<br />
+<code><br />
+prepend domain-name-server 127.0.0.1;<br />
+</code><br />
+in /etc/resolv.conf<br />
+<code><br />
+nameserver 127.0.0.1<br />
+</code><br />
+The last thing you need to do<br />
+<code><br />
+#/etc/init.d/dnsmasq restart<br />
+#/etc/init.d/networking restart<br />
+</code><br />
+Another interesting package that does the same thing is pdnsd. The best thing about pdnsd is, it saves the dns cache in disk which is still available even after you reboot.</p>
+<p><a href="http://80.83.114.72/linux/howto/dnsmasq.html"><br />
+More info on dnsmasq</a><br />
+<a href="http://www.geocities.com/sunil_tt/pdnsd.txt">pdnsd info</a> <br />
+<a href="http://kakku.wordpress.com/2008/01/29/local-dns-caching-pdnsd-reduce-name-resolutions-times-run-your-own-caching-dns-server-and-theres-something-about-opendns/">How to setup pdnsd</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/20/lyx-lovely-word-processor">
+      Lyx - lovely word processor
+    </a>
+  </h1>
+  <div class="post-date">Nov 20, 2008</div>
+  <p>I wondering why i do not find this awesome lyx before. Very well adapted into the scientific community.<br />
+Lyx is available on Windows. </p>
+<p><a href="http://www.lyx.org/Screenshots">Lyx screenshot</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/19/tagged-by-sandra-something-about-me">
+      tagged by sandra. something about me
+    </a>
+  </h1>
+  <div class="post-date">Nov 19, 2008</div>
+  <p>i am relatively new on this blogging world. and honestly i am not really good in writing. LOL, i should write something about me supposed to be a month ago. But i am relative slow to pick up what it mean by tagged. Anyway, better late than never. so here is a 7 funny or weird fact about me.  </p>
+<p>wait. i don't even know where i  should start. LOL</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/18/gnome-applet-tutorial">
+      gnome applet tutorial
+    </a>
+  </h1>
+  <div class="post-date">Nov 18, 2008</div>
+  <p>Here is a very interesting tutorial on how to create your own applet.</p>
+<p><a href="http://projects.gnome.org/ORBit2/appletstutorial.html">gnome applet tutorial</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/18/pwgen-password-generator">
+      pwgen - password generator
+    </a>
+  </h1>
+  <div class="post-date">Nov 18, 2008</div>
+  <p>from the project homepage,  it says</p>
+<blockquote><p>password generator which creates password which can be easily memorized by human</p></blockquote>
+<p><code><br />
+#apt-get install pwgen<br />
+</code></p>
+<p>It does have a -y switch to include special characters in the generated password. try<br />
+<code><br />
+$pwgen -syB<br />
+m=g_L3on<br />
+\d?7ans^<br />
+[J7\{xwo<br />
+</code><br />
+nice!<br />
+<a href="http://sourceforge.net/projects/pwgen/"> pwgen homepage </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/18/resize-photo-using-imagick">
+      resize photo using imagick
+    </a>
+  </h1>
+  <div class="post-date">Nov 18, 2008</div>
+  <p>i use a very old laptop - VIA C3 1Ghz + 256MB memory with broken fan.<br />
+I have about 200MB photos in one folder with 1MB size each. Resizing with Gimp is not an option because it takes few minutes to even show or display the content of the folder.<br />
+I wrote simple but practical bash script resize.sh</p>
+<p><code><br />
+#!/bin/bash<br />
+for i in *.JPG<br />
+do<br />
+        if [-e "thumbs/$i"]; then<br />
+                echo "$i exists"<br />
+        else<br />
+                echo "resize $i"<br />
+                convert "$i" -resize 600x450 "thumbs/$i"<br />
+       fi<br />
+done<br />
+echo "finish"<br />
+</code></p>
+<p>I simply run the script and go outside watching movie. It takes almost hours to finish<br />
+Sometime it just stop half way. Have to re-run the scripts to make the whole thumbnails. </p>
+<p> The best solutions might be to get a new computer. </p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/18/delete-all-gedit-backup-files">
+      delete all gedit backup files
+    </a>
+  </h1>
+  <div class="post-date">Nov 18, 2008</div>
+  <p>by default gedit will maintain a copy of files being edited with the prefix ~.</p>
+<p>it is irritating sometimes to have this files uploaded to the server. a simple way to delete this file will be<br />
+<code><br />
+$find . -name *~ -exec rm '{}' \;<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/07/postfix-postgresql">
+      postfix + postgresql
+    </a>
+  </h1>
+  <div class="post-date">Nov 7, 2008</div>
+  <p>we can use postgresql to store postfix configuration.<br />
+<code><br />
+#apt-get install postfix postfix-pgsql<br />
+</code><br />
+edit the configuration /etc/postfix/main.cf<br />
+<code><br />
+   alias_maps = pgsql:/etc/postfix/pgsql-aliases.cf<br />
+</code><br />
+then in /etc/postfix/pgsql-aliases.cf<br />
+<code><br />
+host =<br />
+username=<br />
+password=<br />
+db_name=<br />
+query=<br />
+select_field=<br />
+table=<br />
+where_field=<br />
+additional_conditions=<br />
+</code><a href="http://www.postfix.org/PGSQL_README.html"></p>
+<p>more from postfix documentation</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/05/free-installer-for-windows">
+      free installer for windows
+    </a>
+  </h1>
+  <div class="post-date">Nov 5, 2008</div>
+  <p>Inno setup from jrsoftware.org is a free installer for window program. Another one is NSIS, and open source system to create window installer.</p>
+<p>Wix Installer is another option. Just found out about Wix recently and it seem a very good option. </p>
+<p><a href="http://wix.sourceforge.net/">Wix Project page </a><br />
+<a href="http://www.tramontana.co.hu/wix/">Wix Tutorial page</a> <br />
+<a href="http://www.jrsoftware.org/isinfo.php">Innosetup homepage</a><br />
+<a href="http://nsis.sourceforge.net/Main_Page">NullSoft scriptable install system</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/05/gtkdatabox-plotting-data">
+      GtkDataBox - plotting data
+    </a>
+  </h1>
+  <div class="post-date">Nov 5, 2008</div>
+  <blockquote>GtkDatabox is a widget for the Gtk+-library designed to display large amounts of numerical data fast and easy. One or more data sets of thousands of data points (X and Y coordinate) may be displayed and updated in split seconds.</p></blockquote>
+<p><a href="http://www.eudoxos.net/gtk/gtkdatabox/index.html">gtkdatabox homepage</a><br />
+<a href="http://www.linux.com/articles/148315">simple tutorial on gtkdatabox</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/11/04/imgareaselect">
+      imgAreaSelect
+    </a>
+  </h1>
+  <div class="post-date">Nov 4, 2008</div>
+  <p><a href="http://odyniec.net/projects/imgareaselect/">jQuery plugin for selecting a rectangular area on an image</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/31/lighttpd-redirect-www-to-non-www">
+      lighttpd redirect www to non www
+    </a>
+  </h1>
+  <div class="post-date">Oct 31, 2008</div>
+  <p>good SEO practice?<br />
+<code><br />
+$HTTP["host"] =~ "^www\.(.*)" {<br />
+url.redirect = ( "^/(.*)" =&gt; "http://%1/$1" )<br />
+}<br />
+</code><br />
+<a href="http://www.cyberciti.biz/tips/lighttpd-redirect-www-domaincom-to-domain-com.html"><br />
+more from cyberciti</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/31/get-imagemagick-to-work-on-php5-lighttpd">
+      get imagemagick to work on php5 + lighttpd
+    </a>
+  </h1>
+  <div class="post-date">Oct 31, 2008</div>
+  <p>somehow #apt-get install php5-imagick simply doesn't work. <br />
+The right way,<br />
+<code><br />
+#apt-get install imagemagick<br />
+#aptitude install make php5-dev php-pear<br />
+#aptitude remove php5-imagick<br />
+#aptitude install libmagick9-dev<br />
+#pecl install imagick<br />
+</code></p>
+<p><a href="http://kevin.vanzonneveld.net/techblog/article/class_imagick_not_found/">Thanks to Kevin for this solutions</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/30/lightweight-dns-server">
+      lightweight dns server
+    </a>
+  </h1>
+  <div class="post-date">Oct 30, 2008</div>
+  <p>one of the best open source dns server is <a href="http://www.maradns.org/notes.html">maradns </a> </p>
+<p><a href="http://www.programmer-art.org/articles/maradns">maradns configuration </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/30/multiple-ip-address-on-linux">
+      multiple ip address on linux
+    </a>
+  </h1>
+  <div class="post-date">Oct 30, 2008</div>
+  <p>debian etch </p>
+<p><code><br />
+#ifconfig eth0:1 192.168.1.7<br />
+#ifconfig eth0:2 192.168.1.8<br />
+</code><br />
+<br />
+restart the networking service<br />
+<code><br />
+#/etc/init.d/networking restart<br />
+</code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/30/ifup-eth0-vs-ifconfig-eth0-up">
+      ifup eth0 vs ifconfig eth0 up
+    </a>
+  </h1>
+  <div class="post-date">Oct 30, 2008</div>
+  <p><code><br />
+#ifup eth0<br />
+#ifconfig eth0 up<br />
+</code></p>
+<p>both work the same way. ifup will configure network based on  /etc/network/interfaces. <br />
+ifconfig use to configrue kernel resident network interfaces</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/30/forex-exchange-rate">
+      forex exchange rate
+    </a>
+  </h1>
+  <div class="post-date">Oct 30, 2008</div>
+  <p>one of my client asking me to write a software for his money changer company. The current exchange rates can<br />
+be downloaded from</p>
+<p>http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml<br />
+http://www.bnm.gov.my/statistics/exchangerates.php</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/30/libxml2-tutorial">
+      LibXML2 tutorial
+    </a>
+  </h1>
+  <div class="post-date">Oct 30, 2008</div>
+  <p>libxml2 one of the most important c library programmer must know.</p>
+<p><a href="http://xmlsoft.org/examples/index.html">LibXML2 official tutorial</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/30/glibcurl">
+      glibcurl
+    </a>
+  </h1>
+  <div class="post-date">Oct 30, 2008</div>
+  <p>very interesting curl library binding using glib. It make life easier to use http in gtk program  </p>
+<p><a href="http://atterer.net/glibcurl/"> more info</a> <br />
+<a href="http://curl.haxx.se/">Official libcurl website</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/29/flickcurl-c-library-for-flickr-api">
+      Flickcurl c library for flickr API
+    </a>
+  </h1>
+  <div class="post-date">Oct 29, 2008</div>
+  <p><a href="http://librdf.org/flickcurl/">very interesting C API for flickr!</a> </p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/27/globalization-support-for-software-application">
+      Globalization support for software application
+    </a>
+  </h1>
+  <div class="post-date">Oct 27, 2008</div>
+  <blockquote>ICU is a mature, widely used set of C/C++ and Java libraries providing Unicode and Globalization support for software applications</p></blockquote>
+<p><a href="http://paragasu.wordpress.com/wp-admin/post-new.php"> ICU projects </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/19/convert-video-to-flv">
+      convert video to flv
+    </a>
+  </h1>
+  <div class="post-date">Oct 19, 2008</div>
+  <p>ffmpg and memcoder</p>
+<p><code><br />
+hardy2@hardy2-laptop:~$ cat .bin/video-flv_png<br />
+#!/bin/bash<br />
+filename="$@"<br />
+filename=${filename%.*}<br />
+ffmpeg -sameq -i "$@" -s 640x480 -ar 44100 -r 25 $filename.flv -pass 2<br />
+ffmpeg  -itsoffset -0  -i "$@" -vcodec png -vframes 1 -an -f rawvideo<br />
+-s 640x480 $filename.1.png<br />
+ffmpeg  -itsoffset -0.5  -i "$@" -vcodec png -vframes 1 -an -f<br />
+rawvideo -s 640x480 $filename.2.png<br />
+ffmpeg  -itsoffset -1  -i "$@" -vcodec png -vframes 1 -an -f rawvideo<br />
+-s 640x480 $filename.3.png<br />
+</code></p>
+<p>by<a href="http://dotanchoen.com"> dotanchoen.com</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/16/vagrind">
+      Vagrind
+    </a>
+  </h1>
+  <div class="post-date">Oct 16, 2008</div>
+  <blockquote>a memory error detector, a thread error detector, a cache and branch-prediction profiler, a call-graph generating cache profiler, and a heap profiler, a data race detector, and an instant memory leak detector</p></blockquote>
+<p><a href="http://valgrind.org/">valgrind project homepage</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/16/the-magic-of-php-variable-function">
+      the magic of PHP variable function
+    </a>
+  </h1>
+  <div class="post-date">Oct 16, 2008</div>
+  <p><code>&lt;?php<br />
+$func = "sqrt";<br />
+if (is_callable($func)) {<br />
+print $func(49);<br />
+}<br />
+//result 7<br />
+?&gt;<br />
+</code></p>
+<p>Alternatively you can use <a href="http://www.php.net/manual/en/function.call-user-func.php">call_user_func()</a> and <a href="http://www.php.net/manual/en/function.call-user-func-array.php">call_user_func_array()<br />
+</a></p>
+<blockquote><p>call_user_func is twice slower than direct call function and call_user_func_array is 10%-20% slower than call_user_func</p></blockquote>
+<p><a href="http://www.hudzilla.org/phpbook/read.php/4_19_0">more info </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/16/how-to-change-label-font-color">
+      how to change label font color
+    </a>
+  </h1>
+  <div class="post-date">Oct 16, 2008</div>
+  <p>by using gtk_label_set_markup() </p>
+<p>or </p>
+<p><code>GdkColor color;<br />
+gdk_color_parse("red", &amp;color);<br />
+gtk_widget_modify_fg(widget, GTK_STATE_NORMAL, &amp;color);</code></p>
+<p><a href="http://library.gnome.org/devel/pango/stable/PangoMarkupFormat.html">more about pango markup format</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/15/customize-openbox-theme">
+      Customize Openbox theme
+    </a>
+  </h1>
+  <div class="post-date">Oct 15, 2008</div>
+  <p>i am a big fan of openbox window manager. Openbox is a very lightweight WM and relatively easy easy to customize.<br />
+<code><br />
+# apt-get install gtk-chtheme<br />
+$ gtk-chtheme<br />
+</code></p>
+<p><a href="http://tuxtraining.com/2008/09/28/how-to-theme-openbox"> How to theme openbox </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/12/wipe-hard-drive">
+      wipe hard drive
+    </a>
+  </h1>
+  <div class="post-date">Oct 12, 2008</div>
+  <p>DBAN</p>
+<blockquote><p>DBAN will automatically and completely delete the contents of any hard disk that it can detect</p></blockquote>
+<p><a href="http://linux.die.net/man/1/shred">dban project homepage</a></p>
+<p>shred<br />
+<a href="http://linux.die.net/man/1/shred"> shred manpage </a></p>
+<p>or simply use dd<br />
+<code> dd if=/dev/zero of=/dev/hda </code></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/10/new-gtkimageviewer">
+      new gtkimageviewer
+    </a>
+  </h1>
+  <div class="post-date">Oct 10, 2008</div>
+  <p>From Dov Grobgeld</p>
+<blockquote><p>
+a major rewrite (using gob2 actually) where the image annotation model has been changed so that the image is provided to the user of the widget before it is drawn to the screen.
+</p></blockquote>
+<p><a href="http://giv.sourceforge.net/gtk-image-viewer/gtkimageviewer_tutorial.html"> gtkimageviewer tutorial </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/10/how-to-replace-notebook-page">
+      how to replace notebook page
+    </a>
+  </h1>
+  <div class="post-date">Oct 10, 2008</div>
+  <p>it is quite tricky since there is not such function in gtk_notebook_*<br />
+tadeboro from gtkforums.com answer me with a good code example. </p>
+<p><a href="http://www.gtkforums.com/viewtopic.php?t=1865">read more</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/10/magical-square-root">
+      magical square root
+    </a>
+  </h1>
+  <div class="post-date">Oct 10, 2008</div>
+  <p><code><br />
+/*<br />
+================<br />
+SquareRootFloat<br />
+================<br />
+*/<br />
+float SquareRootFloat(float number) {<br />
+    long i;<br />
+    float x, y;<br />
+    const float f = 1.5F;</p>
+<p>    x = number * 0.5F;<br />
+    y  = number;<br />
+    i  = * ( long * ) &y;<br />
+    i  = 0x5f3759df - ( i &gt;&gt; 1 );<br />
+    y  = * ( float * ) &i;<br />
+    y  = y * ( f - ( x * y * y ) );<br />
+    y  = y * ( f - ( x * y * y ) );<br />
+    return number * y;<br />
+}<br />
+</code></p>
+<p><a href="http://www.codemaestro.com/reviews/9"> Original article from code maestro </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/10/ssh-filesystem">
+      SSH filesystem
+    </a>
+  </h1>
+  <div class="post-date">Oct 10, 2008</div>
+  <p>mount remote filesystem via ssh. it is develop using fuse by Miklos Szeredi</p>
+<p><a href="http://fuse.sourceforge.net/sshfs.html"> sshfs project page </a><br />
+<a href="http://fuse.sourceforge.net/"> fuse project page </a><br />
+<a href="http://fuse.sourceforge.net/wiki/index.php/FileSystems"> List of filesystem develop using fuse </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/08/how-to-find-not-unique-row-in-the-table">
+      How to find not unique row in the table
+    </a>
+  </h1>
+  <div class="post-date">Oct 8, 2008</div>
+  <p><code><br />
+test=*# select * from dup;<br />
+ a | b<br />
+---+---<br />
+ 1 | 1<br />
+ 1 | 2<br />
+ 2 | 1<br />
+ 1 | 1<br />
+ 3 | 3<br />
+ 3 | 3<br />
+(6 rows)</p>
+<p>test=*# select * from dup where (ctid,a,b) not in (select distinct on (a,b) ctid,* from dup);<br />
+ a | b<br />
+---+---<br />
+ 1 | 1<br />
+ 3 | 3<br />
+(2 rows)<br />
+</code><br />
+another approach:<br />
+<code><br />
+select a,b from dup group by a,b having count(*) &gt; 1;<br />
+</code></p>
+<p><a href="http://archives.postgresql.org/pgsql-general/"> pgsql-general mailing list </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/08/libgmailer">
+      libgmailer
+    </a>
+  </h1>
+  <div class="post-date">Oct 8, 2008</div>
+  <blockquote>
+libgmailer is a PHP library that allow you to write PHP program to access Google's free webmain service Gmail
+</p></blockquote>
+<p><a href="http://gmail-lite.sourceforge.net/wordpress/index.php/about/libgmailer/"> Libgmailer page at sourceforge </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/08/how-to-display-busy-cursor">
+      how to display busy cursor
+    </a>
+  </h1>
+  <div class="post-date">Oct 8, 2008</div>
+  <p>interesting post on gtk-app-devel-list@gnome.org mailing list<br />
+<code><br />
+void busy_stuff ()<br />
+{<br />
+   GdkDisplay *display;<br />
+   GdkCursor *cursor;<br />
+   GdkWindow *window;<br />
+   gint x, y;</p>
+<p>   cursor = gdk_cursor_new(GDK_WATCH);</p>
+<p>   display = gdk_display_get_default();<br />
+   window = gdk_display_get_window_at_pointer(disp, &amp;x, &amp;y);</p>
+<p>   gdk_window_set_cursor(window, cursor);<br />
+   gdk_display_sync(display);<br />
+   gdk_cursor_unref(cursor);</p>
+<p>   /* do time-consuming stuff here */</p>
+<p>   gdk_window_set_cursor(window, NULL);<br />
+}<br />
+</code></p>
+<p>gdk_cursor_unref() prevent memory leak</p>
+<p><a href="http://mail.gnome.org/archives/gtk-devel-list/"> Mailing list archive </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/06/gtk-tutorial">
+      gtk tutorial
+    </a>
+  </h1>
+  <div class="post-date">Oct 6, 2008</div>
+  <p>Gtk is a very powerful GUI programming toolkits. Here is a few interesting website to look at</p>
+<p><a href="http://www.gtkforums.com"> gtk forums </a><br />
+<a href="http://www.com-science.de/pmwiki/pmwiki.php?n=Programming.GTK"> Gtk Summary by Michael Foerster </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/04/c-basics">
+      c basics
+    </a>
+  </h1>
+  <div class="post-date">Oct 4, 2008</div>
+  <p><a href="http://www.gamedev.net/reference/articles/article1697.asp">A Tutorial on Pointers and Arrays in C </a><br />
+<a href="http://boredzo.org/pointers/">Everything you need to know about pointers in C</a><br />
+<a href="http://www.physics.drexel.edu/students/courses/Comp_Phys/General/C_basics/"> Brief c tutorial </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/04/select-row-within-days-interval">
+      select row within days interval
+    </a>
+  </h1>
+  <div class="post-date">Oct 4, 2008</div>
+  <p>
+SELECT * FROM mytable WHERE mydate &gt; DATE_SUB(now(),INTERVAL 7 DAYS)</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/04/using-g_value_get_">
+      Using g_value_get_*
+    </a>
+  </h1>
+  <div class="post-date">Oct 4, 2008</div>
+  <p>using GValue related function is quite tricky. It is not working if you do<br />
+<code><br />
+GdaDataModel *dm;<br />
+gint i;<br />
+i = g_value_get_int ( gda_data_model_get_value_at (dm, 0, 0));<br />
+</code></p>
+<p>For upcomming Version 4.0 (the main difference is at GdaDataModel API)</p>
+<p>GdaDataModel *model;<br />
+const GValue *integer;<br />
+GError *error = NULL;</p>
+<p>integer = gda_value_new (G_TYPE_INT);<br />
+integer = gda_data_model_get_value_at  (model, 0, 0, &amp;error);</p>
+<p>/* All values in a Data Model must be unmodificable then use const GValue, this<br />
+will avoid compilation warnings */</p>
+<p>Or can use (gda_value_new makes this for you :-)<br />
+integer = g_new0 (GValue. 1);<br />
+g_value_init (inteteger, G_TYPE_INT);</p>
+<p>thank to Daniel Espinosa </p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/02/undefine-reference-to">
+      Undefine reference to
+    </a>
+  </h1>
+  <div class="post-date">Oct 2, 2008</div>
+  <p>Header file and function on separate file should not have the static function declaration.</p>
+<p>static void loan_new_record (gpointer data);<br />
+static void loan_display_reset ( GtkWidget *data); </p>
+<p>to</p>
+<p>void loan_new_record (gpointer data);<br />
+void loan_display_reset ( GtkWidget *data); </p>
+<p><a href="http://www.gtkforums.com/viewtopic.php?t=1830"> read more </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/02/libgda-insert-sql-query-example">
+      libgda INSERT SQL query example
+    </a>
+  </h1>
+  <div class="post-date">Oct 2, 2008</div>
+  <p>Code example of gda_data_model_set_modification_query() and how to insert new data</p>
+<p><a href="http://svn.gnome.org/viewvc/libgda/tags/release-3.1.5/samples/TableCopy/table-copy.c?view=markup"> Libgda code example </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/01/how-to-write-unmaintainable-code">
+      How To Write Unmaintainable Code
+    </a>
+  </h1>
+  <div class="post-date">Oct 1, 2008</div>
+  <p>The article come with a quote "ensure job for life".</p>
+<p><code><br />
+if(a);<br />
+else;<br />
+{<br />
+int d;<br />
+d = c;<br />
+}<br />
+;<br />
+</code></p>
+<p><a href="http://freeworld.thc.org/root/phun/unmaintain.html">An article written by Roedy Green.</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/01/splint-tool-to-examine-c-code-for-bugs">
+      splint - tool to examine c code for bugs
+    </a>
+  </h1>
+  <div class="post-date">Oct 1, 2008</div>
+  <blockquote>Splint is a tool for statically checking C programs for security vulnerabilities and coding mistakes.</p></blockquote>
+<p>Available in debian<br />
+<code><br />
+#apt-get install splint<br />
+</code></p>
+<p>Visit <a href="http://www.splint.org"> Splint.org </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/10/01/learn-the-linux-command-line">
+      Learn the Linux Command Line
+    </a>
+  </h1>
+  <div class="post-date">Oct 1, 2008</div>
+  <p>found a very interesting <a href="http://bashcurescancer.com/"> Linux shell tutorial </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/09/30/49">
+      align gtk label using gtk_misc_set_alignment()
+    </a>
+  </h1>
+  <div class="post-date">Sep 30, 2008</div>
+  <p>When packing a gtk label inside gtk table. I come across one problem. All the label as aligned center. As a result i just made one ugly form. To fix the problem, use gtk_misc_set_alignment(). See code example</p>
+<p><code><br />
+#include &lt;gtk/gtk.h&gt;<br />
+int main (int argc, char **argv)<br />
+{<br />
+GtkWidget *window;</code></p>
+<p>gtk_init( &amp;argc, &amp;argv);</p>
+<p>window = gtk_window_new(GTK_WINDOW_TOPLEVEL);</p>
+<p>GtkWidget *table = gtk_table_new( 4, 1, TRUE ) ;<br />
+GtkWidget *label;</p>
+<p>label = gtk_label_new("Normal label");<br />
+gtk_table_attach_defaults ( GTK_TABLE(table), label, 0, 1, 0, 1)</p>
+<p>label = gtk_label_new( "left" );<br />
+gtk_misc_set_alignment( GTK_MISC(label), 0.0, 0.0 );<br />
+gtk_table_attach( GTK_TABLE(table), label, 0, 1, 1, 2,<br />
+                                     GTK_EXPAND|GTK_FILL, GTK_SHRINK, 0, 0 ); /*important*/</p>
+<p>label = gtk_label_new( "center" );<br />
+gtk_misc_set_alignment( GTK_MISC(label), 0.5, 0.0 );<br />
+gtk_table_attach_defaults( GTK_TABLE(table), label, 0, 1, 2, 3<br />
+                                     GTK_EXPAND|GTK_FILL, GTK_SHRINK, 0, 0 ); /*important*/</p>
+<p>label = gtk_label_new( "right" );<br />
+gtk_misc_set_alignment( GTK_MISC(label), 1.0, 0.0 );<br />
+gtk_table_attach_defaults( GTK_TABLE(table), label, 0, 1, 3, 4<br />
+                                     GTK_EXPAND|GTK_FILL, GTK_SHRINK, 0, 0 ); /*important*/</p>
+<p>gtk_widget_set_size_request (GTK_WIDGET (table), 200, 100);<br />
+gtk_container_add( GTK_CONTAINER (window), GTK_WIDGET(table));<br />
+gtk_widget_show_all(window);<br />
+gtk_main();</p>
+<p>return 0;<br />
+}</p>
+<p>[caption id="attachment_53" align="alignnone" width="208" caption="gtk label with gtk_misc_set_alignment()"]<a href="http://paragasu.files.wordpress.com/2008/09/tablescr.png"><img class="size-full wp-image-53" title="gtk label with gtk_misc_set_" src="/assets/tablescr.png" alt="gtk label with gtk_misc_set_" width="208" height="128" /></a>[/caption]</p>
+<p>Thanks to <a href="http://www.gtkforums.com/viewtopic.php?t=1792">owl102 from gtkforums.com </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/09/30/select-row-in-gnomedbrawgrid">
+      Select row in GnomeDbRawGrid
+    </a>
+  </h1>
+  <div class="post-date">Sep 30, 2008</div>
+  <p>GnomeDbRawGrid come from GtkTreeView widget.</p>
+<p>So we can select row using gtk_tree_view_selection_select_iter() and get the current selected row gtk_tree_view_get_selection().</p>
+<p><code><br />
+GnomeDbRawGrid *grid;<br />
+GtkTreeView *tree_view;</p>
+<p>tree_view = GTK_TREE_VIEW (grid);<br />
+</code><br />
+<a href="http://svn.gnome.org/viewvc/libgnomedb/trunk/libgnomedb/gnome-db-raw-grid.c?view=markup"><br />
+View complete code</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/09/29/save-image-and-display-image-from-postgresql">
+      save image and display image from postgresql
+    </a>
+  </h1>
+  <div class="post-date">Sep 29, 2008</div>
+  <p>There is several way to save image into postgresql database. Using oid, blob and bytea data types.bytea column type recommended.</p>
+<p>To store image<br />
+gdk_pixdata_from_pixbuf(),<br />
+gdk_pixdata_serialize()</p>
+<p>To display image<br />
+gdk_pixdata_deserialize(),<br />
+gdk_pixbuf_from_pixdata(),<br />
+gtk_image_new_from_pixbuf() </p>
+<p><a href="http://library.gnome.org/devel/gdk-pixbuf/stable/gdk-pixbuf-inline.html"> Gdk Pixbuf inline </a><br />
+<a href="http://svn.gnome.org/viewvc/libgnomedb/trunk/libgnomedb/plugins/common-pict.c?revision=1686&amp;view=markup">Libgnomedb Example  </a></p>
+<p>Thank to vivien and Yann Droneaud for great help</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/09/29/malaysia-open-source-irc-channel">
+      Malaysia Open Source IRC Channel
+    </a>
+  </h1>
+  <div class="post-date">Sep 29, 2008</div>
+  <p>It is nice to know, at least there is some people out there love open source. </p>
+<p>Channel: FreeNode<br />
+Room: #MyOSS</p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/09/29/alternative-nameserver">
+      alternative nameserver
+    </a>
+  </h1>
+  <div class="post-date">Sep 29, 2008</div>
+  <p>Just found one free domain name server run by one of malaysian open source supporter angch. </p>
+<p>DNS IP: 202.190.85.116</p>
+<p>It should be better than TM dns because not too many people use it or OpenDNS since it is located in malaysia. </p>
+<p><a href="http://szap.blogspot.com/"> Visit Angch blog </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/09/29/string-with-dinamicly-growing-buffer">
+      String with dinamicly growing buffer
+    </a>
+  </h1>
+  <div class="post-date">Sep 29, 2008</div>
+  <p>String is where buffer overflow always occur.<br />
+GLIB supports doing this much more easily:<br />
+<code><br />
+/* portable asprintf() */<br />
+char *str = g_strdup_printf("string%s%d", str_variable, int_variable);<br />
+</code><br />
+Or if you wanted a modifyable buffer:<br />
+<code><br />
+GString *str = g_string_new(NULL);<br />
+g_string_append(str, "string");<br />
+g_string_append(str, str_variable);<br />
+g_string_sprintfa(str, "%d", int_variable); /* no g_string_append_int() */<br />
+</code></p>
+<p><a href="http://www.irccrew.org/~cras/security/c-guide.html">Secure, Efficient and Easy C programming</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/09/29/c-tutorial">
+      C variable definition
+    </a>
+  </h1>
+  <div class="post-date">Sep 29, 2008</div>
+  <p><strong>extern </strong>-  Variables described by extern statements will not have any space allocated for them, as they should be properly defined elsewhere.</p>
+<p><strong>static</strong> - The static data type modifier is used to create permanent storage for variables. Static variables keep their value between function calls. When used in a class, all instantiations of that class share one copy of the variable.</p>
+<p><strong>const</strong> - The const keyword can be used to tell the compiler that a certain variable should not be modified once it has been initialized.</p>
+<p><a href="http://www.cs.mu.oz.au/acmicpc/www.cppreference.com/keywords/index.html"> More C definition here</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/09/29/using-makefile">
+      Using Makefile
+    </a>
+  </h1>
+  <div class="post-date">Sep 29, 2008</div>
+  <p>If you writing gtk application. You will have to use more than one source file to make the code more manage able. To compile the application you need to use make.</p>
+<p>[caption id="attachment_63" align="alignnone" width="411" caption="makefile tutorial"]<a href="http://paragasu.files.wordpress.com/2008/10/makefile.jpeg"><img class="size-full wp-image-63" title="makefile" src="/assets/makefile.jpeg" alt="makefile tutorial" width="411" height="528" /></a>[/caption]</p>
+<p>It is all you need to compile a c code with libgnomedb. This code will output an executable<br />
+file with name ekoken. A more complicated makefiles using variable is like this</p>
+<p><code><br />
+CC = gcc<br />
+LD = gcc<br />
+CFLAGS =<br />
+RM = rm -f<br />
+LDFLAGS = `pkg-config --libs gtk+-2.0`</code></p>
+<p>PROG =<br />
+OBJS =</p>
+<p>all : $(PROG)</p>
+<p>%.o : %.c<br />
+$(CC) $(CFLAGS) -c $&lt; -o $@</p>
+<p>$(PROG) : $(OBJS)<br />
+$(LD) $(LDFLAGS) $(OBJS) -o $(PROG)</p>
+<p>clean :<br />
+$(RM) $(OBJS) $(PROG)</p>
+<p>Where PROG is the executable output and OBJS is the object file output with .o suffix.</p>
+<p>You can read more from this link<br />
+<a href="http://helpdesk.cs.tamu.edu/docs/makeFile"> Makefile in C or C++ </a><br />
+<a href="http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/"> A simple makefile tutorial </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/09/28/design-pattern">
+      Design pattern
+    </a>
+  </h1>
+  <div class="post-date">Sep 28, 2008</div>
+  <p>Design pattern is somehow overlook in many newbie tutorial. But it is very important to know before even writing the code. I found a list of design pattern for PHP </p>
+<p><a href="http://www.fluffycat.com/PHP-Design-Patterns/">Design Pattern </a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/09/27/installing-debian-from-running-system">
+      Installing debian from running system
+    </a>
+  </h1>
+  <div class="post-date">Sep 27, 2008</div>
+  <p>I am a Debian user for almost four years now. I think one very unique feature on debian system is deboostrap.<br />
+Easily install debian distro using another running system to mounted drive.</p>
+<p><a href="http://www.debuntu.org/book/export/html/69">Install debian from running system</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2008/09/26/hello-world">
+      Hello world!
+    </a>
+  </h1>
+  <div class="post-date">Sep 26, 2008</div>
+  <p>i think it is better to start with</p>
+<p><code><br />
+&lt;?<br />
+php echo "hello world";<br />
+?&gt;<br />
+</code></p>
+
+</article>
+
+
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Different in a good way.</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>Different in a good way.</li>
+          <li><a href="mailto:paragasu@gmail.com">paragasu@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/paragasu"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">paragasu</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/paragasu"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">paragasu</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Different in a good way.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
