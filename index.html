@@ -60,6 +60,22 @@
 
 <article class='post'>
   <h1 class='post-title'>
+    <a href="/2016/01/11/hash-to-number">
+      Hash any string to number
+    </a>
+  </h1>
+  <div class="post-date">Jan 11, 2016</div>
+  <p>crc32 function will hash any string to number.</p>
+
+<p><a href="http://redis.io/topics/partitioning">Redis partitoning</a>
+<a href="https://en.wikipedia.org/wiki/Cyclic_redundancy_check">Cyclic Redundancy Check</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
     <a href="/2016/01/11/migrating-to-github-io">
       Migration from wordpress.com to github.io in Debian
     </a>
@@ -67,11 +83,13 @@
   <div class="post-date">Jan 11, 2016</div>
   <p>Login to wordpress and export all pages</p>
 
-<p><code class="highlighter-rouge">
-#aptitude install ruby ruby-dev
+<div class="highlighter-rouge"><pre class="highlight"><code>#aptitude install ruby ruby-dev
 #gem install jekyll jekyll-import hpricot open_uri_redirections
+$jekyll new paragasu.github.io
+$cd paragasu.github.io
 $jekyll serve
-</code></p>
+</code></pre>
+</div>
 
 </article>
 
@@ -98,17 +116,18 @@ $jekyll serve
     </a>
   </h1>
   <div class="post-date">Nov 29, 2015</div>
-  <p>edit /etc/sysctl.conf and add config</p>
-<p><code><br />
-net.ipv6.conf.all.disable_ipv6 = 1<br />
-net.ipv6.conf.default.disable_ipv6 = 1<br />
-net.ipv6.conf.lo.disable_ipv6 = 1<br />
-net.ipv6.conf.eth0.disable_ipv6 = 1<br />
-</code></p>
-<p><code><br />
-#sysctl -p<br />
-</code></p>
-<p><a href="https://wiki.debian.org/DebianIPv6">Debian IPv6</a></p>
+  <p>Edit /etc/sysctl.conf and add config</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+net.ipv6.conf.eth0.disable_ipv6 = 1
+
+#sysctl -p
+</code></pre>
+</div>
+
+<p><a href="https://wiki.debian.org/DebianIPV6">Debian IPV6</a></p>
 
 </article>
 
@@ -122,14 +141,13 @@ net.ipv6.conf.eth0.disable_ipv6 = 1<br />
   </h1>
   <div class="post-date">Nov 9, 2015</div>
   <p>The callback function for onRowDoubleClick for <a href="https://facebook.github.io/fixed-data-table">Fixed data table</a>.</p>
-<p><code><br />
-rowClicked: function(event, rowIndex, rowData){<br />
-//code here<br />
-}<br />
-..</p>
-<table>
-</table>
-<p></code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>rowClicked: function(event, rowIndex, rowData){&lt;br /&gt;
+	//code here
+}
+</code></pre>
+</div>
+
 
 </article>
 
@@ -218,17 +236,23 @@ rowClicked: function(event, rowIndex, rowData){<br />
     </a>
   </h1>
   <div class="post-date">Oct 29, 2015</div>
-  <p>Come across nice function by Merlin Moncure posted on grokbase<br />
-<code><br />
-CREATE OR REPLACE FUNCTION calculate_distance(lat1 float8, lon1 float8, lat2 float8, lon2 float8)<br />
-RETURNS float8 AS<br />
-$$<br />
-SELECT ACOS(SIN(RADIANS($1)) * SIN(RADIANS($3)) + COS(RADIANS($1)) * COS(RADIANS($3)) * COS(RADIANS($4) - RADIANS($2))) * 6371;<br />
-$$ LANGUAGE 'sql' IMMUTABLE;<br />
-</code></p>
-<p>More details</p>
-<p><a href="http://grokbase.com/t/postgresql/pgsql-general/1069rn3ca0/calculating-distance-between-longitude-and-latitude">http://grokbase.com/t/postgresql/pgsql-general/1069rn3ca0/calculating-distance-between-longitude-and-latitude</a><br />
-<a href="http://www.movable-type.co.uk/scripts/latlong.html">http://www.movable-type.co.uk/scripts/latlong.html</a></p>
+  <p>Come across nice function by Merlin Moncure posted on grokbase.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CREATE OR REPLACE 
+FUNCTION calculate_distance(lat1 float8, lon1 float8, lat2 float8, lon2 float8)
+RETURNS float8 AS
+$$
+	SELECT ACOS(SIN(RADIANS($1)) * SIN(RADIANS($3)) 
+		 + COS(RADIANS($1)) * COS(RADIANS($3)) 
+		 * COS(RADIANS($4) - RADIANS($2))) * 6371;
+
+$$ LANGUAGE 'sql' IMMUTABLE;
+</code></pre>
+</div>
+
+<p>More details<br />
+<a href="http://grokbase.com/t/postgresql/pgsql-general/1069rn3ca0/calculating-distance-between-longitude-and-latitude">Calculating distance between longitude and latitude</a><br />
+<a href="http://www.movable-type.co.uk/scripts/latlong.html">Calculate distance, bearing and more</a></p>
 
 </article>
 
@@ -271,14 +295,16 @@ Converting the json field to jsonb solve the problem</p>
   </h1>
   <div class="post-date">Oct 9, 2015</div>
   <p>The replication performance leap from MySQL 5.5 to MySQL 5.6 is more than 4x.</p>
-<p><a href="https://blogs.oracle.com/MySQL/entry/mysql_5_6_replication_performance">https://blogs.oracle.com/MySQL/entry/mysql_5_6_replication_performance</a><br />
-<code><br />
-#wget http://dev.mysql.com/get/mysql-apt-config_0.3.5-1debian8_all.deb<br />
-#dpkg -i mysql-apt-config_0.3.5-1debian7_all.deb<br />
-#apt-get update<br />
-#apt-get install mysql-community-server<br />
-</code></p>
-<p><a href="http://www.debiantutorials.com/install-mysql-server-5-6-debian-7-8/">More info</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#wget http://dev.mysql.com/get/mysql-apt-config_0.3.5-1debian8_all.deb
+#dpkg -i mysql-apt-config_0.3.5-1debian7_all.deb
+#apt-get update
+#apt-get install mysql-community-server
+</code></pre>
+</div>
+
+<p><a href="https://blogs.oracle.com/MySQL/entry/mysql_5_6_replication_performance">MySQL 5.6 replication performance</a><br />
+<a href="http://www.debiantutorials.com/install-mysql-server-5-6-debian-7-8">Install MySQL server 5.6 to debian</a></p>
 
 </article>
 
@@ -655,20 +681,24 @@ ImageLoader: Not recognized format of external image 'sumisi/login.png'<br />
     </a>
   </h1>
   <div class="post-date">Aug 13, 2013</div>
-  <p>It happen when i have a code like below<br />
-<code><br />
-function connect()<br />
-{<br />
-     return sqlsrv_connect(..);<br />
-}<br />
-..<br />
-$result = sqlsrv_query(connect(), $sql);<br />
-</code></p>
-<p>The error mysteriously went away when i change the code to this<br />
-<code><br />
-$connect = connect();<br />
-$result  = sqlsrv_query($connec, $sql);<br />
-</code></p>
+  <p>It happen when i have a code like below</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>function connect()
+{
+	return sqlsrv_connect(..);
+}
+..
+
+$result = sqlsrv_query(connect(), $sql);  
+</code></pre>
+</div>
+
+<p>The error mysteriously went away when i change the code to this</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$connect = connect();
+$result  = sqlsrv_query($connect, $sql);
+</code></pre>
+</div>
 
 </article>
 

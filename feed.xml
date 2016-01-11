@@ -5,19 +5,37 @@
     <description>Different in a good way.</description>
     <link>http://paragasu.github.io/</link>
     <atom:link href="http://paragasu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 11 Jan 2016 16:07:51 +0800</pubDate>
-    <lastBuildDate>Mon, 11 Jan 2016 16:07:51 +0800</lastBuildDate>
+    <pubDate>Tue, 12 Jan 2016 00:16:52 +0800</pubDate>
+    <lastBuildDate>Tue, 12 Jan 2016 00:16:52 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Hash any string to number</title>
+        <description>&lt;p&gt;crc32 function will hash any string to number.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://redis.io/topics/partitioning&quot;&gt;Redis partitoning&lt;/a&gt;
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Cyclic_redundancy_check&quot;&gt;Cyclic Redundancy Check&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 11 Jan 2016 23:16:30 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/01/11/hash-to-number</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/01/11/hash-to-number</guid>
+        
+        
+        <category>programming</category>
+        
+      </item>
     
       <item>
         <title>Migration from wordpress.com to github.io in Debian</title>
         <description>&lt;p&gt;Login to wordpress and export all pages&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
-#aptitude install ruby ruby-dev
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#aptitude install ruby ruby-dev
 #gem install jekyll jekyll-import hpricot open_uri_redirections
+$jekyll new paragasu.github.io
+$cd paragasu.github.io
 $jekyll serve
-&lt;/code&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Mon, 11 Jan 2016 11:18:30 +0800</pubDate>
         <link>http://paragasu.github.io/2016/01/11/migrating-to-github-io</link>
@@ -44,17 +62,18 @@ $jekyll serve
     
       <item>
         <title>Disable ipv6 in debian</title>
-        <description>&lt;p&gt;edit /etc/sysctl.conf and add config&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&lt;br /&gt;
-net.ipv6.conf.all.disable_ipv6 = 1&lt;br /&gt;
-net.ipv6.conf.default.disable_ipv6 = 1&lt;br /&gt;
-net.ipv6.conf.lo.disable_ipv6 = 1&lt;br /&gt;
-net.ipv6.conf.eth0.disable_ipv6 = 1&lt;br /&gt;
-&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&lt;br /&gt;
-#sysctl -p&lt;br /&gt;
-&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://wiki.debian.org/DebianIPv6&quot;&gt;Debian IPv6&lt;/a&gt;&lt;/p&gt;
+        <description>&lt;p&gt;Edit /etc/sysctl.conf and add config&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+net.ipv6.conf.eth0.disable_ipv6 = 1
+
+#sysctl -p
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://wiki.debian.org/DebianIPV6&quot;&gt;Debian IPV6&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 29 Nov 2015 09:46:43 +0800</pubDate>
         <link>http://paragasu.github.io/2015/11/29/disable-ipv6-in-debian</link>
@@ -67,19 +86,20 @@ net.ipv6.conf.eth0.disable_ipv6 = 1&lt;br /&gt;
         <category>Linux</category>
         
         
+        <category>linux</category>
+        
       </item>
     
       <item>
         <title>Reactjs Fixed Data Table callback function onRowDoubleClick function</title>
         <description>&lt;p&gt;The callback function for onRowDoubleClick for &lt;a href=&quot;https://facebook.github.io/fixed-data-table&quot;&gt;Fixed data table&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&lt;br /&gt;
-rowClicked: function(event, rowIndex, rowData){&lt;br /&gt;
-//code here&lt;br /&gt;
-}&lt;br /&gt;
-..&lt;/p&gt;
-&lt;table&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rowClicked: function(event, rowIndex, rowData){&amp;lt;br /&amp;gt;
+	//code here
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
 </description>
         <pubDate>Mon, 09 Nov 2015 06:53:08 +0800</pubDate>
         <link>http://paragasu.github.io/2015/11/09/reactjs-fixed-data-table-callback-function-onrowdoubleclick-function</link>
@@ -176,17 +196,23 @@ rowClicked: function(event, rowIndex, rowData){&lt;br /&gt;
     
       <item>
         <title>Calculate distance between two point on earth in PostgreSQL</title>
-        <description>&lt;p&gt;Come across nice function by Merlin Moncure posted on grokbase&lt;br /&gt;
-&lt;code&gt;&lt;br /&gt;
-CREATE OR REPLACE FUNCTION calculate_distance(lat1 float8, lon1 float8, lat2 float8, lon2 float8)&lt;br /&gt;
-RETURNS float8 AS&lt;br /&gt;
-$$&lt;br /&gt;
-SELECT ACOS(SIN(RADIANS($1)) * SIN(RADIANS($3)) + COS(RADIANS($1)) * COS(RADIANS($3)) * COS(RADIANS($4) - RADIANS($2))) * 6371;&lt;br /&gt;
-$$ LANGUAGE &#39;sql&#39; IMMUTABLE;&lt;br /&gt;
-&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;More details&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://grokbase.com/t/postgresql/pgsql-general/1069rn3ca0/calculating-distance-between-longitude-and-latitude&quot;&gt;http://grokbase.com/t/postgresql/pgsql-general/1069rn3ca0/calculating-distance-between-longitude-and-latitude&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://www.movable-type.co.uk/scripts/latlong.html&quot;&gt;http://www.movable-type.co.uk/scripts/latlong.html&lt;/a&gt;&lt;/p&gt;
+        <description>&lt;p&gt;Come across nice function by Merlin Moncure posted on grokbase.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CREATE OR REPLACE 
+FUNCTION calculate_distance(lat1 float8, lon1 float8, lat2 float8, lon2 float8)
+RETURNS float8 AS
+$$
+	SELECT ACOS(SIN(RADIANS($1)) * SIN(RADIANS($3)) 
+		 + COS(RADIANS($1)) * COS(RADIANS($3)) 
+		 * COS(RADIANS($4) - RADIANS($2))) * 6371;
+
+$$ LANGUAGE &#39;sql&#39; IMMUTABLE;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;More details&lt;br /&gt;
+&lt;a href=&quot;http://grokbase.com/t/postgresql/pgsql-general/1069rn3ca0/calculating-distance-between-longitude-and-latitude&quot;&gt;Calculating distance between longitude and latitude&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.movable-type.co.uk/scripts/latlong.html&quot;&gt;Calculate distance, bearing and more&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 29 Oct 2015 02:54:15 +0800</pubDate>
         <link>http://paragasu.github.io/2015/10/29/calculate-distance-between-two-point-on-earth-in-postgresql</link>
@@ -235,39 +261,6 @@ Converting the json field to jsonb solve the problem&lt;/p&gt;
         <category>database</category>
         
         <category>postgresql</category>
-        
-      </item>
-    
-      <item>
-        <title>Install mysql 5.6 in debian 8 jessie</title>
-        <description>&lt;p&gt;The replication performance leap from MySQL 5.5 to MySQL 5.6 is more than 4x.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://blogs.oracle.com/MySQL/entry/mysql_5_6_replication_performance&quot;&gt;https://blogs.oracle.com/MySQL/entry/mysql_5_6_replication_performance&lt;/a&gt;&lt;br /&gt;
-&lt;code&gt;&lt;br /&gt;
-#wget http://dev.mysql.com/get/mysql-apt-config_0.3.5-1debian8_all.deb&lt;br /&gt;
-#dpkg -i mysql-apt-config_0.3.5-1debian7_all.deb&lt;br /&gt;
-#apt-get update&lt;br /&gt;
-#apt-get install mysql-community-server&lt;br /&gt;
-&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.debiantutorials.com/install-mysql-server-5-6-debian-7-8/&quot;&gt;More info&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Fri, 09 Oct 2015 02:30:44 +0800</pubDate>
-        <link>http://paragasu.github.io/2015/10/09/install-mysql-5-6-in-debian-8-jessie</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2015/10/09/install-mysql-5-6-in-debian-8-jessie</guid>
-        
-        <category>debian jessie</category>
-        
-        <category>install</category>
-        
-        <category>mysql</category>
-        
-        <category>mysql 5.5</category>
-        
-        <category>mysql 5.6</category>
-        
-        
-        <category>database</category>
-        
-        <category>Linux</category>
         
       </item>
     

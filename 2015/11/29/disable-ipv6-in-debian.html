@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Disable ipv6 in debian</title>
-  <meta name="description" content="edit /etc/sysctl.conf and add confignet.ipv6.conf.all.disable_ipv6 = 1net.ipv6.conf.default.disable_ipv6 = 1net.ipv6.conf.lo.disable_ipv6 = 1net.ipv6.conf.et...">
+  <meta name="description" content="Edit /etc/sysctl.conf and add config">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2015/11/29/disable-ipv6-in-debian">
@@ -58,21 +58,22 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">Disable ipv6 in debian</h1>
-    <p class="post-meta"><time datetime="2015-11-29T09:46:43+08:00" itemprop="datePublished">Nov 29, 2015</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">paragasu</span></span></p>
+    <p class="post-meta"><time datetime="2015-11-29T09:46:43+08:00" itemprop="datePublished">Nov 29, 2015</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>edit /etc/sysctl.conf and add config</p>
-<p><code><br />
-net.ipv6.conf.all.disable_ipv6 = 1<br />
-net.ipv6.conf.default.disable_ipv6 = 1<br />
-net.ipv6.conf.lo.disable_ipv6 = 1<br />
-net.ipv6.conf.eth0.disable_ipv6 = 1<br />
-</code></p>
-<p><code><br />
-#sysctl -p<br />
-</code></p>
-<p><a href="https://wiki.debian.org/DebianIPv6">Debian IPv6</a></p>
+    <p>Edit /etc/sysctl.conf and add config</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+net.ipv6.conf.eth0.disable_ipv6 = 1
+
+#sysctl -p
+</code></pre>
+</div>
+
+<p><a href="https://wiki.debian.org/DebianIPV6">Debian IPV6</a></p>
 
   </div>
 

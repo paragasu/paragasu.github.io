@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Calculate distance between two point on earth in PostgreSQL</title>
-  <meta name="description" content="Come across nice function by Merlin Moncure posted on grokbaseCREATE OR REPLACE FUNCTION calculate_distance(lat1 float8, lon1 float8, lat2 float8, lon2 float...">
+  <meta name="description" content="Come across nice function by Merlin Moncure posted on grokbase.">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2015/10/29/calculate-distance-between-two-point-on-earth-in-postgresql">
@@ -62,17 +62,23 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>Come across nice function by Merlin Moncure posted on grokbase<br />
-<code><br />
-CREATE OR REPLACE FUNCTION calculate_distance(lat1 float8, lon1 float8, lat2 float8, lon2 float8)<br />
-RETURNS float8 AS<br />
-$$<br />
-SELECT ACOS(SIN(RADIANS($1)) * SIN(RADIANS($3)) + COS(RADIANS($1)) * COS(RADIANS($3)) * COS(RADIANS($4) - RADIANS($2))) * 6371;<br />
-$$ LANGUAGE 'sql' IMMUTABLE;<br />
-</code></p>
-<p>More details</p>
-<p><a href="http://grokbase.com/t/postgresql/pgsql-general/1069rn3ca0/calculating-distance-between-longitude-and-latitude">http://grokbase.com/t/postgresql/pgsql-general/1069rn3ca0/calculating-distance-between-longitude-and-latitude</a><br />
-<a href="http://www.movable-type.co.uk/scripts/latlong.html">http://www.movable-type.co.uk/scripts/latlong.html</a></p>
+    <p>Come across nice function by Merlin Moncure posted on grokbase.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CREATE OR REPLACE 
+FUNCTION calculate_distance(lat1 float8, lon1 float8, lat2 float8, lon2 float8)
+RETURNS float8 AS
+$$
+	SELECT ACOS(SIN(RADIANS($1)) * SIN(RADIANS($3)) 
+		 + COS(RADIANS($1)) * COS(RADIANS($3)) 
+		 * COS(RADIANS($4) - RADIANS($2))) * 6371;
+
+$$ LANGUAGE 'sql' IMMUTABLE;
+</code></pre>
+</div>
+
+<p>More details<br />
+<a href="http://grokbase.com/t/postgresql/pgsql-general/1069rn3ca0/calculating-distance-between-longitude-and-latitude">Calculating distance between longitude and latitude</a><br />
+<a href="http://www.movable-type.co.uk/scripts/latlong.html">Calculate distance, bearing and more</a></p>
 
   </div>
 
