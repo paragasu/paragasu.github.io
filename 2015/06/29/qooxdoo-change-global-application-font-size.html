@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Qooxdoo change global application font size</title>
-  <meta name="description" content="         setFontSize: function(size)         {             var doc         = this.getRoot();             var manager     = qx.theme.manager.Font.getInstance(...">
+  <meta name="description" content="setFontSize: function(size){	var doc         = this.getRoot();  	var manager     = qx.theme.manager.Font.getInstance();  	var defaultFont = manager.resolve(d...">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2015/06/29/qooxdoo-change-global-application-font-size">
@@ -62,16 +62,17 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p><code><br />
-         setFontSize: function(size)<br />
-         {<br />
-             var doc         = this.getRoot();<br />
-             var manager     = qx.theme.manager.Font.getInstance();<br />
-             var defaultFont = manager.resolve(doc.getFont());<br />
-             var newFont     = defaultFont.clone().setSize(parseInt(size));</p>
-<p>             doc.setFont(newFont);<br />
-         },<br />
-<code /></code></p>
+    <div class="highlighter-rouge"><pre class="highlight"><code>setFontSize: function(size)
+{
+	var doc         = this.getRoot();  
+	var manager     = qx.theme.manager.Font.getInstance();  
+	var defaultFont = manager.resolve(doc.getFont());
+	var newFont     = defaultFont.clone().setSize(parseInt(size));
+	doc.setFont(newFont);
+},  
+</code></pre>
+</div>
+
 
   </div>
 
@@ -89,7 +90,6 @@
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
         <ul class="contact-list">
-          <li>Different in a good way.</li>
           <li><a href="mailto:paragasu@gmail.com">paragasu@gmail.com</a></li>
         </ul>
       </div>
@@ -115,7 +115,6 @@
       </div>
 
       <div class="footer-col footer-col-3">
-        <p>Different in a good way.</p>
       </div>
     </div>
 

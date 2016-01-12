@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>css blueprint generator</title>
-  <meta name="description" content="CSS is quite simple if you only use firefox. But, thing get complicated when you considering IE.I found a very useful css grid generator.  click here">
+  <title>Nodemon failed to start process, possible issue with exec arguments</title>
+  <meta name="description" content="Nodemon will crashed with this error when the exec comman return error code 2">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://paragasu.github.io/2008/12/17/css-blueprint-generator">
+  <link rel="canonical" href="http://paragasu.github.io/2016/01/11/nodemon-failed-to-start-process">
   <link rel="alternate" type="application/rss+xml" title="Different in a good way." href="http://paragasu.github.io/feed.xml">
 </head>
 
@@ -57,13 +57,37 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">css blueprint generator</h1>
-    <p class="post-meta"><time datetime="2008-12-17T08:58:51+08:00" itemprop="datePublished">Dec 17, 2008</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">paragasu</span></span></p>
+    <h1 class="post-title" itemprop="name headline">Nodemon failed to start process, possible issue with exec arguments</h1>
+    <p class="post-meta"><time datetime="2016-01-11T11:27:00+08:00" itemprop="datePublished">Jan 11, 2016</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>CSS is quite simple if you only use firefox. But, thing get complicated when you considering IE.<br />
-I found a very useful css grid generator.  <a href="http://kematzy.com/blueprint-generator/">click here</a></p>
+    <p>Nodemon will crashed with this error when the exec comman return error code 2</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[Nodemon] failed to start process, possible issue with exec arguments
+events.js:146
+	throw err;
+	^
+
+Error: Uncaught, unspecified "error" event. (2)
+	at emit (events.js:144:17)
+</code></pre>
+</div>
+
+<p>Error code 2 is reserved for bash. Command line tools like mocha or jshint sometimes will throw error 2.
+When jshint or mocha executed as argument to -x in nodemon. Nodemon crash.</p>
+
+<p>A simple workaround is to put exit 1 in the -x</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$nodemon --e js -w ./ -d 1 -x 'mocha ./test || exit 1'
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="https://github.com/remy/nodemon/blob/e177dd7865376876b01c8c4b069bf21aaf75cf50/lib/monitor/run.js#L118">Nodemon code</a><br />
+<a href="https://github.com/remy/nodemon/issues/627">JSHint integration on github</a><br />
+<a href="https://github.com/nodejs/node-v0.x-archive/blob/master/doc/api/process.markdown#exit-codes">Nodejs exit code</a></p>
+
 
   </div>
 

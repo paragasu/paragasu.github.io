@@ -5,8 +5,8 @@
     <description>Different in a good way.</description>
     <link>http://paragasu.github.io/</link>
     <atom:link href="http://paragasu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 12 Jan 2016 00:16:52 +0800</pubDate>
-    <lastBuildDate>Tue, 12 Jan 2016 00:16:52 +0800</lastBuildDate>
+    <pubDate>Tue, 12 Jan 2016 22:04:21 +0800</pubDate>
+    <lastBuildDate>Tue, 12 Jan 2016 22:04:21 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -22,6 +22,44 @@
         
         
         <category>programming</category>
+        
+      </item>
+    
+      <item>
+        <title>Nodemon failed to start process, possible issue with exec arguments</title>
+        <description>&lt;p&gt;Nodemon will crashed with this error when the exec comman return error code 2&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[Nodemon] failed to start process, possible issue with exec arguments
+events.js:146
+	throw err;
+	^
+
+Error: Uncaught, unspecified &quot;error&quot; event. (2)
+	at emit (events.js:144:17)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Error code 2 is reserved for bash. Command line tools like mocha or jshint sometimes will throw error 2.
+When jshint or mocha executed as argument to -x in nodemon. Nodemon crash.&lt;/p&gt;
+
+&lt;p&gt;A simple workaround is to put exit 1 in the -x&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$nodemon --e js -w ./ -d 1 -x &#39;mocha ./test || exit 1&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Related&lt;br /&gt;
+&lt;a href=&quot;https://github.com/remy/nodemon/blob/e177dd7865376876b01c8c4b069bf21aaf75cf50/lib/monitor/run.js#L118&quot;&gt;Nodemon code&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/remy/nodemon/issues/627&quot;&gt;JSHint integration on github&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/nodejs/node-v0.x-archive/blob/master/doc/api/process.markdown#exit-codes&quot;&gt;Nodejs exit code&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 11 Jan 2016 11:27:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/01/11/nodemon-failed-to-start-process</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/01/11/nodemon-failed-to-start-process</guid>
+        
+        
+        <category>nodejs</category>
         
       </item>
     
@@ -224,43 +262,6 @@ $$ LANGUAGE &#39;sql&#39; IMMUTABLE;
         
         
         <category>database</category>
-        
-      </item>
-    
-      <item>
-        <title>Migrating from MySQL to PostgreSQL</title>
-        <description>&lt;p&gt;Encounter some issue along the way&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1.MySQL DATE_SUB &amp;amp; DATE_ADD&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;(DATE_ADD(NOW(), INTERVAL 30 MINUTES)&lt;/p&gt;
-&lt;p&gt;(DATE_SUB(NOW(), INTERVAL 30 MINUTES)&lt;/p&gt;
-&lt;p&gt;(NOW() - INTERVAL &#39;30&#39; MINUTE)&lt;/p&gt;
-&lt;p&gt;(NOW() - INTERVAL &#39;30&#39; MINUTE) or&lt;/p&gt;
-&lt;p&gt;(NOW() - INTERVAL &#39;30 MINUTES&#39;) or&lt;/p&gt;
-&lt;p&gt;(NOW() - &#39;30 MINUTES&#39;::INTERVAL)&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2. MySQL RADIANS&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Need to cast to real&lt;/p&gt;
-&lt;p&gt;SELECT RADIANS(lat::real);&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;3. DISTINCT on json field (v9.4.5)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&lt;br /&gt;
-SELECT DISTINCT id, json_field FROM driver;&lt;br /&gt;
-&lt;/code&gt;&lt;br /&gt;
-Throw could not identify an equality operator for type json error.&lt;br /&gt;
-Converting the json field to jsonb solve the problem&lt;/p&gt;
-</description>
-        <pubDate>Thu, 29 Oct 2015 02:50:01 +0800</pubDate>
-        <link>http://paragasu.github.io/2015/10/29/migrating-from-mysql-to-postgresql</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2015/10/29/migrating-from-mysql-to-postgresql</guid>
-        
-        <category>migrating</category>
-        
-        <category>mysql</category>
-        
-        <category>postgresql</category>
-        
-        
-        <category>database</category>
-        
-        <category>postgresql</category>
         
       </item>
     
