@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>qooxdoo execute callback function on this scope</title>
-  <meta name="description" content="rpc.callAsync(qx.lang.Function.bind(this._responseReceived, that));now you can refer this in _responseReceived Functions.">
+  <meta name="description" content="rpc.callAsync(qx.lang.Function.bind(this._responseReceived, that));  ">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2012/03/06/qooxdoo-execute-callback-function-on-this-scope">
@@ -62,10 +62,11 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p><code><br />
-rpc.callAsync(qx.lang.Function.bind(this._responseReceived, that));<br />
-</code></p>
-<p>now you can refer this in _responseReceived Functions.</p>
+    <div class="highlighter-rouge"><pre class="highlight"><code>rpc.callAsync(qx.lang.Function.bind(this._responseReceived, that));  
+</code></pre>
+</div>
+
+<p>Now you can refer this in _responseReceived Functions.</p>
 
   </div>
 
