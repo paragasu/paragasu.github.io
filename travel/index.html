@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>how to display busy cursor</title>
-  <meta name="description" content="interesting post on gtk-app-devel-list@gnome.org mailing listvoid busy_stuff (){   GdkDisplay *display;   GdkCursor *cursor;   GdkWindow *window;   gint x, y...">
+  <title>Travel</title>
+  <meta name="description" content="Different in a good way.">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://paragasu.github.io/2008/10/08/how-to-display-busy-cursor">
+  <link rel="canonical" href="http://paragasu.github.io/travel/">
   <link rel="alternate" type="application/rss+xml" title="Different in a good way." href="http://paragasu.github.io/feed.xml">
 </head>
 
@@ -58,34 +58,34 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <article class="post">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">how to display busy cursor</h1>
-    <p class="post-meta"><time datetime="2008-10-08T05:24:06+08:00" itemprop="datePublished">Oct 8, 2008</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">paragasu</span></span></p>
+    <h1 class="post-title">Travel</h1>
   </header>
 
-  <div class="post-content" itemprop="articleBody">
-    <p>interesting post on gtk-app-devel-list@gnome.org mailing list<br />
-<code><br />
-void busy_stuff ()<br />
-{<br />
-   GdkDisplay *display;<br />
-   GdkCursor *cursor;<br />
-   GdkWindow *window;<br />
-   gint x, y;</p>
-<p>   cursor = gdk_cursor_new(GDK_WATCH);</p>
-<p>   display = gdk_display_get_default();<br />
-   window = gdk_display_get_window_at_pointer(disp, &amp;x, &amp;y);</p>
-<p>   gdk_window_set_cursor(window, cursor);<br />
-   gdk_display_sync(display);<br />
-   gdk_cursor_unref(cursor);</p>
-<p>   /* do time-consuming stuff here */</p>
-<p>   gdk_window_set_cursor(window, NULL);<br />
-}<br />
-</code></p>
-<p>gdk_cursor_unref() prevent memory leak</p>
-<p><a href="http://mail.gnome.org/archives/gtk-devel-list/"> Mailing list archive </a></p>
+  <div class="post-content">
+    <blockquote>
+  <p>The world is a book and those who do not travel read only one page.</p>
+</blockquote>
+
+<p>One of my things to do before i die is to visit all country in the world.</p>
+
+<p>Some country i visit multiple times because it just awesome place to go.
+Which make my goal more challenging to accomplish at the rate i am going.</p>
+
+<p>So far,</p>
+
+<ol>
+  <li>Brunei <em>July 2010</em></li>
+  <li>Singapore <em>November 2010</em></li>
+  <li>Philippines <em>November 2011</em></li>
+  <li>New Zealand <em>January 2013</em></li>
+  <li>Indonesia <em>Jun 2013</em></li>
+  <li>Myanmar <em>January 2015</em></li>
+  <li>Taiwan <em>January 2016</em></li>
+</ol>
+
 
   </div>
 
