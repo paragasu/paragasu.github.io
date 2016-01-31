@@ -60,6 +60,222 @@
 
 <article class='post'>
   <h1 class='post-title'>
+    <a href="/2016/01/29/merge-git-repo-as-another-branch">
+      Merge git repo as another branch
+    </a>
+  </h1>
+  <div class="post-date">Jan 29, 2016</div>
+  <p>I have two local repository on my directory api-php and api-nodejs.
+I want to have one repo called api with two branch php and nodejs.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$cd api-php
+$git remote add nodejs ../api-nodejs
+$git remote update
+$git checkout -b nodejs
+$git checkout nodejs
+$git rm -f *
+$git merge nodejs/master 
+$git push -f
+</code></pre>
+</div>
+
+<p>By the way, both php and node js implement the same api but the language is totally differnet.<br />
+It is best to put both project on separate repository.</p>
+
+<p>Related<br />
+<a href="http://stackoverflow.com/questions/21353656/merge-git-repo-into-branch-of-another-repo">Merge git repo into branch of another repo</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/01/28/letsencrypt-ssl-debian">
+      Generate SSL certificates using letsencrypt
+    </a>
+  </h1>
+  <div class="post-date">Jan 28, 2016</div>
+  <p><a href="https://letsencrypt.org">Letsencrypt</a> provide free ssl certificate. The only downside is that the certificate only valid <br />
+for 3 months and then you have to renew the certificate again.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#git clone https://github.com/letsencrypt/letsencrypt
+#cd letsencrypt
+#./letsencrypt certonly --manual -d mydomain.com
+</code></pre>
+</div>
+
+<p>On my debian server, The command will update packages and ask for root if you run as normal user
+and it will require you to put some key file in the root domain for verification.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>http://mydomain.com/.well-known/acme-challenge/random-key-filename
+</code></pre>
+</div>
+
+<p>You have to make sure the content-type is text/plain for the verification to work.
+The certificate will be available at /etc/letsencrypt.
+The latest cert will be inside the /etc/letsencrypt/live folder.</p>
+
+<p>You need to update your server configuration to point to the cert file.</p>
+
+<p>Related<br />
+<a href="https://github.com/letsencrypt/letsencrypt">Letsencrypt github</a><br />
+<a href="https://letsencrypt.readthedocs.org/en/latest/using.html#installation">Letsencrypt user guide</a></p>
+
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/01/28/https-on-nodejs">
+      Https on Nodejs
+    </a>
+  </h1>
+  <div class="post-date">Jan 28, 2016</div>
+  <div class="highlighter-rouge"><pre class="highlight"><code>const https = require('https');
+const fs = require('fs');
+
+const options = {
+  key: fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
+  cert: fs.readFileSync('test/fixtures/keys/agent2-cert.pem')
+};
+
+https.createServer(options, (req, res) =&gt; {
+  res.writeHead(200);
+  res.end('hello world\n');
+}).listen(8000);
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="https://nodejs.org/api/https.html">Nodejs doc</a></p>
+
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/01/27/install-lua-gin-openresty-debian-jessie">
+      Install gin.io in Debian Jessie
+    </a>
+  </h1>
+  <div class="post-date">Jan 27, 2016</div>
+  <p>Openresty is nginx with embeded lua. High performance with low memory footprint.    <br />
+Gin is a small and elegant lua framework build on top of Openresty.</p>
+
+<p>Install Openresty framework</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#aptitude install lua-dbi-postgresql-dev  
+#aptitude install luajit  
+#aptitude install libreadline-dev libncurses5-dev libpcre3-dev libssl-dev perl make build-essential
+#aptitude install libpq-dev
+#cd /usr/src
+#wget https://openresty.org/download/ngx_openresty-1.9.7.2.tar.gz
+#cd ngx_openresty*
+#./configure --with-luajit --with-http_postgres_module
+</code></pre>
+</div>
+
+<p>Install gin framework</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#aptitude install luarocks  
+#luarocks install --server=http://gin.io/repo gin  
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="http://openresty.org/">OpenResty</a><br />
+<a href="http://gin.io">Gin JSON API framework</a></p>
+
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/01/25/could-not-open-connection-auth-agent">
+      Could not open connection to your authentication agent
+    </a>
+  </h1>
+  <div class="post-date">Jan 25, 2016</div>
+  <div class="highlighter-rouge"><pre class="highlight"><code>eval `ssh-agent -s`
+ssh-add  
+</code></pre>
+</div>
+
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/01/15/postgresql-enum-type">
+      PostgreSQL ENUM type
+    </a>
+  </h1>
+  <div class="post-date">Jan 15, 2016</div>
+  <p>To create enum type</p>
+
+<p>CREATE TYPE colors AS ENUM (‘grey’, ‘skyblue’, ‘black’);</p>
+
+<p>To list enum values</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>SELECT ENUM_RANGE(null::colors); or  
+SELECT UNNEST(ENUM_RANGE(null::colors)) AS colors;  
+</code></pre>
+</div>
+
+<p>To add new item on the enum list</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ALTER TYPE colors ADD VALUE 'orange' AFTER 'skyblue';
+</code></pre>
+</div>
+
+<p>To delete item from enum list</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ALTER TYPE colors DROP attribute 'orange';
+</code></pre>
+</div>
+
+<p>To drop enum type</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>DROP type colors
+</code></pre>
+</div>
+
+<p>There is a more elegant way using domain to enforce value from <a href="http://justatheory.com/computers/databases/postgresql/enforce-set-of-values.html">David E. Wheeler post</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CREATE DOMAIN eye_color AS TEXT
+CONSTRAINT valid_eye_colors CHECK (
+	VALUE IN ( 'blue', 'green', 'brown' )
+);
+
+CREATE TABLE faces (
+	face_id SERIAL PRIMARY KEY,
+	name TEXT NOT NULL DEFAULT '',
+	eye_color eye_color NOT NULL
+);
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="http://www.postgresql.org/docs/current/static/functions-enum.html">Enum support function</a><br />
+<a href="http://www.postgresql.org/docs/current/static/sql-altertype.html">Alter type</a><br />
+<a href="http://justatheory.com/computers/databases/postgresql/enforce-set-of-values.html">Enforce set of values</a></p>
+
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
     <a href="/2016/01/11/hash-to-number">
       Hash any string to number
     </a>

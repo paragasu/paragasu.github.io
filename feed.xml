@@ -5,9 +5,225 @@
     <description>Different in a good way.</description>
     <link>http://paragasu.github.io/</link>
     <atom:link href="http://paragasu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 23 Jan 2016 21:17:27 +0800</pubDate>
-    <lastBuildDate>Sat, 23 Jan 2016 21:17:27 +0800</lastBuildDate>
+    <pubDate>Sun, 31 Jan 2016 10:48:48 +0800</pubDate>
+    <lastBuildDate>Sun, 31 Jan 2016 10:48:48 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Merge git repo as another branch</title>
+        <description>&lt;p&gt;I have two local repository on my directory api-php and api-nodejs.
+I want to have one repo called api with two branch php and nodejs.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$cd api-php
+$git remote add nodejs ../api-nodejs
+$git remote update
+$git checkout -b nodejs
+$git checkout nodejs
+$git rm -f *
+$git merge nodejs/master 
+$git push -f
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;By the way, both php and node js implement the same api but the language is totally differnet.&lt;br /&gt;
+It is best to put both project on separate repository.&lt;/p&gt;
+
+&lt;p&gt;Related&lt;br /&gt;
+&lt;a href=&quot;http://stackoverflow.com/questions/21353656/merge-git-repo-into-branch-of-another-repo&quot;&gt;Merge git repo into branch of another repo&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 29 Jan 2016 16:53:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/01/29/merge-git-repo-as-another-branch</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/01/29/merge-git-repo-as-another-branch</guid>
+        
+        
+        <category>git</category>
+        
+      </item>
+    
+      <item>
+        <title>Generate SSL certificates using letsencrypt</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://letsencrypt.org&quot;&gt;Letsencrypt&lt;/a&gt; provide free ssl certificate. The only downside is that the certificate only valid &lt;br /&gt;
+for 3 months and then you have to renew the certificate again.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#git clone https://github.com/letsencrypt/letsencrypt
+#cd letsencrypt
+#./letsencrypt certonly --manual -d mydomain.com
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;On my debian server, The command will update packages and ask for root if you run as normal user
+and it will require you to put some key file in the root domain for verification.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http://mydomain.com/.well-known/acme-challenge/random-key-filename
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You have to make sure the content-type is text/plain for the verification to work.
+The certificate will be available at /etc/letsencrypt.
+The latest cert will be inside the /etc/letsencrypt/live folder.&lt;/p&gt;
+
+&lt;p&gt;You need to update your server configuration to point to the cert file.&lt;/p&gt;
+
+&lt;p&gt;Related&lt;br /&gt;
+&lt;a href=&quot;https://github.com/letsencrypt/letsencrypt&quot;&gt;Letsencrypt github&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://letsencrypt.readthedocs.org/en/latest/using.html#installation&quot;&gt;Letsencrypt user guide&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 28 Jan 2016 16:23:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/01/28/letsencrypt-ssl-debian</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/01/28/letsencrypt-ssl-debian</guid>
+        
+        
+        <category>linux</category>
+        
+      </item>
+    
+      <item>
+        <title>Https on Nodejs</title>
+        <description>&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;const https = require(&#39;https&#39;);
+const fs = require(&#39;fs&#39;);
+
+const options = {
+  key: fs.readFileSync(&#39;test/fixtures/keys/agent2-key.pem&#39;),
+  cert: fs.readFileSync(&#39;test/fixtures/keys/agent2-cert.pem&#39;)
+};
+
+https.createServer(options, (req, res) =&amp;gt; {
+  res.writeHead(200);
+  res.end(&#39;hello world\n&#39;);
+}).listen(8000);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Related&lt;br /&gt;
+&lt;a href=&quot;https://nodejs.org/api/https.html&quot;&gt;Nodejs doc&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 28 Jan 2016 16:02:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/01/28/https-on-nodejs</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/01/28/https-on-nodejs</guid>
+        
+        
+        <category>nodejs</category>
+        
+      </item>
+    
+      <item>
+        <title>Install gin.io in Debian Jessie</title>
+        <description>&lt;p&gt;Openresty is nginx with embeded lua. High performance with low memory footprint.    &lt;br /&gt;
+Gin is a small and elegant lua framework build on top of Openresty.&lt;/p&gt;
+
+&lt;p&gt;Install Openresty framework&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#aptitude install lua-dbi-postgresql-dev  
+#aptitude install luajit  
+#aptitude install libreadline-dev libncurses5-dev libpcre3-dev libssl-dev perl make build-essential
+#aptitude install libpq-dev
+#cd /usr/src
+#wget https://openresty.org/download/ngx_openresty-1.9.7.2.tar.gz
+#cd ngx_openresty*
+#./configure --with-luajit --with-http_postgres_module
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Install gin framework&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#aptitude install luarocks  
+#luarocks install --server=http://gin.io/repo gin  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Related&lt;br /&gt;
+&lt;a href=&quot;http://openresty.org/&quot;&gt;OpenResty&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://gin.io&quot;&gt;Gin JSON API framework&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 27 Jan 2016 17:34:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/01/27/install-lua-gin-openresty-debian-jessie</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/01/27/install-lua-gin-openresty-debian-jessie</guid>
+        
+        
+        <category>openresty</category>
+        
+      </item>
+    
+      <item>
+        <title>Could not open connection to your authentication agent</title>
+        <description>&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;eval `ssh-agent -s`
+ssh-add  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+</description>
+        <pubDate>Mon, 25 Jan 2016 15:33:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/01/25/could-not-open-connection-auth-agent</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/01/25/could-not-open-connection-auth-agent</guid>
+        
+        
+        <category>linux</category>
+        
+      </item>
+    
+      <item>
+        <title>PostgreSQL ENUM type</title>
+        <description>&lt;p&gt;To create enum type&lt;/p&gt;
+
+&lt;p&gt;CREATE TYPE colors AS ENUM (‘grey’, ‘skyblue’, ‘black’);&lt;/p&gt;
+
+&lt;p&gt;To list enum values&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;SELECT ENUM_RANGE(null::colors); or  
+SELECT UNNEST(ENUM_RANGE(null::colors)) AS colors;  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To add new item on the enum list&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ALTER TYPE colors ADD VALUE &#39;orange&#39; AFTER &#39;skyblue&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To delete item from enum list&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ALTER TYPE colors DROP attribute &#39;orange&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To drop enum type&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DROP type colors
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;There is a more elegant way using domain to enforce value from &lt;a href=&quot;http://justatheory.com/computers/databases/postgresql/enforce-set-of-values.html&quot;&gt;David E. Wheeler post&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CREATE DOMAIN eye_color AS TEXT
+CONSTRAINT valid_eye_colors CHECK (
+	VALUE IN ( &#39;blue&#39;, &#39;green&#39;, &#39;brown&#39; )
+);
+
+CREATE TABLE faces (
+	face_id SERIAL PRIMARY KEY,
+	name TEXT NOT NULL DEFAULT &#39;&#39;,
+	eye_color eye_color NOT NULL
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Related&lt;br /&gt;
+&lt;a href=&quot;http://www.postgresql.org/docs/current/static/functions-enum.html&quot;&gt;Enum support function&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.postgresql.org/docs/current/static/sql-altertype.html&quot;&gt;Alter type&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://justatheory.com/computers/databases/postgresql/enforce-set-of-values.html&quot;&gt;Enforce set of values&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 15 Jan 2016 15:10:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/01/15/postgresql-enum-type</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/01/15/postgresql-enum-type</guid>
+        
+        
+        <category>database</category>
+        
+      </item>
     
       <item>
         <title>Hash any string to number</title>
@@ -95,173 +311,6 @@ $jekyll serve
         
         <category>git</category>
         
-        
-      </item>
-    
-      <item>
-        <title>Disable ipv6 in debian</title>
-        <description>&lt;p&gt;Edit /etc/sysctl.conf and add config&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;net.ipv6.conf.all.disable_ipv6 = 1
-net.ipv6.conf.default.disable_ipv6 = 1
-net.ipv6.conf.lo.disable_ipv6 = 1
-net.ipv6.conf.eth0.disable_ipv6 = 1
-
-#sysctl -p
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://wiki.debian.org/DebianIPV6&quot;&gt;Debian IPV6&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 29 Nov 2015 09:46:43 +0800</pubDate>
-        <link>http://paragasu.github.io/2015/11/29/disable-ipv6-in-debian</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2015/11/29/disable-ipv6-in-debian</guid>
-        
-        <category>debian</category>
-        
-        <category>ipv6</category>
-        
-        <category>Linux</category>
-        
-        
-        <category>linux</category>
-        
-      </item>
-    
-      <item>
-        <title>Reactjs Fixed Data Table callback function onRowDoubleClick function</title>
-        <description>&lt;p&gt;The callback function for onRowDoubleClick for &lt;a href=&quot;https://facebook.github.io/fixed-data-table&quot;&gt;Fixed data table&lt;/a&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rowClicked: function(event, rowIndex, rowData){&amp;lt;br /&amp;gt;
-	//code here
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-</description>
-        <pubDate>Mon, 09 Nov 2015 06:53:08 +0800</pubDate>
-        <link>http://paragasu.github.io/2015/11/09/reactjs-fixed-data-table-callback-function-onrowdoubleclick-function</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2015/11/09/reactjs-fixed-data-table-callback-function-onrowdoubleclick-function</guid>
-        
-        <category>facebook</category>
-        
-        <category>fixed-data-table</category>
-        
-        <category>reactjs</category>
-        
-        
-        <category>javascript</category>
-        
-      </item>
-    
-      <item>
-        <title>setting up nfs in debian stretch</title>
-        <description>&lt;p&gt;On nfs server&lt;br /&gt;
-&lt;code&gt;&lt;br /&gt;
-#aptitude install nfs-kernel-server&lt;br /&gt;
-&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Edit /etc/exports configuration file&lt;br /&gt;
-&lt;code&gt;&lt;br /&gt;
-/home/me/public 192.168.1.2(rw,no_root_squash,subtree_check)&lt;br /&gt;
-&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Restart nfs&lt;br /&gt;
-&lt;code&gt;&lt;br /&gt;
-#exportfs -a&lt;br /&gt;
-#/etc/init.d/nfs-kernel-server start&lt;br /&gt;
-&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;On nfs client&lt;br /&gt;
-&lt;code&gt;&lt;br /&gt;
-#aptitude install nfs-common&lt;br /&gt;
-#/etc/init.d/nfs-common start&lt;br /&gt;
-&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;To list available nfs&lt;br /&gt;
-&lt;code&gt;&lt;br /&gt;
-#showmount -e 192.168.1.2&lt;br /&gt;
-&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;To mount nfs&lt;br /&gt;
-&lt;code&gt;&lt;br /&gt;
-#mount -t nfs /home/me/public /mnt/public&lt;br /&gt;
-&lt;/code&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.linode.com/docs/networking/basic-nfs-configuration-on-debian-7/&quot;&gt;more info&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 08 Nov 2015 01:57:58 +0800</pubDate>
-        <link>http://paragasu.github.io/2015/11/08/setting-up-nfs-in-debian-stretch</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2015/11/08/setting-up-nfs-in-debian-stretch</guid>
-        
-        <category>debian stretch</category>
-        
-        <category>Linux</category>
-        
-        <category>nfs</category>
-        
-        
-        <category>Linux</category>
-        
-      </item>
-    
-      <item>
-        <title>Docker error System error in /sys/fs/cgroup/cpu,cpuactt in debian</title>
-        <description>&lt;p&gt;
-&lt;a href=&quot;https://github.com/docker/docker/issues/16256&quot;&gt;https://github.com/docker/docker/issues/16256&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Fri, 30 Oct 2015 05:33:40 +0800</pubDate>
-        <link>http://paragasu.github.io/2015/10/30/docker-error-system-error-in-sysfscgroupcpucpuactt-in-debian</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2015/10/30/docker-error-system-error-in-sysfscgroupcpucpuactt-in-debian</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Basic tmux command</title>
-        <description>&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Ctrl+b &quot;&lt;/code&gt; - split pane horizontally.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Ctrl+b %&lt;/code&gt; - split pane vertically.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Ctrl+b arrow key&lt;/code&gt; - switch pane.&lt;/li&gt;
-&lt;li&gt;Hold &lt;code&gt;Ctrl+b&lt;/code&gt;, don&#39;t release it and hold one of the arrow keys - resize pane.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Ctrl+b c&lt;/code&gt; - (c)reate a new window.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Ctrl+b n&lt;/code&gt; - move to the (n)ext window.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Ctrl+b p&lt;/code&gt; - move to the (p)revious window.\&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;a href=&quot;http://lukaszwrobel.pl/blog/tmux-tutorial-split-terminal-windows-easily&quot;&gt; Tmux tutorial&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://blog.hawkhost.com/2010/06/28/tmux-the-terminal-multiplexer/&quot;&gt;Tmux the terminal multiplexer&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Thu, 29 Oct 2015 05:36:29 +0800</pubDate>
-        <link>http://paragasu.github.io/2015/10/29/basic-tmux-command</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2015/10/29/basic-tmux-command</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Calculate distance between two point on earth in PostgreSQL</title>
-        <description>&lt;p&gt;Come across nice function by Merlin Moncure posted on grokbase.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CREATE OR REPLACE 
-FUNCTION calculate_distance(lat1 float8, lon1 float8, lat2 float8, lon2 float8)
-RETURNS float8 AS
-$$
-	SELECT ACOS(SIN(RADIANS($1)) * SIN(RADIANS($3)) 
-		 + COS(RADIANS($1)) * COS(RADIANS($3)) 
-		 * COS(RADIANS($4) - RADIANS($2))) * 6371;
-
-$$ LANGUAGE &#39;sql&#39; IMMUTABLE;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;More details&lt;br /&gt;
-&lt;a href=&quot;http://grokbase.com/t/postgresql/pgsql-general/1069rn3ca0/calculating-distance-between-longitude-and-latitude&quot;&gt;Calculating distance between longitude and latitude&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://www.movable-type.co.uk/scripts/latlong.html&quot;&gt;Calculate distance, bearing and more&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Thu, 29 Oct 2015 02:54:15 +0800</pubDate>
-        <link>http://paragasu.github.io/2015/10/29/calculate-distance-between-two-point-on-earth-in-postgresql</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2015/10/29/calculate-distance-between-two-point-on-earth-in-postgresql</guid>
-        
-        <category>calculate distance</category>
-        
-        <category>postgresql</category>
-        
-        
-        <category>database</category>
         
       </item>
     
