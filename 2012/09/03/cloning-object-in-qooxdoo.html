@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>cloning object in qooxdoo</title>
-  <meta name="description" content="Objectvar a = {};var b = qx.lang.Object.clone(a);Arrayvar a = [];var b = a.slice()">
+  <title>Cloning object in qooxdoo</title>
+  <meta name="description" content="Object">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2012/09/03/cloning-object-in-qooxdoo">
@@ -61,25 +61,54 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">cloning object in qooxdoo</h1>
+    <h1 class="post-title" itemprop="name headline">Cloning object in qooxdoo</h1>
     <p class="post-meta"><time datetime="2012-09-03T14:35:11+08:00" itemprop="datePublished">Sep 3, 2012</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">paragasu</span></span></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>Object<br />
-<code><br />
-var a = {};<br />
-var b = qx.lang.Object.clone(a);<br />
-</code></p>
-<p>Array<br />
-<code><br />
-var a = [];<br />
-var b = a.slice()<br />
-</code></p>
+    <p>Object</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var a = {};
+var b = qx.lang.Object.clone(a);
+</code></pre>
+</div>
+
+<p>Array</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var a = [];
+var b = a.slice();
+</code></pre>
+</div>
+
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>

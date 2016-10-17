@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>phonegap add android error</title>
-  <meta name="description" content="on the phonegap 3.4 running to command$phonegap add androidgive an error like this/bin/node_modules/q/q.js:126                    throw e;                   ...">
+  <title>Phonegap add android error</title>
+  <meta name="description" content="On the phonegap 3.4 running to command">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2014/04/15/phonegap-add-android-error">
@@ -61,32 +61,63 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">phonegap add android error</h1>
+    <h1 class="post-title" itemprop="name headline">Phonegap add android error</h1>
     <p class="post-meta"><time datetime="2014-04-15T20:35:29+08:00" itemprop="datePublished">Apr 15, 2014</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">paragasu</span></span></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>on the phonegap 3.4 running to command<br />
-<code><br />
-$phonegap add android<br />
-</code></p>
-<p>give an error like this<br />
-<code><br />
-/bin/node_modules/q/q.js:126<br />
-                    throw e;<br />
-                          ^<br />
-</code></p>
-<p>the problem is the android sdk still not configured properly<br />
-you need to configure the environment ANDROID_HOME, ANDROID_HOME/tools and ANDROID_HOME/platform-tools<br />
-add this in your ~/.bash_profile<br />
-<code><br />
-export ANDROID_HOME=$HOME/android-sdk-linux<br />
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools<br />
-</code></p>
+    <p>On the phonegap 3.4 running to command</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$phonegap add android
+</code></pre>
+</div>
+
+<p>Give an error like this</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/bin/node_modules/q/q.js:126
+                throw e;
+                      ^
+</code></pre>
+</div>
+
+<p>The problem is the android sdk still not configured properly
+you need to configure the environment ANDROID_HOME, ANDROID_HOME/tools and ANDROID_HOME/platform-tools
+add this in your ~/.bash_profile</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>export ANDROID_HOME=$HOME/android-sdk-linux
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+</code></pre>
+</div>
+
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>

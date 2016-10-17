@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>String with dinamicly growing buffer</title>
-  <meta name="description" content="String is where buffer overflow always occur.GLIB supports doing this much more easily:/* portable asprintf() */char *str = g_strdup_printf("string%s%d", str...">
+  <title>String with dinamicaly growing buffer</title>
+  <meta name="description" content="String is where buffer overflow always occur.GLIB supports doing this much more easily:">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2008/09/29/string-with-dinamicly-growing-buffer">
@@ -61,29 +61,59 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">String with dinamicly growing buffer</h1>
+    <h1 class="post-title" itemprop="name headline">String with dinamicaly growing buffer</h1>
     <p class="post-meta"><time datetime="2008-09-29T05:12:08+08:00" itemprop="datePublished">Sep 29, 2008</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">paragasu</span></span></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>String is where buffer overflow always occur.<br />
-GLIB supports doing this much more easily:<br />
-<code><br />
-/* portable asprintf() */<br />
-char *str = g_strdup_printf("string%s%d", str_variable, int_variable);<br />
-</code><br />
-Or if you wanted a modifyable buffer:<br />
-<code><br />
-GString *str = g_string_new(NULL);<br />
-g_string_append(str, "string");<br />
-g_string_append(str, str_variable);<br />
-g_string_sprintfa(str, "%d", int_variable); /* no g_string_append_int() */<br />
-</code></p>
-<p><a href="http://www.irccrew.org/~cras/security/c-guide.html">Secure, Efficient and Easy C programming</a></p>
+    <p>String is where buffer overflow always occur.
+GLIB supports doing this much more easily:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/* portable asprintf() */
+char *str = g_strdup_printf("string%s%d", str_variable, int_variable);
+</code></pre>
+</div>
+
+<p>Or if you wanted a modifyable buffer:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>GString *str = g_string_new(NULL);
+g_string_append(str, "string");
+g_string_append(str, str_variable);
+g_string_sprintfa(str, "%d", int_variable); /* no g_string_append_int() */
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="http://www.irccrew.org/~cras/security/c-guide.html">Secure, Efficient and Easy C programming</a></p>
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>

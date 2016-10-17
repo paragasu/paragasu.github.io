@@ -66,18 +66,49 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>After installing epel and remi repository and enable remi-php56, the php packages still not available. The issue is i just uninstall Cpanel from my Centos 6 server. Cpanel disable php packages from showing up in you</p>
-<p><code><br />
-#vim /etc/yum.conf<br />
-[main]<br />
-exclude=php* ..<br />
-</code></p>
-<p>Just remove php packages from the exclude section of the /etc/yum.conf</p>
-<p>It waste 3 hours of my time to figure this out.. :(</p>
+    <p>After installing epel and remi repository and enable remi-php56, the php packages still not available. <br />
+The issue is i just uninstall Cpanel from my Centos 6 server. Cpanel disable php packages from showing up in you.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#vim /etc/yum.conf
+
+
+[main]
+exclude=php* ..
+</code></pre>
+</div>
+
+<p>Just remove php packages from the exclude section of the <em>/etc/yum.conf</em>.<br />
+It waste 3 hours of my time to figure this out.. :(</p>
+
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>

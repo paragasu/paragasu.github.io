@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Migrating from MySQL to PostgreSQL</title>
-  <meta name="description" content="Encounter some issue along the way1.MySQL DATE_SUB &amp; DATE_ADD(DATE_ADD(NOW(), INTERVAL 30 MINUTES)(DATE_SUB(NOW(), INTERVAL 30 MINUTES)(NOW() - INTERVAL ...">
+  <meta name="description" content="Encounter some issue along the way">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2015/10/29/migrating-from-mysql-to-postgresql">
@@ -67,26 +67,63 @@
 
   <div class="post-content" itemprop="articleBody">
     <p>Encounter some issue along the way</p>
-<p><strong>1.MySQL DATE_SUB &amp; DATE_ADD</strong></p>
-<p>(DATE_ADD(NOW(), INTERVAL 30 MINUTES)</p>
-<p>(DATE_SUB(NOW(), INTERVAL 30 MINUTES)</p>
-<p>(NOW() - INTERVAL '30' MINUTE)</p>
-<p>(NOW() - INTERVAL '30' MINUTE) or</p>
-<p>(NOW() - INTERVAL '30 MINUTES') or</p>
-<p>(NOW() - '30 MINUTES'::INTERVAL)</p>
-<p><strong>2. MySQL RADIANS</strong></p>
-<p>Need to cast to real</p>
-<p>SELECT RADIANS(lat::real);</p>
-<p><strong>3. DISTINCT on json field (v9.4.5)</strong></p>
-<p><code><br />
-SELECT DISTINCT id, json_field FROM driver;<br />
-</code><br />
-Throw could not identify an equality operator for type json error.<br />
+
+<p>1.MySQL DATE_SUB &amp; DATE_ADD</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(DATE_ADD(NOW(), INTERVAL 30 MINUTES)
+(DATE_SUB(NOW(), INTERVAL 30 MINUTES)
+(NOW() - INTERVAL '30' MINUTE)
+(NOW() - INTERVAL '30' MINUTE) or
+(NOW() - INTERVAL '30 MINUTES') or
+(NOW() - '30 MINUTES'::INTERVAL)
+</code></pre>
+</div>
+
+<p>2.MySQL RADIANS<br />
+Need to cast to real</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>SELECT RADIANS(lat::real);
+</code></pre>
+</div>
+
+<p>3.DISTINCT on json field (v9.4.5)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>SELECT DISTINCT id, json_field FROM driver;
+</code></pre>
+</div>
+
+<p>Throw could not identify an equality operator for type json error.<br />
 Converting the json field to jsonb solve the problem</p>
+
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>

@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>change associated array to indexed array</title>
-  <meta name="description" content="sometimes i want to change this form of arrayarray('position'=&gt; array('data1', 'data2'..)       'year'   =&gt; array('year1', 'year2'..))to thisarray(0 =&...">
+  <title>Change associated array to indexed array</title>
+  <meta name="description" content="Sometimes i want to change this form of array">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2013/02/24/change-associated-array-to-indexed-array">
@@ -61,39 +61,74 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">change associated array to indexed array</h1>
+    <h1 class="post-title" itemprop="name headline">Change associated array to indexed array</h1>
     <p class="post-meta"><time datetime="2013-02-24T08:47:59+08:00" itemprop="datePublished">Feb 24, 2013</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">paragasu</span></span></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>sometimes i want to change this form of array<br />
-<code><br />
-array('position'=&gt; array('data1', 'data2'..)<br />
-       'year'   =&gt; array('year1', 'year2'..)<br />
-)<br />
-</code></p>
-<p>to this<br />
-<code><br />
-array(0 =&gt; array('position'=&gt; 'data1',<br />
-                 'year' =&gt; 'year1'),<br />
-      1 =&gt; array('position' =&gt; 'data2',<br />
-                 'year' =&gt; 'year2')<br />
-</code></p>
-<p>here is how i do it.<br />
-<code><br />
-function array_group($data)<br />
-{<br />
-     $result = array();<br />
-     foreach($data as $key=&gt;$rows)<br />
-         foreach($rows as $i=&gt;$value)<br />
-             $result[$i][$key] = $value; </p>
-<p>     return $result;<br />
-}<br />
-</code></p>
+    <p>Sometimes i want to change this form of array</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array(
+  'position' =&gt; array('data1', 'data2'..)
+  'year'     =&gt; array('year1', 'year2'..)
+)
+</code></pre>
+</div>
+
+<p>to this</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array(0 =&gt; array('position' =&gt;'data1',
+                 'year' =&gt; 'year1'),
+
+      1 =&gt; array('position' =&gt; 'data2',
+                 'year' =&gt; 'year2')
+</code></pre>
+</div>
+
+<p>Here is how i do it.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>function array_group($data)
+{
+  $result = array();
+
+  foreach($data as $key=&gt;$rows)
+     foreach($rows as $i=&gt;$value)
+         $result[$i][$key] = $value;
+  
+   return $result;
+}
+</code></pre>
+</div>
+
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>

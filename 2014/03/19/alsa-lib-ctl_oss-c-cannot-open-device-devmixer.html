@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>ALSA lib ctl_oss.c Cannot open device /dev/mixer</title>
-  <meta name="description" content="It happen recently on my debian workstationALSA lib ctl_oss.c:398 (_snd_ctl_oss_open) Cannot open device /dev/mixerCannot open mixer: No such file or directo...">
+  <meta name="description" content="It happen recently on my debian workstation">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2014/03/19/alsa-lib-ctl_oss-c-cannot-open-device-devmixer">
@@ -66,19 +66,47 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>It happen recently on my debian workstation<br />
-<code><br />
-ALSA lib ctl_oss.c:398 (_snd_ctl_oss_open) Cannot open device /dev/mixer<br />
-Cannot open mixer: No such file or directory<br />
-</code> </p>
-<p>When you try to run alsamixer. The reason is the the module snd-pcm-oss not loaded. To fix<br />
-<code><br />
-#modprobe snd-pcm-oss<br />
-</code></p>
+    <p>It happen recently on my debian workstation</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ALSA lib ctl_oss.c:398 (_snd_ctl_oss_open) Cannot open device /dev/mixer
+Cannot open mixer: No such file or directory
+</code></pre>
+</div>
+
+<p>When you try to run alsamixer. The reason is the the module snd-pcm-oss not loaded. To fix</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#modprobe snd-pcm-oss
+</code></pre>
+</div>
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>

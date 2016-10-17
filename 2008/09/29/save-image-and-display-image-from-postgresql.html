@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>save image and display image from postgresql</title>
-  <meta name="description" content="There is several way to save image into postgresql database. Using oid, blob and bytea data types.bytea column type recommended.To store imagegdk_pixdata_fro...">
+  <meta name="description" content="There is several way to save image into postgresql database. Using oid, blob and bytea data types.bytea column type recommended.">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2008/09/29/save-image-and-display-image-from-postgresql">
@@ -62,25 +62,62 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">save image and display image from postgresql</h1>
-    <p class="post-meta"><time datetime="2008-09-29T06:26:10+08:00" itemprop="datePublished">Sep 29, 2008</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">paragasu</span></span></p>
+    <p class="post-meta"><time datetime="2008-09-29T06:26:10+08:00" itemprop="datePublished">Sep 29, 2008</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"></span></span></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
     <p>There is several way to save image into postgresql database. Using oid, blob and bytea data types.bytea column type recommended.</p>
-<p>To store image<br />
-gdk_pixdata_from_pixbuf(),<br />
-gdk_pixdata_serialize()</p>
-<p>To display image<br />
-gdk_pixdata_deserialize(),<br />
-gdk_pixbuf_from_pixdata(),<br />
-gtk_image_new_from_pixbuf() </p>
-<p><a href="http://library.gnome.org/devel/gdk-pixbuf/stable/gdk-pixbuf-inline.html"> Gdk Pixbuf inline </a><br />
-<a href="http://svn.gnome.org/viewvc/libgnomedb/trunk/libgnomedb/plugins/common-pict.c?revision=1686&amp;view=markup">Libgnomedb Example  </a></p>
-<p>Thank to vivien and Yann Droneaud for great help</p>
+
+<p>To store image</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gdk_pixdata_from_pixbuf(),
+gdk_pixdata_serialize()
+</code></pre>
+</div>
+
+<p>To display image</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gdk_pixdata_deserialize(),
+gdk_pixbuf_from_pixdata(),
+gtk_image_new_from_pixbuf() 
+</code></pre>
+</div>
+
+<p>Thanks to vivien and Yann Droneaud for great help</p>
+
+<p>Related<br />
+<a href="http://library.gnome.org/devel/gdk-pixbuf/stable/gdk-pixbuf-inline.html">Gdk Pixbuf inline</a><br />
+<a href="http://svn.gnome.org/viewvc/libgnomedb/trunk/libgnomedb/plugins/common-pict.c?revision=1686&amp;view=markup">Libgnomedb example</a></p>
+
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>

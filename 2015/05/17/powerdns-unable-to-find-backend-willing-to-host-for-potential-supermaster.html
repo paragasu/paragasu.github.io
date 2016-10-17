@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>powerdns unable to find backend willing to host for potential supermaster</title>
-  <meta name="description" content="I got this error when i setup powerdns superslave in debian using sqlite3 backend. The condition to get the superslave working.The supermaster must carry a S...">
+  <title>Powerdns unable to find backend willing to host for potential supermaster</title>
+  <meta name="description" content="I got this error when i setup powerdns superslave in debian using sqlite3 backend. The condition to get the superslave working.">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2015/05/17/powerdns-unable-to-find-backend-willing-to-host-for-potential-supermaster">
@@ -61,29 +61,66 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">powerdns unable to find backend willing to host for potential supermaster</h1>
+    <h1 class="post-title" itemprop="name headline">Powerdns unable to find backend willing to host for potential supermaster</h1>
     <p class="post-meta"><time datetime="2015-05-17T02:36:40+08:00" itemprop="datePublished">May 17, 2015</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">paragasu</span></span></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>I got this error when i setup powerdns superslave in debian using sqlite3 backend. The condition to get the superslave working.</p>
+    <p>I got this error when i setup powerdns superslave in debian using sqlite3 backend. <br />
+The condition to get the superslave working.</p>
+
 <ul>
-<li>The supermaster must carry a SOA record for the notified domain</li>
-<li>The supermaster IP must be present in the 'supermaster' table</li>
-<li>The set of NS records for the domain, as retrieved by the slave from the supermaster, <strong>must include the nameserver</strong> that goes with the IP address in the supermaster table</li>
+  <li>The supermaster must carry a SOA record for the notified domain.</li>
+  <li>The supermaster IP must be present in the ‘supermaster’ table.</li>
+  <li>The set of NS records for the domain, as retrieved by the slave from the supermaster,<br />
+ <em>must include the nameserver</em> that goes with the IP address in the supermaster table.</li>
 </ul>
-<p>A very usefull command to test if the setup is working</p>
-<p>to send the notification to the slave and<br />
-<code>#pdns_control notify mydomain.com<br />
-</code></p>
-<p>to request for supermasters zone<br />
-<code>#pdns_control retrieve mydomain.com<br />
-</code></p>
-<p><a href="https://doc.powerdns.com/md/authoritative/modes-of-operation/#slave-operation">More</a></p>
+
+<p>A very usefull command to test if the setup is working.
+To send the notification to the slave and</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#pdns_control notify mydomain.com
+</code></pre>
+</div>
+
+<p>To request for supermasters zone</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#pdns_control retrieve mydomain.com
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="https://doc.powerdns.com/md/authoritative/modes-of-operation/#slave-operation">PDNS slave operation</a></p>
+
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>

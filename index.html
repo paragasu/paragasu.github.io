@@ -64,6 +64,537 @@
 
 <article class='post'>
   <h1 class='post-title'>
+    <a href="/2016/10/17/installing-couchdb-2.0-on-debian-stretch">
+      Installing CouchDB 2.0 on Debian Stretch
+    </a>
+  </h1>
+  <div class="post-date">Oct 17, 2016</div>
+  <p>CouchDB 2.0 released on September 2016 has clustering support.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#cd /usr/src
+#wget http://www-eu.apache.org/dist/couchdb/source/2.0.0/apache-couchdb-2.0.0.tar.gz
+#tar xvzf apache-couchdb-2.0.0.tar.gz
+#cd apache-couchdb-2.0.0
+#./configure
+#make release
+</code></pre>
+</div>
+
+<p>By any chance you encounter this error,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ERROR: Unable to generate spec: read file info /usr/lib/erlang/man/man1/gcc-ar.1.gz failed 
+ERROR: Unexpected error: rebar_abort   
+generate failed while processing  rebar_abort 
+</code></pre>
+</div>
+
+<p>You need to install erlang-base-hipe instead of erlang-base</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#aptitude install erlang-base-hipe
+#rm /usr/lib/erlang/main
+#make clean
+#make release
+</code></pre>
+</div>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/07/29/openresty-debugging-and-logging">
+      Debugging and logging in OpenResty
+    </a>
+  </h1>
+  <div class="post-date">Jul 29, 2016</div>
+  <p>There is a few key point to ease the development of lua in OpenResty environment.</p>
+
+<h3 id="turn-lua-code-caching-off">Turn lua code caching off</h3>
+
+<p>Restarting nginx everytime there is a code changes is painful. 
+The easier way is to load external lua code using <em>content_by_lua_file</em> as opposed
+to have lua code inside nginx configuration files and then turn off the cache.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>location /hello {
+  default_type text/html;
+  lua_code_cache off; #development
+  content_by_lua ./hello.lua;
+}
+</code></pre>
+</div>
+
+<h3 id="read-nginx-log-as-it-is-written">Read nginx log as it is written</h3>
+
+<p>Set the error_log configuration directive to output log on easily accessable directory.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>error_log /home/away/tmp/hello.log
+</code></pre>
+</div>
+
+<p>And read the log interactively in a separate terminal as it been written using</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tail -f /home/away/temp/hello.log
+</code></pre>
+</div>
+
+<h3 id="output-the-log-file-in-the-terminal">Output the log file in the terminal</h3>
+<p>Redirect all error log to the terminal where nginx is running</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>error_log /dev/stderr;
+</code></pre>
+</div>
+
+<h3 id="log-event-or-variable">Log event or variable</h3>
+<p>Output debugging info using ngx.log</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ngx.log(ngx.ERR, "hello world here")
+</code></pre>
+</div>
+
+<p>References <br />
+<a href="http://openresty.org">OpenResty website</a><br />
+<a href="http://www.staticshin.com/programming/definitely-an-open-resty-guide">Definintely an OpenResty Guide</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/05/18/nodejs-on-heroku">
+      Nodejs gotcha on heroku
+    </a>
+  </h1>
+  <div class="post-date">May 18, 2016</div>
+  <p>Use environment variable process.env.PORT instead of requesting for fixed port.
+Heroku will assign random port everytime the application bootup. This lead to some misleading
+error like strange Redis too many connection error and error H10.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>app.listen(process.env.PORT || 5000);
+</code></pre>
+</div>
+
+<p>Another gotcha when we upgrade the PostgreSQL to the bigger plan, yet another misleading error</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>error: no pg_hba.conf entry for host 
+</code></pre>
+</div>
+
+<p>The paid plan (standard-0) only accept ssl connection:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>postgres://user:seckrit@pghost:5432/dbname?ssl=true
+</code></pre>
+</div>
+
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/03/22/javascript-isfloat-and-isinteger">
+      isFloat and isInteger in javascript
+    </a>
+  </h1>
+  <div class="post-date">Mar 22, 2016</div>
+  <p>Found some interesting way to check isFloat and isInteger in javascript on stackoverflow</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>function isFloat(n) {
+  return n === +n &amp;&amp; n !== (n|0);
+}
+
+function isInteger(n) {
+  return n === +n &amp;&amp; n === (n|0);
+}
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="http://stackoverflow.com/questions/3885817/how-do-i-check-that-a-number-is-float-or-integer">How do i check that a number is a float or integer</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/03/10/couchapp-on-debian-stretch">
+      Couchapp on Debian Stretch
+    </a>
+  </h1>
+  <div class="post-date">Mar 10, 2016</div>
+  <p>I have been developing application using <a href="http://qooxdoo.org">Qooxdoo</a> for years.
+It works great so far, except when the internet very slow, which is quite common problem.
+It make the application behave unexpectedly weird because user will randomly click
+anywhere while data loading from the server.</p>
+
+<p>One way to solve this problem is to design using offline first concept. 
+That is where i get to know about <a href="http://pouchdb.com">PouchDB</a> and  <a href="http://couchdb.apache.org">CouchDB</a>.
+<a href="https://github.com/couchapp/couchapp">Couchapp</a> is a convinient way to develop application on CouchDB.</p>
+
+<p>Installing couchapp is pretty easy,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#aptitude install python-pip
+#pip install couchapp
+</code></pre>
+</div>
+
+<p>Then creating a new project,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$couchapp generate hello
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="https://github.com/couchapp/couchapp">Couchapp on github</a><br />
+<a href="http://docs.couchdb.org/en/latest/couchapp/ddocs.html">Couchapp documentation</a><br />
+<a href="http://www.ibm.com/developerworks/opensource/tutorials/os-couchapp/index.html">Building couchapp</a></p>
+
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/03/01/remove-node-modules-from-remote-git-repo">
+      Remove node_modules from remote git repo
+    </a>
+  </h1>
+  <div class="post-date">Mar 1, 2016</div>
+  <p>node_modules folder in the root project directory can be very large and slow down commit.<br />
+This command will overwrite history.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$git filter-branch -f --tree-filter 'rm -rf node_modules' HEAD 
+$git gc --prune
+$git push origin master --force
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="http://dalibornasevic.com/posts/2-permanently-remove-files-and-folders-from-a-git-repository">Permanently remove files and folders from Git repo</a></p>
+
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/02/25/validate-malaysian-phone-number-javascript">
+      Validate malaysian phone number in javascript
+    </a>
+  </h1>
+  <div class="post-date">Feb 25, 2016</div>
+  <p>My pull request just accepted by chriso author of validator.js, now you can use validator.js 
+to validate malaysian phone number using ‘ms-MY’ locale.</p>
+
+<p>Probably will take sometime before the npm and bower package updated.<br />
+You can install via npm,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$npm install --save https://github.com/chriso/validator.js.git
+</code></pre>
+</div>
+
+<p>On nodejs,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>const v = require('validator')
+v.isMobilePhone('+60128747889', 'ms-MY')
+</code></pre>
+</div>
+
+<p>On browser,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;script type="text/javascript" src="validator.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+  validator.isMobilePhone('+60128747889', 'ms-MY') //true
+&lt;/script&gt; 
+</code></pre>
+</div>
+
+<p>Btw, i wish the locale is en-MY but there is no such thing. So, i think ms-MY will do.</p>
+
+<p>Related<br />
+<a href="https://en.wikipedia.org/wiki/Telephone_numbers_in_Malaysia">Telephone number in malaysia</a><br />
+<a href="https://github.com/chriso/validator.js">Github validator.js</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/02/24/update-github-fork">
+      Update github fork from the original repo
+    </a>
+  </h1>
+  <div class="post-date">Feb 24, 2016</div>
+  <div class="highlighter-rouge"><pre class="highlight"><code>$git remote add --track master chriso git://github.com/chriso/validator.js.git
+$git fetch chriso
+$git merge chriso/master
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="http://bradlyfeeley.com/2008/09/03/update-a-github-fork-from-the-original-repo">Update a github fork from the original repo</a></p>
+
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/02/20/beautify-js-code">
+      Beautify javascript code
+    </a>
+  </h1>
+  <div class="post-date">Feb 20, 2016</div>
+  <p>Some of my javascript code indent contain mixed of tab and space<br />
+and only aware of the code ugly indent when i open in github.</p>
+
+<p>There is a few cli program to format code and my favorite so far is <em>js-beautify</em></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#npm install -g js-beautify
+</code></pre>
+</div>
+
+<p>Go to the source code do</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$js-beautify -h
+$js-beautify -s 2 -r *js
+</code></pre>
+</div>
+
+<p>You can make vim to display space character on the editor by using the command</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>:set list
+</code></pre>
+</div>
+
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/02/20/costum-variable-in-nginx-conf">
+      Variable in nginx configuration
+    </a>
+  </h1>
+  <div class="post-date">Feb 20, 2016</div>
+  <p>Found one interesting overlook configuration in nginx.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>server {
+  server_name ~^(www\.)?(?&lt;domain&gt;.+)$;
+
+  location / {
+    root /sites/$domain;
+  }
+}
+</code></pre>
+</div>
+
+<p>Some note on the matching pattern modifiers,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(none) prefix match
+=    match exactly
+~    case sensetive regex match
+~*   case insensetive regex match
+^~   non regular match is prefered
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server">Nginx core module configuration</a><br />
+<a href="https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms">Understanding server and location block selection algorithm</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/02/18/install-php7-in-debian-jessie">
+      Install php7.0 on debian jessie
+    </a>
+  </h1>
+  <div class="post-date">Feb 18, 2016</div>
+  <p>The latest PHP7.0 come with huge speed improvement.
+PHP7.0 debian package is available from dotdeb repository.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>deb http://packages.dotdeb.org jessie all
+deb-src http://packages.dotdeb.org jessie all
+</code></pre>
+</div>
+
+<p>Then install the key</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#wget https://www.dotdeb.org/dotdeb.gpg
+#sudo apt-key add dotdeb.gpg
+#aptitude install php7.0-fpm php7.0-pgsql php7.0-cli
+</code></pre>
+</div>
+
+<p>Please note that some extension not yet available.</p>
+
+<p>Related<br />
+<a href="https://www.dotdeb.org/2016/02/06/php-7-0-3-for-jessie">PHP 7.0.3 for jessie</a><br />
+<a href="https://www.dotdeb.org/instructions">Dotdeb install instruction</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/02/16/socket.io-in-nodejs-cluster">
+      Socket.io in nodejs cluster
+    </a>
+  </h1>
+  <div class="post-date">Feb 16, 2016</div>
+  <p>Running nodejs in cluster is a bit tricky. We need to make sure the same
+worker handle the same connection from the same client.</p>
+
+<p>To make life a little bit easier, we can use <a href="https://github.com/indutny/sticky-session">Sticky Session</a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$npm install sticky-session 
+</code></pre>
+</div>
+
+<p>And we need to use socket.io-redis to make sure we can send message 
+to socket handle by different workers.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$npm install socket.io-redis
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="https://github.com/indutny/sticky-session">Sticky Session</a><br />
+<a href="http://socket.io/docs/using-multiple-nodes">Using multiple nodes</a><br />
+<a href="https://github.com/elad/node-cluster-socket.io">Node cluster socket.io</a></p>
+
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/02/15/ghost-blog-amazon-ses-mail-setting">
+      Ghost blog mail configuration using Amazon SES
+    </a>
+  </h1>
+  <div class="post-date">Feb 15, 2016</div>
+  <p>Ghost is a blogging platform written in nodejs.<br />
+Edit the config.js file at the ghost root directory</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mail: {
+   from: 'from@email.com',
+   transport: 'SMTP',
+   options: {
+     host: "your-amazon-host",
+     port: 465,
+     service: "SES",
+     auth: {
+       user: "your-amazon-user",
+       pass: "your-amazon-password"
+     }
+   }
+}
+</code></pre>
+</div>
+
+<p>Amazon SES credential can be generated from amazon control panel.<br />
+From address must be registered and verified as sender.</p>
+
+<p>Related<br />
+<a href="http://support.ghost.org/mail">Mail configuration on a self hosted ghost</a><br />
+<a href="https://github.com/TryGhost/Ghost/blob/master/core/server/mail/index.js">Mail github source</a></p>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/02/15/nginx-socket-io-premature-closed-connection">
+      Nginx and socket.io premature closed connection
+    </a>
+  </h1>
+  <div class="post-date">Feb 15, 2016</div>
+  <p>It happen whenever nodejs server crashed.</p>
+
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/02/14/block-ads-using-hosts-file">
+      Block ads using /etc/hosts in debian
+    </a>
+  </h1>
+  <div class="post-date">Feb 14, 2016</div>
+  <p>We can avoid ads from loading by serving 0.0.0.0 or 127.0.0.1 for the ads domain. <br />
+There is a few website that provide such list and one of them is from mvps.org.</p>
+
+<p>The installation is rather simple. Just copy and paste the list to /etc/hosts file.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#wget http://winhelp2002.mvps.org/hosts.txt
+#cp /etc/hosts /etc/hosts.old
+#cat hosts.txt &gt;&gt; /etc/hosts
+</code></pre>
+</div>
+
+<p>The host file come from window enviroment. So there will be some extra line ugly line <br />
+ending that look like ^M in vim. To fix it</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#vim /etc/hosts
+</code></pre>
+</div>
+
+<p>Then on the vim command mode run</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>:%s/&lt;CTRL-V&gt;&lt;CTRL-M&gt;//g
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="http://www.putorius.net/2012/01/block-unwanted-advertisements-on.html">Block unwanted advertisements with /etc/hosts file on Linux </a><br />
+<a href="https://github.com/StevenBlack/hosts">Amalgamated hosts file</a></p>
+
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
+    <a href="/2016/02/13/compiling-mupdf-in-debian">
+      Compile mupdf in debian
+    </a>
+  </h1>
+  <div class="post-date">Feb 13, 2016</div>
+  <div class="highlighter-rouge"><pre class="highlight"><code>#aptitude install libgl-dev libxcursor-dev libxrandr-dev libxinerama-dev
+$git clone git@github.com:paragasu/mupdf.git
+$cd mupdf
+$git submodule init
+$git submodule update
+$make
+</code></pre>
+</div>
+
+</article>
+
+
+
+<article class='post'>
+  <h1 class='post-title'>
     <a href="/2016/01/29/merge-git-repo-as-another-branch">
       Merge git repo as another branch
     </a>
@@ -76,7 +607,6 @@ I want to have one repo called api with two branch php and nodejs.</p>
 $git remote add nodejs ../api-nodejs
 $git remote update
 $git checkout -b nodejs
-$git checkout nodejs
 $git rm -f *
 $git merge nodejs/master 
 $git push -f
@@ -414,37 +944,50 @@ net.ipv6.conf.eth0.disable_ipv6 = 1
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2015/11/08/setting-up-nfs-in-debian-stretch">
-      setting up nfs in debian stretch
+      Setting up nfs in debian stretch
     </a>
   </h1>
   <div class="post-date">Nov 8, 2015</div>
-  <p>On nfs server<br />
-<code><br />
-#aptitude install nfs-kernel-server<br />
-</code></p>
-<p>Edit /etc/exports configuration file<br />
-<code><br />
-/home/me/public 192.168.1.2(rw,no_root_squash,subtree_check)<br />
-</code></p>
-<p>Restart nfs<br />
-<code><br />
-#exportfs -a<br />
-#/etc/init.d/nfs-kernel-server start<br />
-</code></p>
-<p>On nfs client<br />
-<code><br />
-#aptitude install nfs-common<br />
-#/etc/init.d/nfs-common start<br />
-</code></p>
-<p>To list available nfs<br />
-<code><br />
-#showmount -e 192.168.1.2<br />
-</code></p>
-<p>To mount nfs<br />
-<code><br />
-#mount -t nfs /home/me/public /mnt/public<br />
-</code><br />
-<a href="https://www.linode.com/docs/networking/basic-nfs-configuration-on-debian-7/">more info</a></p>
+  <p>On nfs server</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#aptitude install nfs-kernel-server
+</code></pre>
+</div>
+
+<p>Edit /etc/exports configuration file</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/home/me/public 192.168.1.2(rw,no_root_squash,subtree_check)&lt;br /&gt;
+</code></pre>
+</div>
+
+<p>Restart nfs</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#exportfs -a
+#/etc/init.d/nfs-kernel-server start
+</code></pre>
+</div>
+
+<p>On nfs client</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#aptitude install nfs-common
+#/etc/init.d/nfs-common start
+</code></pre>
+</div>
+
+<p>To list available nfs</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#showmount -e 192.168.1.2
+</code></pre>
+</div>
+
+<p>To mount nfs</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#mount -t nfs /home/me/public /mnt/public&lt;br /&gt;
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="https://www.linode.com/docs/networking/basic-nfs-configuration-on-debian-7">Basic nfs configuration on debian 7</a></p>
 
 </article>
 
@@ -524,22 +1067,34 @@ $$ LANGUAGE 'sql' IMMUTABLE;
   </h1>
   <div class="post-date">Oct 29, 2015</div>
   <p>Encounter some issue along the way</p>
-<p><strong>1.MySQL DATE_SUB &amp; DATE_ADD</strong></p>
-<p>(DATE_ADD(NOW(), INTERVAL 30 MINUTES)</p>
-<p>(DATE_SUB(NOW(), INTERVAL 30 MINUTES)</p>
-<p>(NOW() - INTERVAL '30' MINUTE)</p>
-<p>(NOW() - INTERVAL '30' MINUTE) or</p>
-<p>(NOW() - INTERVAL '30 MINUTES') or</p>
-<p>(NOW() - '30 MINUTES'::INTERVAL)</p>
-<p><strong>2. MySQL RADIANS</strong></p>
-<p>Need to cast to real</p>
-<p>SELECT RADIANS(lat::real);</p>
-<p><strong>3. DISTINCT on json field (v9.4.5)</strong></p>
-<p><code><br />
-SELECT DISTINCT id, json_field FROM driver;<br />
-</code><br />
-Throw could not identify an equality operator for type json error.<br />
+
+<p>1.MySQL DATE_SUB &amp; DATE_ADD</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(DATE_ADD(NOW(), INTERVAL 30 MINUTES)
+(DATE_SUB(NOW(), INTERVAL 30 MINUTES)
+(NOW() - INTERVAL '30' MINUTE)
+(NOW() - INTERVAL '30' MINUTE) or
+(NOW() - INTERVAL '30 MINUTES') or
+(NOW() - '30 MINUTES'::INTERVAL)
+</code></pre>
+</div>
+
+<p>2.MySQL RADIANS<br />
+Need to cast to real</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>SELECT RADIANS(lat::real);
+</code></pre>
+</div>
+
+<p>3.DISTINCT on json field (v9.4.5)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>SELECT DISTINCT id, json_field FROM driver;
+</code></pre>
+</div>
+
+<p>Throw could not identify an equality operator for type json error.<br />
 Converting the json field to jsonb solve the problem</p>
+
 
 </article>
 
@@ -638,13 +1193,17 @@ intentional, but I failed to recognize the side effects.</p>
   </h1>
   <div class="post-date">Jun 5, 2015</div>
   <p>Start the emulator. Then find out the genymotion assigned IP address</p>
-<p><code><br />
-$ps ax | grep geny<br />
-</code></p>
-<p>Then connect using adb<br />
-<code><br />
-$adb connect 192.168.1.3<br />
-</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ps ax | grep geny
+</code></pre>
+</div>
+
+<p>Then connect using adb</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$adb connect 192.168.1.3
+</code></pre>
+</div>
+
 
 </article>
 
@@ -657,15 +1216,20 @@ $adb connect 192.168.1.3<br />
     </a>
   </h1>
   <div class="post-date">Jun 5, 2015</div>
-  <p>1. Connect using USB<br />
-<code><br />
-$adb tcpip 5555<br />
-</code></p>
-<p>2. Disconnect USB<br />
-3. Reconnect using wireless connection. You can find out the IP address from wireless config<br />
-<code><br />
-$adb connect 192.168.1.3:5555<br />
-</code></p>
+  <p>Connect using USB.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$adb tcpip 5555
+</code></pre>
+</div>
+
+<p>Disconnect USB.</p>
+
+<p>Reconnect using wireless connection. You can find out the IP address from wireless config</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$adb connect 192.168.1.3:5555
+</code></pre>
+</div>
+
 
 </article>
 
@@ -678,15 +1242,17 @@ $adb connect 192.168.1.3:5555<br />
     </a>
   </h1>
   <div class="post-date">Jun 5, 2015</div>
-  <p>Go into genymotion installation directory<br />
-<code><br />
-#cd /opt/genymotion<br />
-</code><code><br />
-#aptitude install libxi-dev libxmu-dev<br />
-#mkdir QtLibs<br />
-#mv *Qt*.so* QtLibs<br />
-<code></code></code></p>
-<p>for more info <a title="Ubuntu Forums" href="http://ubuntuforums.org/showthread.php?t=2207219&amp;p=13048000#post13048000"> Ubuntu Forums </a></p>
+  <p>Go into genymotion installation directory</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#cd /opt/genymotion
+#aptitude install libxi-dev libxmu-dev
+#mkdir QtLibs
+#mv *Qt*.so* QtLibs
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="http://ubuntuforums.org/showthread.php?t=2207219&amp;p=13048000#post13048000">Ubuntu Forums</a></p>
 
 </article>
 
@@ -699,8 +1265,8 @@ $adb connect 192.168.1.3:5555<br />
     </a>
   </h1>
   <div class="post-date">Jun 4, 2015</div>
-  <p>More info on this post</p>
-<p><a title="https://www.nativescript.org/blog/splash-screen-for-your-android-applications" href="https://www.nativescript.org/blog/splash-screen-for-your-android-applications">https://www.nativescript.org/blog/splash-screen-for-your-android-applications</a></p>
+  <p><a href="https://www.nativescript.org/blog/splash-screen-for-your-android-applications&quot; href=&quot;https://www.nativescript.org/blog/splash-screen-for-your-android-applications">Splas screen for your android applications</a></p>
+
 
 </article>
 
@@ -713,16 +1279,21 @@ $adb connect 192.168.1.3:5555<br />
     </a>
   </h1>
   <div class="post-date">Jun 4, 2015</div>
-  <p>the nativescript cli<br />
-<code><br />
-$tns debug android --debug-brk<br />
-</code></p>
-<p>The command expect your google chrome executable name is "chrome".<br />
-But in my debian jessie workstation. The executable name is "google-chrome"</p>
-<p><code><br />
-$ln -s /usr/bin/google-chrome ~/bin/chrome<br />
-</code></p>
+  <p>The nativescript cli</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$tns debug android --debug-brk
+</code></pre>
+</div>
+
+<p>The command expect your google chrome executable name is “chrome”.<br />
+But in my debian jessie workstation. The executable name is “google-chrome”</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ln -s /usr/bin/google-chrome ~/bin/chrome
+</code></pre>
+</div>
+
 <p>will fix the problem.</p>
+
 
 </article>
 
@@ -735,14 +1306,17 @@ $ln -s /usr/bin/google-chrome ~/bin/chrome<br />
     </a>
   </h1>
   <div class="post-date">May 27, 2015</div>
-  <p><code><br />
-#yum erase 'centos*'<br />
-<code></p>
-<p>make sure to edit the /etc/yum.conf to remove the packages listed in the exclude section<br />
-<code><br />
-[main]<br />
-exclude= ..<br />
-</code></code></code></p>
+  <div class="highlighter-rouge"><pre class="highlight"><code>#yum erase 'centos*'
+</code></pre>
+</div>
+
+<p>Make sure to edit the <em>/etc/yum.conf</em> to remove the packages listed in the exclude section</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[main]
+exclude= ..
+</code></pre>
+</div>
+
 
 </article>
 
@@ -755,14 +1329,20 @@ exclude= ..<br />
     </a>
   </h1>
   <div class="post-date">May 27, 2015</div>
-  <p>After installing epel and remi repository and enable remi-php56, the php packages still not available. The issue is i just uninstall Cpanel from my Centos 6 server. Cpanel disable php packages from showing up in you</p>
-<p><code><br />
-#vim /etc/yum.conf<br />
-[main]<br />
-exclude=php* ..<br />
-</code></p>
-<p>Just remove php packages from the exclude section of the /etc/yum.conf</p>
-<p>It waste 3 hours of my time to figure this out.. :(</p>
+  <p>After installing epel and remi repository and enable remi-php56, the php packages still not available. <br />
+The issue is i just uninstall Cpanel from my Centos 6 server. Cpanel disable php packages from showing up in you.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#vim /etc/yum.conf
+
+
+[main]
+exclude=php* ..
+</code></pre>
+</div>
+
+<p>Just remove php packages from the exclude section of the <em>/etc/yum.conf</em>.<br />
+It waste 3 hours of my time to figure this out.. :(</p>
+
 
 </article>
 
@@ -771,24 +1351,36 @@ exclude=php* ..<br />
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2015/05/17/powerdns-unable-to-find-backend-willing-to-host-for-potential-supermaster">
-      powerdns unable to find backend willing to host for potential supermaster
+      Powerdns unable to find backend willing to host for potential supermaster
     </a>
   </h1>
   <div class="post-date">May 17, 2015</div>
-  <p>I got this error when i setup powerdns superslave in debian using sqlite3 backend. The condition to get the superslave working.</p>
+  <p>I got this error when i setup powerdns superslave in debian using sqlite3 backend. <br />
+The condition to get the superslave working.</p>
+
 <ul>
-<li>The supermaster must carry a SOA record for the notified domain</li>
-<li>The supermaster IP must be present in the 'supermaster' table</li>
-<li>The set of NS records for the domain, as retrieved by the slave from the supermaster, <strong>must include the nameserver</strong> that goes with the IP address in the supermaster table</li>
+  <li>The supermaster must carry a SOA record for the notified domain.</li>
+  <li>The supermaster IP must be present in the ‘supermaster’ table.</li>
+  <li>The set of NS records for the domain, as retrieved by the slave from the supermaster,<br />
+ <em>must include the nameserver</em> that goes with the IP address in the supermaster table.</li>
 </ul>
-<p>A very usefull command to test if the setup is working</p>
-<p>to send the notification to the slave and<br />
-<code>#pdns_control notify mydomain.com<br />
-</code></p>
-<p>to request for supermasters zone<br />
-<code>#pdns_control retrieve mydomain.com<br />
-</code></p>
-<p><a href="https://doc.powerdns.com/md/authoritative/modes-of-operation/#slave-operation">More</a></p>
+
+<p>A very usefull command to test if the setup is working.
+To send the notification to the slave and</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#pdns_control notify mydomain.com
+</code></pre>
+</div>
+
+<p>To request for supermasters zone</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#pdns_control retrieve mydomain.com
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="https://doc.powerdns.com/md/authoritative/modes-of-operation/#slave-operation">PDNS slave operation</a></p>
+
 
 </article>
 
@@ -801,9 +1393,10 @@ exclude=php* ..<br />
     </a>
   </h1>
   <div class="post-date">Apr 7, 2015</div>
-  <p><code><br />
-ALTER TABLE booking ALTER nationality DROP not null;<br />
-</code></p>
+  <div class="highlighter-rouge"><pre class="highlight"><code>ALTER TABLE booking ALTER nationality DROP not null;  
+</code></pre>
+</div>
+
 
 </article>
 
@@ -816,13 +1409,13 @@ ALTER TABLE booking ALTER nationality DROP not null;<br />
     </a>
   </h1>
   <div class="post-date">Oct 9, 2014</div>
-  <p>[code]<br />
-&lt;div class=&quot;row&quot;&gt;<br />
-&lt;div class=&quot;small-8 small-centered large-4 large-uncentered columns&quot;&gt;<br />
- &lt;img src=&quot;logo.png&quot; /&gt;<br />
-&lt;/div&gt;<br />
-&lt;/div&gt;<br />
-[/code]</p>
+  <div class="highlighter-rouge"><pre class="highlight"><code>&lt;div class="row"&gt;;
+&lt;div class="small-8 small-centered large-4 large-uncentered columns"&gt;
+&lt;img src="logo.png" /&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+</div>
 
 </article>
 
@@ -831,14 +1424,16 @@ ALTER TABLE booking ALTER nationality DROP not null;<br />
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2014/09/11/javascript-get-the-last-value-of-an-array">
-      javascript get the last value of an array
+      Javascript get the last value of an array
     </a>
   </h1>
   <div class="post-date">Sep 11, 2014</div>
-  <p>the value of the last item in a javascript array</p>
-<p><code><br />
-arr.split(-1)[0]<br />
-</code></p>
+  <p>The value of the last item in a javascript array</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.split(-1)[0]
+</code></pre>
+</div>
+
 
 </article>
 
@@ -851,10 +1446,12 @@ arr.split(-1)[0]<br />
     </a>
   </h1>
   <div class="post-date">Jun 8, 2014</div>
-  <p>add the following line to the /etc/rc.local</p>
-<p><code><br />
-echo 0 &gt; /sys/class/backlight/acpi_video0/brightness<br />
-</code></p>
+  <p>Add the following line to the <em>/etc/rc.local</em>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>echo 0 &gt; /sys/class/backlight/acpi_video0/brightness  
+</code></pre>
+</div>
+
 
 </article>
 
@@ -863,27 +1460,33 @@ echo 0 &gt; /sys/class/backlight/acpi_video0/brightness<br />
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2014/04/15/phonegap-add-android-error">
-      phonegap add android error
+      Phonegap add android error
     </a>
   </h1>
   <div class="post-date">Apr 15, 2014</div>
-  <p>on the phonegap 3.4 running to command<br />
-<code><br />
-$phonegap add android<br />
-</code></p>
-<p>give an error like this<br />
-<code><br />
-/bin/node_modules/q/q.js:126<br />
-                    throw e;<br />
-                          ^<br />
-</code></p>
-<p>the problem is the android sdk still not configured properly<br />
-you need to configure the environment ANDROID_HOME, ANDROID_HOME/tools and ANDROID_HOME/platform-tools<br />
-add this in your ~/.bash_profile<br />
-<code><br />
-export ANDROID_HOME=$HOME/android-sdk-linux<br />
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools<br />
-</code></p>
+  <p>On the phonegap 3.4 running to command</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$phonegap add android
+</code></pre>
+</div>
+
+<p>Give an error like this</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/bin/node_modules/q/q.js:126
+                throw e;
+                      ^
+</code></pre>
+</div>
+
+<p>The problem is the android sdk still not configured properly
+you need to configure the environment ANDROID_HOME, ANDROID_HOME/tools and ANDROID_HOME/platform-tools
+add this in your ~/.bash_profile</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>export ANDROID_HOME=$HOME/android-sdk-linux
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+</code></pre>
+</div>
+
 
 </article>
 
@@ -896,15 +1499,18 @@ export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools<br />
     </a>
   </h1>
   <div class="post-date">Mar 19, 2014</div>
-  <p>It happen recently on my debian workstation<br />
-<code><br />
-ALSA lib ctl_oss.c:398 (_snd_ctl_oss_open) Cannot open device /dev/mixer<br />
-Cannot open mixer: No such file or directory<br />
-</code> </p>
-<p>When you try to run alsamixer. The reason is the the module snd-pcm-oss not loaded. To fix<br />
-<code><br />
-#modprobe snd-pcm-oss<br />
-</code></p>
+  <p>It happen recently on my debian workstation</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ALSA lib ctl_oss.c:398 (_snd_ctl_oss_open) Cannot open device /dev/mixer
+Cannot open mixer: No such file or directory
+</code></pre>
+</div>
+
+<p>When you try to run alsamixer. The reason is the the module snd-pcm-oss not loaded. To fix</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#modprobe snd-pcm-oss
+</code></pre>
+</div>
 
 </article>
 
@@ -913,21 +1519,25 @@ Cannot open mixer: No such file or directory<br />
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2014/03/12/qooxdoo-wrong-icon-path-after-migrate-from-2-0-to-3-5">
-      qooxdoo wrong icon path after  migrate from 2.0 to 3.5
+      Qooxdoo wrong icon path after  migrate from 2.0 to 3.5
     </a>
   </h1>
   <div class="post-date">Mar 12, 2014</div>
-  <p>It must be in the form below, start by "/**" and end by "*/" and in between start by "*".<br />
-<code><br />
-/**<br />
-* @assert(sumisi/*)<br />
-*/<br />
-</code></p>
-<p>Otherwise assert will not be read by JsDoc and give an error<br />
-<code><br />
-qx.ui.basic.Image[90-0]: Image could not be loaded: sumisi/login.png<br />
-ImageLoader: Not recognized format of external image 'sumisi/login.png'<br />
-</code></p>
+  <p>It must be in the form below, start by “/<em>*” and end by “</em>/” and in between start by “*”.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/**
+* @assert(sumisi/*)
+*/
+</code></pre>
+</div>
+
+<p>Otherwise assert will not be read by JsDoc and give an error.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>qx.ui.basic.Image[90-0]: Image could not be loaded: sumisi/login.png
+ImageLoader: Not recognized format of external image 'sumisi/login.png'
+</code></pre>
+</div>
+
 
 </article>
 
@@ -936,7 +1546,7 @@ ImageLoader: Not recognized format of external image 'sumisi/login.png'<br />
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2013/08/13/mssql-not-a-valid-ss_sqlsrv_stmt-resource">
-      mssql not a valid ss_sqlsrv_stmt resource
+      Mssql not a valid ss_sqlsrv_stmt resource
     </a>
   </h1>
   <div class="post-date">Aug 13, 2013</div>
@@ -944,7 +1554,7 @@ ImageLoader: Not recognized format of external image 'sumisi/login.png'<br />
 
 <div class="highlighter-rouge"><pre class="highlight"><code>function connect()
 {
-	return sqlsrv_connect(..);
+    return sqlsrv_connect(..);
 }
 ..
 
@@ -958,6 +1568,7 @@ $result = sqlsrv_query(connect(), $sql);
 $result  = sqlsrv_query($connect, $sql);
 </code></pre>
 </div>
+
 
 </article>
 
@@ -994,14 +1605,15 @@ Delete one of it to solve the problem.</p>
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2013/05/24/change-amazon-ec2-debian-ami-image-hostname">
-      change amazon ec2 debian AMI image hostname
+      Change amazon ec2 debian AMI image hostname
     </a>
   </h1>
   <div class="post-date">May 24, 2013</div>
-  <p><code><br />
-$sudo -i<br />
-#hostname -b<br />
-</code></p>
+  <div class="highlighter-rouge"><pre class="highlight"><code>$sudo -i
+#hostname -b
+</code></pre>
+</div>
+
 
 </article>
 
@@ -1014,10 +1626,12 @@ $sudo -i<br />
     </a>
   </h1>
   <div class="post-date">Apr 4, 2013</div>
-  <p>Add this into ~/.bash_profile<br />
-<code><br />
-setxkbmap -option terminate:ctrl_alt_bksp<br />
-</code></p>
+  <p>Add this into ~/.bash_profile</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>setxkbmap -option terminate:ctrl_alt_bksp
+</code></pre>
+</div>
+
 
 </article>
 
@@ -1030,57 +1644,67 @@ setxkbmap -option terminate:ctrl_alt_bksp<br />
     </a>
   </h1>
   <div class="post-date">Mar 10, 2013</div>
-  <p>php-cgi.php just hang and die on a very low load.</p>
-<p>To fix this, use <a href="https://bitbucket.org/cybergene/spawn-php/wiki/Home">spawn-php</a></p>
-<p>Install<br />
-<code><br />
-ActivePython-2.7.2.5-win64-x64.msi<br />
-pywin32-217.win-amd64-py2.7.exe<br />
-</code></p>
-<p>Change nginx configuration<br />
-<code><br />
+  <p>php-cgi.php just hang and die on a very low load.
+To fix this, use <a href="https://bitbucket.org/cybergene/spawn-php/wiki/Home">spawn-php</a></p>
+
+<p>Install</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ActivePython-2.7.2.5-win64-x64.msi
+pywin32-217.win-amd64-py2.7.exe
+</code></pre>
+</div>
+
+<p>Change nginx configuration
 worker_processes  1;</p>
-<p>events {<br />
-    worker_connections  1024;<br />
-}</p>
-<p>http {<br />
-   include       mime.types;<br />
-   default_type  application/octet-stream;</p>
-<p>   sendfile        on;<br />
-   keepalive_timeout  65;</p>
-<p>   upstream php_farm {<br />
-       server 127.0.0.1:9000 weight=1;<br />
-       server 127.0.0.1:9001 weight=1;<br />
-       server 127.0.0.1:9002 weight=1;<br />
-       server 127.0.0.1:9003 weight=1;<br />
-       server 127.0.0.1:9004 weight=1;<br />
-       server 127.0.0.1:9005 weight=1;<br />
-       server 127.0.0.1:9006 weight=1;<br />
-       server 127.0.0.1:9007 weight=1;<br />
-       server 127.0.0.1:9008 weight=1;<br />
-       server 127.0.0.1:9009 weight=1;<br />
-    }</p>
-<p>    server {<br />
-       listen       80;<br />
-       server_name  localhost;<br />
-       location / {<br />
-            root   html;<br />
-            index  index.php index.html index.htm;<br />
-        }</p>
-<p>        error_page   500 502 503 504  /50x.html;<br />
-        location = /50x.html {<br />
-            root   html;<br />
-        }   </p>
-<p>        location ~ \.php$ {<br />
-            root           html;<br />
-            fastcgi_pass   php_farm;<br />
-            fastcgi_index  index.php;<br />
-            fastcgi_param  SCRIPT_FILENAME  c:/nginx/html/$fastcgi_script_name;<br />
-            include        fastcgi_params;<br />
-        }<br />
-    }<br />
-}<br />
-</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>events {
+  worker_connections  1024;
+}
+
+http {
+  include       mime.types;
+  default_type  application/octet-stream;
+  sendfile        on;
+  keepalive_timeout  65;
+
+  upstream php_farm {
+   server 127.0.0.1:9000 weight=1;
+   server 127.0.0.1:9001 weight=1;
+   server 127.0.0.1:9002 weight=1;
+   server 127.0.0.1:9003 weight=1;
+   server 127.0.0.1:9004 weight=1;
+   server 127.0.0.1:9005 weight=1;
+   server 127.0.0.1:9006 weight=1;
+   server 127.0.0.1:9007 weight=1;
+   server 127.0.0.1:9008 weight=1;
+   server 127.0.0.1:9009 weight=1;
+  }
+
+
+server {
+  listen       80;
+  server_name  localhost;
+  location / {
+   root   html;
+   index  index.php index.html index.htm;
+  }
+
+  error_page   500 502 503 504  /50x.html;
+   location = /50x.html {
+   root   html;
+  }
+ 
+  location ~ \.php$ {
+   root           html;
+   fastcgi_pass   php_farm;
+   fastcgi_index  index.php;
+   fastcgi_param  SCRIPT_FILENAME  c:/nginx/html/$fastcgi_script_name;
+   include        fastcgi_params;
+  }
+}
+</code></pre>
+</div>
+
 
 </article>
 
@@ -1089,13 +1713,13 @@ worker_processes  1;</p>
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2013/03/10/change-default-browser">
-      change default browser
+      Change default browser
     </a>
   </h1>
   <div class="post-date">Mar 10, 2013</div>
-  <p><code><br />
-#update-alternatives --config x-www-browser<br />
-</code></p>
+  <div class="highlighter-rouge"><pre class="highlight"><code>#update-alternatives --config x-www-browser
+</code></pre>
+</div>
 
 </article>
 
@@ -1104,21 +1728,25 @@ worker_processes  1;</p>
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2013/02/28/php-linux-vs-window-version">
-      php linux vs window version
+      PHP linux vs window version
     </a>
   </h1>
   <div class="post-date">Feb 28, 2013</div>
-  <p>Come across interesting fact;</p>
-<p>In linux<br />
-<code><br />
-echo $_SERVER['SERVER_NAME']; //somedomain.org<br />
-echo $_SERVER['HTTP_HOST']; //somedomain.org<br />
-</code></p>
-<p>In window<br />
-<code><br />
-echo $_SERVER['SERVER_NAME']; //localhost<br />
-echo $_SERVER['HTTP_HOST']; //somedomain.org<br />
-</code></p>
+  <p>Come across interesting fact:
+In linux</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>echo $_SERVER['SERVER_NAME']; //somedomain.org
+echo $_SERVER['HTTP_HOST']; //somedomain.org
+</code></pre>
+</div>
+
+<p>In window</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>echo $_SERVER['SERVER_NAME']; //localhost
+echo $_SERVER['HTTP_HOST']; //somedomain.org
+</code></pre>
+</div>
+
 
 </article>
 
@@ -1127,34 +1755,44 @@ echo $_SERVER['HTTP_HOST']; //somedomain.org<br />
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2013/02/24/change-associated-array-to-indexed-array">
-      change associated array to indexed array
+      Change associated array to indexed array
     </a>
   </h1>
   <div class="post-date">Feb 24, 2013</div>
-  <p>sometimes i want to change this form of array<br />
-<code><br />
-array('position'=&gt; array('data1', 'data2'..)<br />
-       'year'   =&gt; array('year1', 'year2'..)<br />
-)<br />
-</code></p>
-<p>to this<br />
-<code><br />
-array(0 =&gt; array('position'=&gt; 'data1',<br />
-                 'year' =&gt; 'year1'),<br />
-      1 =&gt; array('position' =&gt; 'data2',<br />
-                 'year' =&gt; 'year2')<br />
-</code></p>
-<p>here is how i do it.<br />
-<code><br />
-function array_group($data)<br />
-{<br />
-     $result = array();<br />
-     foreach($data as $key=&gt;$rows)<br />
-         foreach($rows as $i=&gt;$value)<br />
-             $result[$i][$key] = $value; </p>
-<p>     return $result;<br />
-}<br />
-</code></p>
+  <p>Sometimes i want to change this form of array</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array(
+  'position' =&gt; array('data1', 'data2'..)
+  'year'     =&gt; array('year1', 'year2'..)
+)
+</code></pre>
+</div>
+
+<p>to this</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array(0 =&gt; array('position' =&gt;'data1',
+                 'year' =&gt; 'year1'),
+
+      1 =&gt; array('position' =&gt; 'data2',
+                 'year' =&gt; 'year2')
+</code></pre>
+</div>
+
+<p>Here is how i do it.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>function array_group($data)
+{
+  $result = array();
+
+  foreach($data as $key=&gt;$rows)
+     foreach($rows as $i=&gt;$value)
+         $result[$i][$key] = $value;
+  
+   return $result;
+}
+</code></pre>
+</div>
+
 
 </article>
 
@@ -1163,16 +1801,19 @@ function array_group($data)<br />
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2013/02/20/virtualbox-look-ugly">
-      virtualbox look ugly
+      Virtualbox look ugly
     </a>
   </h1>
   <div class="post-date">Feb 20, 2013</div>
-  <p>virtualbox made with qt library. To fix the ugly win95 looking theme,<br />
-<code><br />
-#aptitude install qt4-qtconfig<br />
-$qtconfig<br />
-</code></p>
+  <p>Virtualbox made with qt library. To fix the ugly win95 looking theme,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#aptitude install qt4-qtconfig
+$qtconfig
+</code></pre>
+</div>
+
 <p>and change the Gui Style to GTK+</p>
+
 
 </article>
 
@@ -1180,29 +1821,32 @@ $qtconfig<br />
 
 <article class='post'>
   <h1 class='post-title'>
-    <a href="/2013/02/20/710">
+    <a href="/2013/02/20/vim-configuration">
       
     </a>
   </h1>
   <div class="post-date">Feb 20, 2013</div>
-  <p><img src="/assets/untitled.png?w=300" alt="Vim" width="300" height="190" class="alignnone size-medium wp-image-711" /></p>
-<p>edit the configuration files _vimrc</p>
-<p><code><br />
-set tabstop=4<br />
-set shiftwidth=4<br />
-set expandtab<br />
-set autoindent<br />
-set smartindent<br />
-set textwidth=0<br />
-set nowrap<br />
-set number<br />
-set scrolljump=5<br />
-colorscheme koehler<br />
-set guifont=Consolas<br />
-set guioptions-=m "remove menubar<br />
-set guioptions-=T "remove toolbar<br />
-set guioptions-=r "remove scrollbar<br />
-</code></p>
+  <p><img src="assets/vimconfig.png" alt="vim config" /></p>
+
+<p>Edit the configuration files _vimrc</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>set tabstop=4
+set shiftwidth=4
+set expandtab
+set autoindent
+set smartindent
+set textwidth=0
+set nowrap
+set number
+set scrolljump=5
+colorscheme koehler
+set guifont=Consolas
+set guioptions-=m "remove menubar
+set guioptions-=T "remove toolbar
+set guioptions-=r "remove scrollbar
+</code></pre>
+</div>
+
 
 </article>
 
@@ -1215,13 +1859,17 @@ set guioptions-=r "remove scrollbar<br />
     </a>
   </h1>
   <div class="post-date">Feb 17, 2013</div>
-  <p>Using SCOPE_IDENTITY(), </p>
-<p><code><br />
-$result = sqlsrv_query($conn, 'INSERT INTO mytable(name) values ('hello world') ; SELECT SCOPE_IDENTITY() AS ID', array(), $option);<br />
-sqlsrv_next_result();<br />
-$row = sqlsrv_fetch_object($result);</p>
-<p>echo $row-&gt;ID; //last insert id<br />
-</code></p>
+  <p>Using SCOPE_IDENTITY(),</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$result = sqlsrv_query($conn, 'INSERT INTO mytable(name) values ('hello world') ; 
+                               SELECT SCOPE_IDENTITY() AS ID', array(), $option);
+sqlsrv_next_result();
+
+$row = sqlsrv_fetch_object($result);
+echo $row-&gt;ID; //last insert id
+</code></pre>
+</div>
+
 
 </article>
 
@@ -1234,10 +1882,12 @@ $row = sqlsrv_fetch_object($result);</p>
     </a>
   </h1>
   <div class="post-date">Feb 17, 2013</div>
-  <p>some unexpected stuff</p>
-<p><code><br />
-var_dump('f' == 0); //bool(true)<br />
-</code></p>
+  <p>Some unexpected stuff</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var_dump('f' == 0); //bool(true)
+</code></pre>
+</div>
+
 
 </article>
 
@@ -1285,21 +1935,23 @@ But it keep returning FALSE even the query executed succesfully.</p>
 
 <article class='post'>
   <h1 class='post-title'>
-    <a href="/2013/02/17/mssql-paging-with-cte-2">
+    <a href="/2013/02/17/mssql-paging-with-cte">
       MSSQL paging with CTE
     </a>
   </h1>
   <div class="post-date">Feb 17, 2013</div>
-  <p>No LIMIT OFFSET as in PostgreSQL or MySQL.<br />
-<code><br />
-WITH cte AS<br />
-(<br />
-      SELECT ROW_NUMBER() OVER(ORDER BY country ASC) AS RowNumber<br />
-      FROM company WHERE country='Malaysia'<br />
-)<br />
-SELECT * FROM cte<br />
-WHERE RowNumber &gt; 0 AND RowNumber &lt; 100 </p>
-<p></code></p>
+  <p>No LIMIT OFFSET as in PostgreSQL or MySQL.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>WITH cte AS
+(
+  SELECT ROW_NUMBER() OVER(ORDER BY country ASC) AS RowNumber
+  FROM company WHERE country='Malaysia'
+)
+SELECT * FROM cte
+WHERE RowNumber &gt; 0 AND RowNumber &lt; 100
+</code></pre>
+</div>
+
 
 </article>
 
@@ -1307,19 +1959,23 @@ WHERE RowNumber &gt; 0 AND RowNumber &lt; 100 </p>
 
 <article class='post'>
   <h1 class='post-title'>
-    <a href="/2013/02/17/mssql-paging-with-cte">
-      sqlsrv driver return datetime colum as datetime object
+    <a href="/2013/02/17/sqlsrv-driver-return-datetime">
+      Sqlsrv driver return datetime colum as datetime object
     </a>
   </h1>
   <div class="post-date">Feb 17, 2013</div>
-  <p>MSSQL's PHP driver sqlsrv_fetch_object return DateTime object by default. To disable this, pass parameter ReturnDatesAsString on the connection string</p>
-<p><code><br />
-$param = array('Database' = &gt; 'db',<br />
-               'UID' =&gt; 'uname',<br />
-               'PWD' =&gt; 'secret',<br />
-               'ReturnDatesAsStrings' =&gt; 'true');</p>
-<p>$conn = sqlsrv_connect('localhost\sqlexpress', $param);<br />
-</code></p>
+  <p>MSSQL’s PHP driver sqlsrv_fetch_object return DateTime object by default. <br />
+To disable this, pass parameter ReturnDatesAsString on the connection string.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$param = array('Database' =&gt; 'db',
+               'UID' =&gt; 'uname',
+               'PWD' =&gt; 'secret',
+               'ReturnDatesAsStrings' =&gt; 'true');
+
+$conn = sqlsrv_connect('localhost\sqlexpress', $param);
+</code></pre>
+</div>
+
 
 </article>
 
@@ -1342,15 +1998,16 @@ on<a href="http://qooxdoo.678.n2.nabble.com/Problem-with-qx-ui-form-DateField-vs
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2012/09/29/disable-tabview-page">
-      disable tabview page
+      Qooxdoo disable tabview page
     </a>
   </h1>
   <div class="post-date">Sep 29, 2012</div>
   <p>Here is a way to disable the tabview page. Turn it grey and unclickable.</p>
-<p><code><br />
-var page = new qx.ui.tabview.Page("page");<br />
-page.set({enabled: false});<br />
-</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var page = new qx.ui.tabview.Page("page");
+page.set({enabled: false});
+</code></pre>
+</div>
 
 </article>
 
@@ -1359,18 +2016,19 @@ page.set({enabled: false});<br />
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2012/09/20/wheezy-php5-fpm-and-nginx">
-      wheezy php5-fpm and nginx
+      Wheezy php5-fpm and nginx
     </a>
   </h1>
   <div class="post-date">Sep 20, 2012</div>
-  <p>Debian wheezy version of php5-fpm (5.4.4-7) using socket instead of server running on local port 9000.<br />
+  <p>Debian wheezy version of php5-fpm (5.4.4-7) using socket instead of server running on local port 9000.
 Need to update nginx configuration files to point to php5-fpm socket.</p>
-<p><code><br />
-location ~.\.php$ {<br />
-   #fastcgi_pass 127.0.0.1:9000;<br />
-    fastcgi_pass unix:/var/run/php5-fpm.sock;<br />
-}<br />
-</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>location ~.\.php$ {
+  #fastcgi_pass 127.0.0.1:9000;
+  fastcgi_pass unix:/var/run/php5-fpm.sock;
+}
+</code></pre>
+</div>
 
 </article>
 
@@ -1384,24 +2042,32 @@ location ~.\.php$ {<br />
   </h1>
   <div class="post-date">Sep 19, 2012</div>
   <p>class definition (shop.py), please note the magic active_id</p>
-<p><code><br />
-class item(osv.osv):<br />
-_name = "shop.item"<br />
-_columns = {<br />
-"item_id": fields.many2one("shop.cart", "Cart"),<br />
-}<br />
-_defaults = {<br />
-"item_id": lambda self, cr, uid, c: c.get('item_id', False),<br />
-}</code></p>
-<p>class cart(osv.osv):<br />
-_name = "shop.cart"<br />
-_columns = {<br />
-"item_ids": one2many("shop.item", "item_id", "Items"),<br />
-}</p>
-<p>In the view definition for the one2many field (shop_view.xml)<br />
-<code></code></p>
-<p>&lt;field name="item_ids" domain="['item_id', '=', active_id]" context="{'item_id': active_id}" /&gt;</p>
-<p>&nbsp;</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class item(osv.osv):
+_name = "shop.item"
+_columns = {
+  "item_id": fields.many2one("shop.cart", "Cart"),
+}
+
+_defaults = {
+  "item_id": lambda self, cr, uid, c: c.get('item_id', False),
+}
+
+
+class cart(osv.osv):
+_name = "shop.cart"
+_columns = {
+  "item_ids": one2many("shop.item", "item_id", "Items"),
+}
+</code></pre>
+</div>
+
+<p>In the view definition for the one2many field (shop_view.xml)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;field name="item_ids" domain="['item_id', '=', active_id]" context="{'item_id': active_id}"&gt;
+</code></pre>
+</div>
+
 
 </article>
 
@@ -1410,17 +2076,19 @@ _columns = {<br />
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2012/09/17/oss4-no-sound-in-iceweasel-flash">
-      oss4 no sound in iceweasel flash
+      Oss4 no sound in iceweasel flash
     </a>
   </h1>
   <div class="post-date">Sep 17, 2012</div>
   <p>flashplugin-nonfree only support Alsa. Thus, extra package required to support OSS4</p>
-<p><code><br />
-#aptitude install flashplugin-nonfree-extrasound<br />
-#mkdir /usr/lib/oss/lib<br />
-#cd /usr/lib/oss/lib<br />
-#ln -s /usr/lib/flashplugin-nonfree-extrasound/libflashsupport.so .<br />
-</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#aptitude install flashplugin-nonfree-extrasound
+#mkdir /usr/lib/oss/lib
+#cd /usr/lib/oss/lib
+#ln -s /usr/lib/flashplugin-nonfree-extrasound/libflashsupport.so
+</code></pre>
+</div>
+
 <p>Restart iceweasel</p>
 
 </article>
@@ -1430,20 +2098,24 @@ _columns = {<br />
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2012/09/03/cloning-object-in-qooxdoo">
-      cloning object in qooxdoo
+      Cloning object in qooxdoo
     </a>
   </h1>
   <div class="post-date">Sep 3, 2012</div>
-  <p>Object<br />
-<code><br />
-var a = {};<br />
-var b = qx.lang.Object.clone(a);<br />
-</code></p>
-<p>Array<br />
-<code><br />
-var a = [];<br />
-var b = a.slice()<br />
-</code></p>
+  <p>Object</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var a = {};
+var b = qx.lang.Object.clone(a);
+</code></pre>
+</div>
+
+<p>Array</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var a = [];
+var b = a.slice();
+</code></pre>
+</div>
+
 
 </article>
 
@@ -1511,13 +2183,13 @@ $find /home/paragasu/myfile -type f -size 0 -exec rm -f {} \;<br />
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2012/03/17/output-csv-from-postgresql">
-      output  csv from postgresql
+      Output  csv from postgresql
     </a>
   </h1>
   <div class="post-date">Mar 17, 2012</div>
-  <p><code><br />
-psql&gt; COPY (SELECT * FROM tablename) TO '/tmp/filename.csv' WITH CSV HEADER;<br />
-</code></p>
+  <div class="highlighter-rouge"><pre class="highlight"><code>psql&gt; COPY (SELECT * FROM tablename) TO '/tmp/filename.csv' WITH CSV HEADER;
+</code></pre>
+</div>
 
 </article>
 
@@ -1526,7 +2198,7 @@ psql&gt; COPY (SELECT * FROM tablename) TO '/tmp/filename.csv' WITH CSV HEADER;<
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2012/03/06/qooxdoo-execute-callback-function-on-this-scope">
-      qooxdoo execute callback function on this scope
+      Qooxdoo execute callback function on this scope
     </a>
   </h1>
   <div class="post-date">Mar 6, 2012</div>
@@ -1543,52 +2215,65 @@ psql&gt; COPY (SELECT * FROM tablename) TO '/tmp/filename.csv' WITH CSV HEADER;<
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2012/02/28/global-variables-in-qooxdoo">
-      global variables in qooxdoo
+      Global variables in qooxdoo
     </a>
   </h1>
   <div class="post-date">Feb 28, 2012</div>
-  <p><code><br />
-Declare the variables in your Application class:</p>
-<p> qx.Class.define("custom.Application",<br />
-{<br />
-  extend  : qx.application.Standalone,</p>
-<p>  members :<br />
-  {<br />
-    /** My global variable */<br />
-    bGlobal : true</p>
-<p>    main : function()<br />
-    {<br />
-      // access to global variable from within this class using "this"<br />
-      this.bGlobal = false;<br />
-    }<br />
-  }<br />
-}</p>
-<p>Then you can access that main application class using qx.core.Init.getApplication() so in some other class, you can read  the global like this:</p>
-<p> qx.Class.define("custom.SomeArbitraryClass",<br />
-{<br />
-  extend  : qx.core.Object,</p>
-<p>  construct : function()<br />
-  {<br />
-    /** Access the global variable */<br />
-    if (qx.core.Init.getApplication().bGlobal)<br />
-    {<br />
-      alert("The global is TRUE");<br />
-    }<br />
-}</p>
-<p>You could also have made that global be a property of the Application class:<br />
- qx.Class.define("custom.Application",<br />
-{<br />
-  extend  : qx.application.Standalone,</p>
-<p>  properties :<br />
-  {<br />
-    /** My global variable */<br />
-    global : true<br />
-    ...</p>
-<p>in which case you'd reference it from the other class using the property's getter:</p>
-<p>  qx.core.Init.getApplicaiton().getGlobal()</p>
-<p>Hope that helps.</p>
-<p>Derrell<br />
-</code></p>
+  <p>Declare the variables in your Application class:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>qx.Class.define("custom.Application",
+{
+  extend  : qx.application.Standalone,
+  members :
+  {
+  /** My global variable */
+   bGlobal : true
+   main : function()
+   {
+  // access to global variable from within this class using "this"
+     this.bGlobal = false;
+   }
+  }
+}
+</code></pre>
+</div>
+
+<p>Then you can access that main application class using <em>qx.core.Init.getApplication()</em> so in some other class, you can read  the global like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>qx.Class.define("custom.SomeArbitraryClass",
+{
+  extend  : qx.core.Object,
+  construct : function()
+  {
+    /** Access the global variable */
+    if(qx.core.Init.getApplication().bGlobal)
+    {
+      alert("The global is TRUE");
+    }
+  }
+}
+</code></pre>
+</div>
+
+<p>You could also have made that global be a property of the Application class:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>qx.Class.define("custom.Application",
+{
+  extend  : qx.application.Standalone,
+  properties :
+  {
+  /** My global variable */
+   global : true
+   ...
+</code></pre>
+</div>
+
+<p>In which case you’d reference it from the other class using the property’s getter:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>qx.core.Init.getApplicaiton().getGlobal()
+</code></pre>
+</div>
+
 
 </article>
 
@@ -1643,17 +2328,18 @@ the field(s) res_model,src_model: Invalid model name in the action definition.</
     </a>
   </h1>
   <div class="post-date">Jan 9, 2012</div>
-  <p>If you install binary manually eg: eclipse. Most likely you end up without entries in FBpanel the start menu.</p>
-<p>Just create a file appname.desktop in then ~/.local/share/applications<br />
-<code><br />
-[Desktop Entry]<br />
-Type=Application<br />
-Name=Eclipse<br />
-Exec=/opt/eclipse/eclipse<br />
-Icon=/opt/eclipse/icon.xpm<br />
-NoDisplay=false<br />
-Categories=Development<br />
-</code></p>
+  <p>If you install binary manually eg: eclipse. Most likely you end up without entries in FBpanel the start menu.
+Just create a file appname.desktop in then ~/.local/share/applications</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[Desktop Entry]
+Type=Application
+Name=Eclipse
+Exec=/opt/eclipse/eclipse
+Icon=/opt/eclipse/icon.xpm
+NoDisplay=false
+Categories=Development
+</code></pre>
+</div>
 
 </article>
 
@@ -1666,20 +2352,24 @@ Categories=Development<br />
     </a>
   </h1>
   <div class="post-date">Jan 7, 2012</div>
-  <p><code><br />
-$android<br />
-/usr/share/themes/Taqua/gtk-2.0/gtkrc:55: Clearlooks configuration option "sunkenmenubar" is not supported and will be ignored.<br />
-/usr/share/themes/Taqua/gtk-2.0/gtkrc:56: Clearlooks configuration option "menuitemstyle" is not supported and will be ignored.<br />
-/usr/share/themes/Taqua/gtk-2.0/gtkrc:57: Clearlooks configuration option "listviewitemstyle" is not supported and will be ignored</code></p>
-<p>To fix it, uncomment the sunkenmenubar, menuitemstyle and lastviewitemstyle in the /usr/share/themes/Taqua/gtk-2.0/gtkrc<br />
-<code><br />
-engine "clearlooks"<br />
-{<br />
-#sunkenmenubar = 0<br />
-#menuitemstyle = 0<br />
-#listviewitemstyle =0<br />
-}<br />
-</code></p>
+  <div class="highlighter-rouge"><pre class="highlight"><code>$android
+/usr/share/themes/Taqua/gtk-2.0/gtkrc:55: Clearlooks configuration option "sunkenmenubar" is not supported and will be ignored.
+/usr/share/themes/Taqua/gtk-2.0/gtkrc:56: Clearlooks configuration option "menuitemstyle" is not supported and will be ignored.
+/usr/share/themes/Taqua/gtk-2.0/gtkrc:57: Clearlooks configuration option "listviewitemstyle" is not supported and will be ignored
+</code></pre>
+</div>
+
+<p>To fix it, uncomment the sunkenmenubar, menuitemstyle and lastviewitemstyle <br />
+in the /usr/share/themes/Taqua/gtk-2.0/gtkrc</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>engine "clearlooks"
+{
+  #sunkenmenubar = 0
+  #menuitemstyle = 0
+  #listviewitemstyle =0
+}
+</code></pre>
+</div>
 
 </article>
 
@@ -1984,22 +2674,30 @@ $wicd-client<br />
     </a>
   </h1>
   <div class="post-date">Oct 26, 2010</div>
-  <p><code><br />
-#aptitude install youtube-dl ffmpeg libmp3lame </code></p>
-<p>a simple bash script called youtube<br />
-<code><br />
-#!/bin/bash<br />
-x=/tmp/youtube-dl-$RANDOM-$RANDOM.flv<br />
-youtube-dl --output=$x --format=18 "http://www.youtube.com/watch?v=$1"<br />
-echo "convert flv to mp3"<br />
-ffmpeg -i $x -acodec libmp3lame -ac 2 -ab 128k -vn -y "/home/paragasu/mp3/youtube/$2"<br />
-rm $x<br />
-echo "done" </code></p>
-<p>the fun begin<br />
-<code><br />
-$youtube linkname fileoutput.mp3</code></p>
-<p><a href="http://hubpages.com/hub/Youtube-to-MP3-on-Ubuntu-Linux"><br />
-more</a></p>
+  <div class="highlighter-rouge"><pre class="highlight"><code>#aptitude install youtube-dl ffmpeg libmp3lame
+</code></pre>
+</div>
+
+<p>a simple bash script called youtube</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nv">x</span><span class="o">=</span>/tmp/youtube-dl-<span class="nv">$RANDOM</span>-<span class="nv">$RANDOM</span>.flv
+youtube-dl --output<span class="o">=</span><span class="nv">$x</span> --format<span class="o">=</span>18 <span class="s2">"http://www.youtube.com/watch?v=</span><span class="nv">$1</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"convert flv to mp3"</span>
+ffmpeg -i <span class="nv">$x</span> -acodec libmp3lame -ac 2 -ab 128k -vn -y <span class="s2">"/home/paragasu/mp3/youtube/</span><span class="nv">$2</span><span class="s2">"</span>
+rm <span class="nv">$x</span>
+<span class="nb">echo</span> <span class="s2">"done"</span>
+</code></pre>
+</div>
+
+<p>The fun begin</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$youtube linkname fileoutput.mp3
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="http://hubpages.com/hub/Youtube-to-MP3-on-Ubuntu-Linux">Youtube to mp3 on ubuntu linux</a></p>
 
 </article>
 
@@ -5158,30 +5856,36 @@ libgmailer is a PHP library that allow you to write PHP program to access Google
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2008/10/08/how-to-display-busy-cursor">
-      how to display busy cursor
+      How to display busy cursor
     </a>
   </h1>
   <div class="post-date">Oct 8, 2008</div>
-  <p>interesting post on gtk-app-devel-list@gnome.org mailing list<br />
-<code><br />
-void busy_stuff ()<br />
-{<br />
-   GdkDisplay *display;<br />
-   GdkCursor *cursor;<br />
-   GdkWindow *window;<br />
-   gint x, y;</p>
-<p>   cursor = gdk_cursor_new(GDK_WATCH);</p>
-<p>   display = gdk_display_get_default();<br />
-   window = gdk_display_get_window_at_pointer(disp, &amp;x, &amp;y);</p>
-<p>   gdk_window_set_cursor(window, cursor);<br />
-   gdk_display_sync(display);<br />
-   gdk_cursor_unref(cursor);</p>
-<p>   /* do time-consuming stuff here */</p>
-<p>   gdk_window_set_cursor(window, NULL);<br />
-}<br />
-</code></p>
+  <p>Interesting post on gtk-app-devel-list@gnome.org mailing list</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>void busy_stuff ()
+{
+  GdkDisplay *display;
+  GdkCursor *cursor;
+  GdkWindow *window;
+  gint x, y;
+
+  cursor = gdk_cursor_new(GDK_WATCH);
+  display = gdk_display_get_default();
+  window = gdk_display_get_window_at_pointer(disp, &amp;amp;x, &amp;amp;y);
+		gdk_window_set_cursor(window, cursor);
+  gdk_display_sync(display);
+  gdk_cursor_unref(cursor);
+
+  /* do time-consuming stuff here */
+  gdk_window_set_cursor(window, NULL);
+
+}
+</code></pre>
+</div>
+
 <p>gdk_cursor_unref() prevent memory leak</p>
-<p><a href="http://mail.gnome.org/archives/gtk-devel-list/"> Mailing list archive </a></p>
+
+<p>More on <a href="http://mail.gnome.org/archives/gtk-devel-list">Mailing list archive</a></p>
 
 </article>
 
@@ -5220,12 +5924,13 @@ void busy_stuff ()<br />
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2008/10/04/select-row-within-days-interval">
-      select row within days interval
+      Select row within days interval
     </a>
   </h1>
   <div class="post-date">Oct 4, 2008</div>
-  <p>
-SELECT * FROM mytable WHERE mydate &gt; DATE_SUB(now(),INTERVAL 7 DAYS)</p>
+  <div class="highlighter-rouge"><pre class="highlight"><code>SELECT * FROM mytable WHERE mydate &gt; DATE_SUB(now(),INTERVAL 7 DAYS)
+</code></pre>
+</div>
 
 </article>
 
@@ -5238,24 +5943,34 @@ SELECT * FROM mytable WHERE mydate &gt; DATE_SUB(now(),INTERVAL 7 DAYS)</p>
     </a>
   </h1>
   <div class="post-date">Oct 4, 2008</div>
-  <p>using GValue related function is quite tricky. It is not working if you do<br />
-<code><br />
-GdaDataModel *dm;<br />
-gint i;<br />
-i = g_value_get_int ( gda_data_model_get_value_at (dm, 0, 0));<br />
-</code></p>
+  <p>Using GValue related function is quite tricky. It is not working if you do</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>GdaDataModel *dm;
+gint i;
+i = g_value_get_int ( gda_data_model_get_value_at (dm, 0, 0));
+</code></pre>
+</div>
+
 <p>For upcomming Version 4.0 (the main difference is at GdaDataModel API)</p>
-<p>GdaDataModel *model;<br />
-const GValue *integer;<br />
-GError *error = NULL;</p>
-<p>integer = gda_value_new (G_TYPE_INT);<br />
-integer = gda_data_model_get_value_at  (model, 0, 0, &amp;error);</p>
-<p>/* All values in a Data Model must be unmodificable then use const GValue, this<br />
-will avoid compilation warnings */</p>
-<p>Or can use (gda_value_new makes this for you :-)<br />
-integer = g_new0 (GValue. 1);<br />
-g_value_init (inteteger, G_TYPE_INT);</p>
-<p>thank to Daniel Espinosa </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>GdaDataModel *model;
+const GValue *integer;
+GError *error = NULL;
+integer = gda_value_new (G_TYPE_INT);
+integer = gda_data_model_get_value_at  (model, 0, 0, &amp;error);
+</code></pre>
+</div>
+
+<p>All values in a Data Model must be unmodificable then use const GValue, this will avoid compilation warnings. 
+Or can use (gda_value_new makes this for you :-)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>integer = g_new0 (GValue. 1);
+g_value_init (inteteger, G_TYPE_INT);
+</code></pre>
+</div>
+
+<p>Thanks to Daniel Espinosa</p>
+
 
 </article>
 
@@ -5264,17 +5979,25 @@ g_value_init (inteteger, G_TYPE_INT);</p>
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2008/10/02/undefine-reference-to">
-      Undefine reference to
+      Gtk undefine reference
     </a>
   </h1>
   <div class="post-date">Oct 2, 2008</div>
   <p>Header file and function on separate file should not have the static function declaration.</p>
-<p>static void loan_new_record (gpointer data);<br />
-static void loan_display_reset ( GtkWidget *data); </p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>static void loan_new_record (gpointer data);
+static void loan_display_reset ( GtkWidget *data); 
+</code></pre>
+</div>
+
 <p>to</p>
-<p>void loan_new_record (gpointer data);<br />
-void loan_display_reset ( GtkWidget *data); </p>
-<p><a href="http://www.gtkforums.com/viewtopic.php?t=1830"> read more </a></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>void loan_new_record (gpointer data);
+void loan_display_reset ( GtkWidget *data);
+</code></pre>
+</div>
+
+<p><a href="http://www.gtkforums.com/viewtopic.php?t=1830">Read more</a></p>
 
 </article>
 
@@ -5350,43 +6073,50 @@ d = c;<br />
 
 <article class='post'>
   <h1 class='post-title'>
-    <a href="/2008/09/30/49">
-      align gtk label using gtk_misc_set_alignment()
+    <a href="/2008/09/30/align-gtk-label">
+      Align gtk label using gtk_misc_set_alignment()
     </a>
   </h1>
   <div class="post-date">Sep 30, 2008</div>
-  <p>When packing a gtk label inside gtk table. I come across one problem. All the label as aligned center. As a result i just made one ugly form. To fix the problem, use gtk_misc_set_alignment(). See code example</p>
-<p><code><br />
-#include &lt;gtk/gtk.h&gt;<br />
-int main (int argc, char **argv)<br />
-{<br />
-GtkWidget *window;</code></p>
-<p>gtk_init( &amp;argc, &amp;argv);</p>
-<p>window = gtk_window_new(GTK_WINDOW_TOPLEVEL);</p>
-<p>GtkWidget *table = gtk_table_new( 4, 1, TRUE ) ;<br />
-GtkWidget *label;</p>
-<p>label = gtk_label_new("Normal label");<br />
-gtk_table_attach_defaults ( GTK_TABLE(table), label, 0, 1, 0, 1)</p>
-<p>label = gtk_label_new( "left" );<br />
-gtk_misc_set_alignment( GTK_MISC(label), 0.0, 0.0 );<br />
-gtk_table_attach( GTK_TABLE(table), label, 0, 1, 1, 2,<br />
-                                     GTK_EXPAND|GTK_FILL, GTK_SHRINK, 0, 0 ); /*important*/</p>
-<p>label = gtk_label_new( "center" );<br />
-gtk_misc_set_alignment( GTK_MISC(label), 0.5, 0.0 );<br />
-gtk_table_attach_defaults( GTK_TABLE(table), label, 0, 1, 2, 3<br />
-                                     GTK_EXPAND|GTK_FILL, GTK_SHRINK, 0, 0 ); /*important*/</p>
-<p>label = gtk_label_new( "right" );<br />
-gtk_misc_set_alignment( GTK_MISC(label), 1.0, 0.0 );<br />
-gtk_table_attach_defaults( GTK_TABLE(table), label, 0, 1, 3, 4<br />
-                                     GTK_EXPAND|GTK_FILL, GTK_SHRINK, 0, 0 ); /*important*/</p>
-<p>gtk_widget_set_size_request (GTK_WIDGET (table), 200, 100);<br />
-gtk_container_add( GTK_CONTAINER (window), GTK_WIDGET(table));<br />
-gtk_widget_show_all(window);<br />
-gtk_main();</p>
-<p>return 0;<br />
-}</p>
-<p>[caption id="attachment_53" align="alignnone" width="208" caption="gtk label with gtk_misc_set_alignment()"]<a href="http://paragasu.files.wordpress.com/2008/09/tablescr.png"><img class="size-full wp-image-53" title="gtk label with gtk_misc_set_" src="/assets/tablescr.png" alt="gtk label with gtk_misc_set_" width="208" height="128" /></a>[/caption]</p>
-<p>Thanks to <a href="http://www.gtkforums.com/viewtopic.php?t=1792">owl102 from gtkforums.com </a></p>
+  <p>When packing a gtk label inside gtk table. I come across one problem. All the label as aligned center. <br />
+As a result i just made one ugly form. To fix the problem, use gtk_misc_set_alignment().</p>
+
+<p><img src="/assets/tablescr.png" alt="Gtk screenshot" title="gtk label with gtk_misc_set_&quot; width=&quot;208&quot; height=&quot;128" /></p>
+
+<p>See code example</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#include &lt;gtk/gtk.h&gt;
+int main (int argc, char **argv)
+{
+  GtkWidget *window;
+  gtk_init( &amp;amp;argc, &amp;amp;argv);
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  GtkWidget *table = gtk_table_new( 4, 1, TRUE );
+  GtkWidget *label;
+  label = gtk_label_new("Normal label");
+  gtk_table_attach_defaults ( GTK_TABLE(table), label, 0, 1, 0, 1)
+  label = gtk_label_new( "left" );
+  gtk_misc_set_alignment( GTK_MISC(label), 0.0, 0.0 );
+  gtk_table_attach( GTK_TABLE(table), label, 0, 1, 1, 2,
+                    GTK_EXPAND|GTK_FILL, GTK_SHRINK, 0, 0 ); /*important*/
+  label = gtk_label_new( "center" );
+  gtk_misc_set_alignment( GTK_MISC(label), 0.5, 0.0 );
+  gtk_table_attach_defaults( GTK_TABLE(table), label, 0, 1, 2, 3
+                             GTK_EXPAND|GTK_FILL, GTK_SHRINK, 0, 0 ); /*important*/
+  label = gtk_label_new( "right" );
+  gtk_misc_set_alignment( GTK_MISC(label), 1.0, 0.0 );
+  gtk_table_attach_defaults( GTK_TABLE(table), label, 0, 1, 3, 4
+                             GTK_EXPAND|GTK_FILL, GTK_SHRINK, 0, 0 ); /*important*/
+  gtk_widget_set_size_request (GTK_WIDGET (table), 200, 100);
+  gtk_container_add( GTK_CONTAINER (window), GTK_WIDGET(table));
+  gtk_widget_show_all(window);
+  gtk_main();
+  return 0;
+}
+</code></pre>
+</div>
+
+<p>Thanks to <a href="http://www.gtkforums.com/viewtopic.php?t=1792">owl102</a> from gtkforums.com</p>
 
 </article>
 
@@ -5399,15 +6129,17 @@ gtk_main();</p>
     </a>
   </h1>
   <div class="post-date">Sep 30, 2008</div>
-  <p>GnomeDbRawGrid come from GtkTreeView widget.</p>
-<p>So we can select row using gtk_tree_view_selection_select_iter() and get the current selected row gtk_tree_view_get_selection().</p>
-<p><code><br />
-GnomeDbRawGrid *grid;<br />
-GtkTreeView *tree_view;</p>
-<p>tree_view = GTK_TREE_VIEW (grid);<br />
-</code><br />
-<a href="http://svn.gnome.org/viewvc/libgnomedb/trunk/libgnomedb/gnome-db-raw-grid.c?view=markup"><br />
-View complete code</a></p>
+  <p>GnomeDbRawGrid come from GtkTreeView widget.
+So we can select row using gtk_tree_view_selection_select_iter() and get the current selected row gtk_tree_view_get_selection().</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>GnomeDbRawGrid *grid;
+GtkTreeView *tree_view;
+tree_view = GTK_TREE_VIEW (grid);
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="http://svn.gnome.org/viewvc/libgnomedb/trunk/libgnomedb/gnome-db-raw-grid.c?view=markup">Gnome db raw grid</a></p>
 
 </article>
 
@@ -5421,16 +6153,28 @@ View complete code</a></p>
   </h1>
   <div class="post-date">Sep 29, 2008</div>
   <p>There is several way to save image into postgresql database. Using oid, blob and bytea data types.bytea column type recommended.</p>
-<p>To store image<br />
-gdk_pixdata_from_pixbuf(),<br />
-gdk_pixdata_serialize()</p>
-<p>To display image<br />
-gdk_pixdata_deserialize(),<br />
-gdk_pixbuf_from_pixdata(),<br />
-gtk_image_new_from_pixbuf() </p>
-<p><a href="http://library.gnome.org/devel/gdk-pixbuf/stable/gdk-pixbuf-inline.html"> Gdk Pixbuf inline </a><br />
-<a href="http://svn.gnome.org/viewvc/libgnomedb/trunk/libgnomedb/plugins/common-pict.c?revision=1686&amp;view=markup">Libgnomedb Example  </a></p>
-<p>Thank to vivien and Yann Droneaud for great help</p>
+
+<p>To store image</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gdk_pixdata_from_pixbuf(),
+gdk_pixdata_serialize()
+</code></pre>
+</div>
+
+<p>To display image</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gdk_pixdata_deserialize(),
+gdk_pixbuf_from_pixdata(),
+gtk_image_new_from_pixbuf() 
+</code></pre>
+</div>
+
+<p>Thanks to vivien and Yann Droneaud for great help</p>
+
+<p>Related<br />
+<a href="http://library.gnome.org/devel/gdk-pixbuf/stable/gdk-pixbuf-inline.html">Gdk Pixbuf inline</a><br />
+<a href="http://svn.gnome.org/viewvc/libgnomedb/trunk/libgnomedb/plugins/common-pict.c?revision=1686&amp;view=markup">Libgnomedb example</a></p>
+
 
 </article>
 
@@ -5470,24 +6214,29 @@ Room: #MyOSS</p>
 <article class='post'>
   <h1 class='post-title'>
     <a href="/2008/09/29/string-with-dinamicly-growing-buffer">
-      String with dinamicly growing buffer
+      String with dinamicaly growing buffer
     </a>
   </h1>
   <div class="post-date">Sep 29, 2008</div>
-  <p>String is where buffer overflow always occur.<br />
-GLIB supports doing this much more easily:<br />
-<code><br />
-/* portable asprintf() */<br />
-char *str = g_strdup_printf("string%s%d", str_variable, int_variable);<br />
-</code><br />
-Or if you wanted a modifyable buffer:<br />
-<code><br />
-GString *str = g_string_new(NULL);<br />
-g_string_append(str, "string");<br />
-g_string_append(str, str_variable);<br />
-g_string_sprintfa(str, "%d", int_variable); /* no g_string_append_int() */<br />
-</code></p>
-<p><a href="http://www.irccrew.org/~cras/security/c-guide.html">Secure, Efficient and Easy C programming</a></p>
+  <p>String is where buffer overflow always occur.
+GLIB supports doing this much more easily:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/* portable asprintf() */
+char *str = g_strdup_printf("string%s%d", str_variable, int_variable);
+</code></pre>
+</div>
+
+<p>Or if you wanted a modifyable buffer:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>GString *str = g_string_new(NULL);
+g_string_append(str, "string");
+g_string_append(str, str_variable);
+g_string_sprintfa(str, "%d", int_variable); /* no g_string_append_int() */
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="http://www.irccrew.org/~cras/security/c-guide.html">Secure, Efficient and Easy C programming</a></p>
 
 </article>
 
@@ -5516,29 +6265,36 @@ g_string_sprintfa(str, "%d", int_variable); /* no g_string_append_int() */<br />
     </a>
   </h1>
   <div class="post-date">Sep 29, 2008</div>
-  <p>If you writing gtk application. You will have to use more than one source file to make the code more manage able. To compile the application you need to use make.</p>
-<p>[caption id="attachment_63" align="alignnone" width="411" caption="makefile tutorial"]<a href="http://paragasu.files.wordpress.com/2008/10/makefile.jpeg"><img class="size-full wp-image-63" title="makefile" src="/assets/makefile.jpeg" alt="makefile tutorial" width="411" height="528" /></a>[/caption]</p>
-<p>It is all you need to compile a c code with libgnomedb. This code will output an executable<br />
+  <p>If you writing gtk application. You will have to use more than one source file to make the code more manage able. To compile the application you need to use make.
+<img src="/assets/makefile.jpeg" alt="Makefile image" title="makefile tutorial" /></p>
+
+<p>It is all you need to compile a c code with libgnomedb. This code will output an executable
 file with name ekoken. A more complicated makefiles using variable is like this</p>
-<p><code><br />
-CC = gcc<br />
-LD = gcc<br />
-CFLAGS =<br />
-RM = rm -f<br />
-LDFLAGS = `pkg-config --libs gtk+-2.0`</code></p>
-<p>PROG =<br />
-OBJS =</p>
-<p>all : $(PROG)</p>
-<p>%.o : %.c<br />
-$(CC) $(CFLAGS) -c $&lt; -o $@</p>
-<p>$(PROG) : $(OBJS)<br />
-$(LD) $(LDFLAGS) $(OBJS) -o $(PROG)</p>
-<p>clean :<br />
-$(RM) $(OBJS) $(PROG)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>CC = gcc
+LD = gcc
+CFLAGS =
+RM = rm -f
+LDFLAGS = `pkg-config --libs gtk+-2.0`
+PROG =
+OBJS =
+
+all : $(PROG)
+%.o : %.c
+$(CC) $(CFLAGS) -c $&amp;lt; -o $@
+$(PROG) : $(OBJS)
+$(LD) $(LDFLAGS) $(OBJS) -o $(PROG)
+
+clean :
+$(RM) $(OBJS) $(PROG)
+</code></pre>
+</div>
+
 <p>Where PROG is the executable output and OBJS is the object file output with .o suffix.</p>
-<p>You can read more from this link<br />
-<a href="http://helpdesk.cs.tamu.edu/docs/makeFile"> Makefile in C or C++ </a><br />
-<a href="http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/"> A simple makefile tutorial </a></p>
+
+<p>Related<br />
+<a href="http://helpdesk.cs.tamu.edu/docs/makeFile">Makefile in C or C++</a><br />
+<a href="http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor">A simple makefile tutorial</a></p>
 
 </article>
 
@@ -5580,12 +6336,14 @@ Easily install debian distro using another running system to mounted drive.</p>
     </a>
   </h1>
   <div class="post-date">Sep 26, 2008</div>
-  <p>i think it is better to start with</p>
-<p><code><br />
-&lt;?<br />
-php echo "hello world";<br />
-?&gt;<br />
-</code></p>
+  <p>I think it is better to start with</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?
+php echo "hello world";
+?&gt;
+</code></pre>
+</div>
+
 
 </article>
 

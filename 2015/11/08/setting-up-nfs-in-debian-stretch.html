@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>setting up nfs in debian stretch</title>
-  <meta name="description" content="On nfs server#aptitude install nfs-kernel-serverEdit /etc/exports configuration file/home/me/public 192.168.1.2(rw,no_root_squash,subtree_check)Restart nfs#e...">
+  <title>Setting up nfs in debian stretch</title>
+  <meta name="description" content="On nfs server">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2015/11/08/setting-up-nfs-in-debian-stretch">
@@ -61,42 +61,80 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">setting up nfs in debian stretch</h1>
+    <h1 class="post-title" itemprop="name headline">Setting up nfs in debian stretch</h1>
     <p class="post-meta"><time datetime="2015-11-08T01:57:58+08:00" itemprop="datePublished">Nov 8, 2015</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">paragasu</span></span></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>On nfs server<br />
-<code><br />
-#aptitude install nfs-kernel-server<br />
-</code></p>
-<p>Edit /etc/exports configuration file<br />
-<code><br />
-/home/me/public 192.168.1.2(rw,no_root_squash,subtree_check)<br />
-</code></p>
-<p>Restart nfs<br />
-<code><br />
-#exportfs -a<br />
-#/etc/init.d/nfs-kernel-server start<br />
-</code></p>
-<p>On nfs client<br />
-<code><br />
-#aptitude install nfs-common<br />
-#/etc/init.d/nfs-common start<br />
-</code></p>
-<p>To list available nfs<br />
-<code><br />
-#showmount -e 192.168.1.2<br />
-</code></p>
-<p>To mount nfs<br />
-<code><br />
-#mount -t nfs /home/me/public /mnt/public<br />
-</code><br />
-<a href="https://www.linode.com/docs/networking/basic-nfs-configuration-on-debian-7/">more info</a></p>
+    <p>On nfs server</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#aptitude install nfs-kernel-server
+</code></pre>
+</div>
+
+<p>Edit /etc/exports configuration file</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/home/me/public 192.168.1.2(rw,no_root_squash,subtree_check)&lt;br /&gt;
+</code></pre>
+</div>
+
+<p>Restart nfs</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#exportfs -a
+#/etc/init.d/nfs-kernel-server start
+</code></pre>
+</div>
+
+<p>On nfs client</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#aptitude install nfs-common
+#/etc/init.d/nfs-common start
+</code></pre>
+</div>
+
+<p>To list available nfs</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#showmount -e 192.168.1.2
+</code></pre>
+</div>
+
+<p>To mount nfs</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>#mount -t nfs /home/me/public /mnt/public&lt;br /&gt;
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="https://www.linode.com/docs/networking/basic-nfs-configuration-on-debian-7">Basic nfs configuration on debian 7</a></p>
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>

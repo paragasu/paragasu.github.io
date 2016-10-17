@@ -5,35 +5,217 @@
     <description>Different in a good way.</description>
     <link>http://paragasu.github.io/</link>
     <atom:link href="http://paragasu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 31 Jan 2016 11:19:57 +0800</pubDate>
-    <lastBuildDate>Sun, 31 Jan 2016 11:19:57 +0800</lastBuildDate>
-    <generator>Jekyll v3.0.1</generator>
+    <pubDate>Mon, 17 Oct 2016 21:22:22 +0800</pubDate>
+    <lastBuildDate>Mon, 17 Oct 2016 21:22:22 +0800</lastBuildDate>
+    <generator>Jekyll v3.1.1</generator>
     
       <item>
-        <title>Merge git repo as another branch</title>
-        <description>&lt;p&gt;I have two local repository on my directory api-php and api-nodejs.
-I want to have one repo called api with two branch php and nodejs.&lt;/p&gt;
+        <title>Installing CouchDB 2.0 on Debian Stretch</title>
+        <description>&lt;p&gt;CouchDB 2.0 released on September 2016 has clustering support.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$cd api-php
-$git remote add nodejs ../api-nodejs
-$git remote update
-$git checkout -b nodejs
-$git checkout nodejs
-$git rm -f *
-$git merge nodejs/master 
-$git push -f
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#cd /usr/src
+#wget http://www-eu.apache.org/dist/couchdb/source/2.0.0/apache-couchdb-2.0.0.tar.gz
+#tar xvzf apache-couchdb-2.0.0.tar.gz
+#cd apache-couchdb-2.0.0
+#./configure
+#make release
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;By the way, both php and node js implement the same api but the language is totally differnet.&lt;br /&gt;
-It is best to put both project on separate repository.&lt;/p&gt;
+&lt;p&gt;By any chance you encounter this error,&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ERROR: Unable to generate spec: read file info /usr/lib/erlang/man/man1/gcc-ar.1.gz failed 
+ERROR: Unexpected error: rebar_abort   
+generate failed while processing  rebar_abort 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You need to install erlang-base-hipe instead of erlang-base&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#aptitude install erlang-base-hipe
+#rm /usr/lib/erlang/main
+#make clean
+#make release
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Mon, 17 Oct 2016 09:08:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/10/17/installing-couchdb-2.0-on-debian-stretch</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/10/17/installing-couchdb-2.0-on-debian-stretch</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Debugging and logging in OpenResty</title>
+        <description>&lt;p&gt;There is a few key point to ease the development of lua in OpenResty environment.&lt;/p&gt;
+
+&lt;h3 id=&quot;turn-lua-code-caching-off&quot;&gt;Turn lua code caching off&lt;/h3&gt;
+
+&lt;p&gt;Restarting nginx everytime there is a code changes is painful. 
+The easier way is to load external lua code using &lt;em&gt;content_by_lua_file&lt;/em&gt; as opposed
+to have lua code inside nginx configuration files and then turn off the cache.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;location /hello {
+  default_type text/html;
+  lua_code_cache off; #development
+  content_by_lua ./hello.lua;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;read-nginx-log-as-it-is-written&quot;&gt;Read nginx log as it is written&lt;/h3&gt;
+
+&lt;p&gt;Set the error_log configuration directive to output log on easily accessable directory.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;error_log /home/away/tmp/hello.log
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And read the log interactively in a separate terminal as it been written using&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tail -f /home/away/temp/hello.log
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;output-the-log-file-in-the-terminal&quot;&gt;Output the log file in the terminal&lt;/h3&gt;
+&lt;p&gt;Redirect all error log to the terminal where nginx is running&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;error_log /dev/stderr;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;log-event-or-variable&quot;&gt;Log event or variable&lt;/h3&gt;
+&lt;p&gt;Output debugging info using ngx.log&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ngx.log(ngx.ERR, &quot;hello world here&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;References &lt;br /&gt;
+&lt;a href=&quot;http://openresty.org&quot;&gt;OpenResty website&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.staticshin.com/programming/definitely-an-open-resty-guide&quot;&gt;Definintely an OpenResty Guide&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 29 Jul 2016 08:43:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/07/29/openresty-debugging-and-logging</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/07/29/openresty-debugging-and-logging</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Nodejs gotcha on heroku</title>
+        <description>&lt;p&gt;Use environment variable process.env.PORT instead of requesting for fixed port.
+Heroku will assign random port everytime the application bootup. This lead to some misleading
+error like strange Redis too many connection error and error H10.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;app.listen(process.env.PORT || 5000);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Another gotcha when we upgrade the PostgreSQL to the bigger plan, yet another misleading error&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;error: no pg_hba.conf entry for host 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The paid plan (standard-0) only accept ssl connection:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;postgres://user:seckrit@pghost:5432/dbname?ssl=true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+</description>
+        <pubDate>Wed, 18 May 2016 11:47:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/05/18/nodejs-on-heroku</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/05/18/nodejs-on-heroku</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>isFloat and isInteger in javascript</title>
+        <description>&lt;p&gt;Found some interesting way to check isFloat and isInteger in javascript on stackoverflow&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function isFloat(n) {
+  return n === +n &amp;amp;&amp;amp; n !== (n|0);
+}
+
+function isInteger(n) {
+  return n === +n &amp;amp;&amp;amp; n === (n|0);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;Related&lt;br /&gt;
-&lt;a href=&quot;http://stackoverflow.com/questions/21353656/merge-git-repo-into-branch-of-another-repo&quot;&gt;Merge git repo into branch of another repo&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&quot;http://stackoverflow.com/questions/3885817/how-do-i-check-that-a-number-is-float-or-integer&quot;&gt;How do i check that a number is a float or integer&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Fri, 29 Jan 2016 16:53:00 +0800</pubDate>
-        <link>http://paragasu.github.io/2016/01/29/merge-git-repo-as-another-branch</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2016/01/29/merge-git-repo-as-another-branch</guid>
+        <pubDate>Tue, 22 Mar 2016 16:45:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/03/22/javascript-isfloat-and-isinteger</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/03/22/javascript-isfloat-and-isinteger</guid>
+        
+        
+        <category>javascript</category>
+        
+      </item>
+    
+      <item>
+        <title>Couchapp on Debian Stretch</title>
+        <description>&lt;p&gt;I have been developing application using &lt;a href=&quot;http://qooxdoo.org&quot;&gt;Qooxdoo&lt;/a&gt; for years.
+It works great so far, except when the internet very slow, which is quite common problem.
+It make the application behave unexpectedly weird because user will randomly click
+anywhere while data loading from the server.&lt;/p&gt;
+
+&lt;p&gt;One way to solve this problem is to design using offline first concept. 
+That is where i get to know about &lt;a href=&quot;http://pouchdb.com&quot;&gt;PouchDB&lt;/a&gt; and  &lt;a href=&quot;http://couchdb.apache.org&quot;&gt;CouchDB&lt;/a&gt;.
+&lt;a href=&quot;https://github.com/couchapp/couchapp&quot;&gt;Couchapp&lt;/a&gt; is a convinient way to develop application on CouchDB.&lt;/p&gt;
+
+&lt;p&gt;Installing couchapp is pretty easy,&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#aptitude install python-pip
+#pip install couchapp
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then creating a new project,&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$couchapp generate hello
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Related&lt;br /&gt;
+&lt;a href=&quot;https://github.com/couchapp/couchapp&quot;&gt;Couchapp on github&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://docs.couchdb.org/en/latest/couchapp/ddocs.html&quot;&gt;Couchapp documentation&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.ibm.com/developerworks/opensource/tutorials/os-couchapp/index.html&quot;&gt;Building couchapp&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 10 Mar 2016 14:17:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/03/10/couchapp-on-debian-stretch</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/03/10/couchapp-on-debian-stretch</guid>
+        
+        
+        <category>couchdb</category>
+        
+      </item>
+    
+      <item>
+        <title>Remove node_modules from remote git repo</title>
+        <description>&lt;p&gt;node_modules folder in the root project directory can be very large and slow down commit.&lt;br /&gt;
+This command will overwrite history.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$git filter-branch -f --tree-filter &#39;rm -rf node_modules&#39; HEAD 
+$git gc --prune
+$git push origin master --force
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Related&lt;br /&gt;
+&lt;a href=&quot;http://dalibornasevic.com/posts/2-permanently-remove-files-and-folders-from-a-git-repository&quot;&gt;Permanently remove files and folders from Git repo&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 01 Mar 2016 15:32:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/03/01/remove-node-modules-from-remote-git-repo</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/03/01/remove-node-modules-from-remote-git-repo</guid>
         
         
         <category>git</category>
@@ -41,276 +223,137 @@ It is best to put both project on separate repository.&lt;/p&gt;
       </item>
     
       <item>
-        <title>Generate SSL certificates using letsencrypt</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://letsencrypt.org&quot;&gt;Letsencrypt&lt;/a&gt; provide free ssl certificate. The only downside is that the certificate only valid &lt;br /&gt;
-for 3 months and then you have to renew the certificate again.&lt;/p&gt;
+        <title>Validate malaysian phone number in javascript</title>
+        <description>&lt;p&gt;My pull request just accepted by chriso author of validator.js, now you can use validator.js 
+to validate malaysian phone number using ‘ms-MY’ locale.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#git clone https://github.com/letsencrypt/letsencrypt
-#cd letsencrypt
-#./letsencrypt certonly --manual -d mydomain.com
+&lt;p&gt;Probably will take sometime before the npm and bower package updated.&lt;br /&gt;
+You can install via npm,&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$npm install --save https://github.com/chriso/validator.js.git
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;On my debian server, The command will update packages and ask for root if you run as normal user
-and it will require you to put some key file in the root domain for verification.&lt;/p&gt;
+&lt;p&gt;On nodejs,&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http://mydomain.com/.well-known/acme-challenge/random-key-filename
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;const v = require(&#39;validator&#39;)
+v.isMobilePhone(&#39;+60128747889&#39;, &#39;ms-MY&#39;)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;You have to make sure the content-type is text/plain for the verification to work.
-The certificate will be available at /etc/letsencrypt.
-The latest cert will be inside the /etc/letsencrypt/live folder.&lt;/p&gt;
+&lt;p&gt;On browser,&lt;/p&gt;
 
-&lt;p&gt;You need to update your server configuration to point to the cert file.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;script type=&quot;text/javascript&quot; src=&quot;validator.min.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script type=&quot;text/javascript&quot;&amp;gt;
+  validator.isMobilePhone(&#39;+60128747889&#39;, &#39;ms-MY&#39;) //true
+&amp;lt;/script&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Btw, i wish the locale is en-MY but there is no such thing. So, i think ms-MY will do.&lt;/p&gt;
 
 &lt;p&gt;Related&lt;br /&gt;
-&lt;a href=&quot;https://github.com/letsencrypt/letsencrypt&quot;&gt;Letsencrypt github&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://letsencrypt.readthedocs.org/en/latest/using.html#installation&quot;&gt;Letsencrypt user guide&lt;/a&gt;&lt;/p&gt;
-
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Telephone_numbers_in_Malaysia&quot;&gt;Telephone number in malaysia&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/chriso/validator.js&quot;&gt;Github validator.js&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 28 Jan 2016 16:23:00 +0800</pubDate>
-        <link>http://paragasu.github.io/2016/01/28/letsencrypt-ssl-debian</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2016/01/28/letsencrypt-ssl-debian</guid>
+        <pubDate>Thu, 25 Feb 2016 09:52:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/02/25/validate-malaysian-phone-number-javascript</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/02/25/validate-malaysian-phone-number-javascript</guid>
         
         
-        <category>linux</category>
+        <category>javascript</category>
         
       </item>
     
       <item>
-        <title>Https on Nodejs</title>
-        <description>&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;const https = require(&#39;https&#39;);
-const fs = require(&#39;fs&#39;);
-
-const options = {
-  key: fs.readFileSync(&#39;test/fixtures/keys/agent2-key.pem&#39;),
-  cert: fs.readFileSync(&#39;test/fixtures/keys/agent2-cert.pem&#39;)
-};
-
-https.createServer(options, (req, res) =&amp;gt; {
-  res.writeHead(200);
-  res.end(&#39;hello world\n&#39;);
-}).listen(8000);
+        <title>Update github fork from the original repo</title>
+        <description>&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$git remote add --track master chriso git://github.com/chriso/validator.js.git
+$git fetch chriso
+$git merge chriso/master
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
 &lt;p&gt;Related&lt;br /&gt;
-&lt;a href=&quot;https://nodejs.org/api/https.html&quot;&gt;Nodejs doc&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&quot;http://bradlyfeeley.com/2008/09/03/update-a-github-fork-from-the-original-repo&quot;&gt;Update a github fork from the original repo&lt;/a&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Thu, 28 Jan 2016 16:02:00 +0800</pubDate>
-        <link>http://paragasu.github.io/2016/01/28/https-on-nodejs</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2016/01/28/https-on-nodejs</guid>
+        <pubDate>Wed, 24 Feb 2016 15:37:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/02/24/update-github-fork</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/02/24/update-github-fork</guid>
         
-        
-        <category>nodejs</category>
-        
-      </item>
-    
-      <item>
-        <title>Install gin.io in Debian Jessie</title>
-        <description>&lt;p&gt;Openresty is nginx with embeded lua. High performance with low memory footprint.    &lt;br /&gt;
-Gin is a small and elegant lua framework build on top of Openresty.&lt;/p&gt;
-
-&lt;p&gt;Install Openresty framework&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#aptitude install lua-dbi-postgresql-dev  
-#aptitude install luajit  
-#aptitude install libreadline-dev libncurses5-dev libpcre3-dev libssl-dev perl make build-essential
-#aptitude install libpq-dev
-#cd /usr/src
-#wget https://openresty.org/download/ngx_openresty-1.9.7.2.tar.gz
-#cd ngx_openresty*
-#./configure --with-luajit --with-http_postgres_module
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Install gin framework&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#aptitude install luarocks  
-#luarocks install --server=http://gin.io/repo gin  
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Related&lt;br /&gt;
-&lt;a href=&quot;http://openresty.org/&quot;&gt;OpenResty&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://gin.io&quot;&gt;Gin JSON API framework&lt;/a&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 27 Jan 2016 17:34:00 +0800</pubDate>
-        <link>http://paragasu.github.io/2016/01/27/install-lua-gin-openresty-debian-jessie</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2016/01/27/install-lua-gin-openresty-debian-jessie</guid>
-        
-        
-        <category>openresty</category>
-        
-      </item>
-    
-      <item>
-        <title>Could not open connection to your authentication agent</title>
-        <description>&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;eval `ssh-agent -s`
-ssh-add  
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-</description>
-        <pubDate>Mon, 25 Jan 2016 15:33:00 +0800</pubDate>
-        <link>http://paragasu.github.io/2016/01/25/could-not-open-connection-auth-agent</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2016/01/25/could-not-open-connection-auth-agent</guid>
-        
-        
-        <category>linux</category>
-        
-      </item>
-    
-      <item>
-        <title>PostgreSQL ENUM type</title>
-        <description>&lt;p&gt;To create enum type&lt;/p&gt;
-
-&lt;p&gt;CREATE TYPE colors AS ENUM (‘grey’, ‘skyblue’, ‘black’);&lt;/p&gt;
-
-&lt;p&gt;To list enum values&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;SELECT ENUM_RANGE(null::colors); or  
-SELECT UNNEST(ENUM_RANGE(null::colors)) AS colors;  
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;To add new item on the enum list&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ALTER TYPE colors ADD VALUE &#39;orange&#39; AFTER &#39;skyblue&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;To delete item from enum list&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ALTER TYPE colors DROP attribute &#39;orange&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;To drop enum type&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DROP type colors
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;There is a more elegant way using domain to enforce value from &lt;a href=&quot;http://justatheory.com/computers/databases/postgresql/enforce-set-of-values.html&quot;&gt;David E. Wheeler post&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CREATE DOMAIN eye_color AS TEXT
-CONSTRAINT valid_eye_colors CHECK (
-	VALUE IN ( &#39;blue&#39;, &#39;green&#39;, &#39;brown&#39; )
-);
-
-CREATE TABLE faces (
-	face_id SERIAL PRIMARY KEY,
-	name TEXT NOT NULL DEFAULT &#39;&#39;,
-	eye_color eye_color NOT NULL
-);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Related&lt;br /&gt;
-&lt;a href=&quot;http://www.postgresql.org/docs/current/static/functions-enum.html&quot;&gt;Enum support function&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://www.postgresql.org/docs/current/static/sql-altertype.html&quot;&gt;Alter type&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://justatheory.com/computers/databases/postgresql/enforce-set-of-values.html&quot;&gt;Enforce set of values&lt;/a&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 15 Jan 2016 15:10:00 +0800</pubDate>
-        <link>http://paragasu.github.io/2016/01/15/postgresql-enum-type</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2016/01/15/postgresql-enum-type</guid>
-        
-        
-        <category>database</category>
-        
-      </item>
-    
-      <item>
-        <title>Hash any string to number</title>
-        <description>&lt;p&gt;crc32 function will hash any string to number.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://redis.io/topics/partitioning&quot;&gt;Redis partitoning&lt;/a&gt;
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Cyclic_redundancy_check&quot;&gt;Cyclic Redundancy Check&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Mon, 11 Jan 2016 23:16:30 +0800</pubDate>
-        <link>http://paragasu.github.io/2016/01/11/hash-to-number</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2016/01/11/hash-to-number</guid>
-        
-        
-        <category>programming</category>
-        
-      </item>
-    
-      <item>
-        <title>Nodemon failed to start process, possible issue with exec arguments</title>
-        <description>&lt;p&gt;Nodemon will crashed with this error when the exec comman return error code 2&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[Nodemon] failed to start process, possible issue with exec arguments
-events.js:146
-	throw err;
-	^
-
-Error: Uncaught, unspecified &quot;error&quot; event. (2)
-	at emit (events.js:144:17)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Error code 2 is reserved for bash. Command line tools like mocha or jshint sometimes will throw error 2.
-When jshint or mocha executed as argument to -x in nodemon. Nodemon crash.&lt;/p&gt;
-
-&lt;p&gt;A simple workaround is to put exit 1 in the -x&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$nodemon --e js -w ./ -d 1 -x &#39;mocha ./test || exit 1&#39;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Related&lt;br /&gt;
-&lt;a href=&quot;https://github.com/remy/nodemon/blob/e177dd7865376876b01c8c4b069bf21aaf75cf50/lib/monitor/run.js#L118&quot;&gt;Nodemon code&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://github.com/remy/nodemon/issues/627&quot;&gt;JSHint integration on github&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://github.com/nodejs/node-v0.x-archive/blob/master/doc/api/process.markdown#exit-codes&quot;&gt;Nodejs exit code&lt;/a&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 11 Jan 2016 11:27:00 +0800</pubDate>
-        <link>http://paragasu.github.io/2016/01/11/nodemon-failed-to-start-process</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2016/01/11/nodemon-failed-to-start-process</guid>
-        
-        
-        <category>nodejs</category>
-        
-      </item>
-    
-      <item>
-        <title>Migration from wordpress.com to github.io in Debian</title>
-        <description>&lt;p&gt;Login to wordpress and export all pages&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#aptitude install ruby ruby-dev
-#gem install jekyll jekyll-import hpricot open_uri_redirections
-$jekyll new paragasu.github.io
-$cd paragasu.github.io
-$jekyll serve
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Mon, 11 Jan 2016 11:18:30 +0800</pubDate>
-        <link>http://paragasu.github.io/2016/01/11/migrating-to-github-io</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2016/01/11/migrating-to-github-io</guid>
-        
-        
-        <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>git change author info</title>
-        <description>&lt;p&gt;Edit the commit author and email name in github&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://help.github.com/articles/changing-author-info/&quot;&gt;change author info&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Mon, 28 Dec 2015 03:42:27 +0800</pubDate>
-        <link>http://paragasu.github.io/2015/12/28/git-change-author-info</link>
-        <guid isPermaLink="true">http://paragasu.github.io/2015/12/28/git-change-author-info</guid>
         
         <category>git</category>
         
+      </item>
+    
+      <item>
+        <title>Beautify javascript code</title>
+        <description>&lt;p&gt;Some of my javascript code indent contain mixed of tab and space&lt;br /&gt;
+and only aware of the code ugly indent when i open in github.&lt;/p&gt;
+
+&lt;p&gt;There is a few cli program to format code and my favorite so far is &lt;em&gt;js-beautify&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#npm install -g js-beautify
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Go to the source code do&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$js-beautify -h
+$js-beautify -s 2 -r *js
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You can make vim to display space character on the editor by using the command&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:set list
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+</description>
+        <pubDate>Sat, 20 Feb 2016 11:30:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/02/20/beautify-js-code</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/02/20/beautify-js-code</guid>
+        
+        
+        <category>js</category>
+        
+      </item>
+    
+      <item>
+        <title>Variable in nginx configuration</title>
+        <description>&lt;p&gt;Found one interesting overlook configuration in nginx.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;server {
+  server_name ~^(www\.)?(?&amp;lt;domain&amp;gt;.+)$;
+
+  location / {
+    root /sites/$domain;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Some note on the matching pattern modifiers,&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(none) prefix match
+=    match exactly
+~    case sensetive regex match
+~*   case insensetive regex match
+^~   non regular match is prefered
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Related&lt;br /&gt;
+&lt;a href=&quot;http://nginx.org/en/docs/http/ngx_http_core_module.html#server&quot;&gt;Nginx core module configuration&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms&quot;&gt;Understanding server and location block selection algorithm&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 20 Feb 2016 10:59:00 +0800</pubDate>
+        <link>http://paragasu.github.io/2016/02/20/costum-variable-in-nginx-conf</link>
+        <guid isPermaLink="true">http://paragasu.github.io/2016/02/20/costum-variable-in-nginx-conf</guid>
+        
+        
+        <category>nginx</category>
         
       </item>
     

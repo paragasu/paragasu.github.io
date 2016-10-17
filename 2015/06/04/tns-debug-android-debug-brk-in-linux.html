@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>tns debug android --debug-brk in linux</title>
-  <meta name="description" content="the nativescript cli$tns debug android --debug-brkThe command expect your google chrome executable name is "chrome".But in my debian jessie workstation. The ...">
+  <meta name="description" content="The nativescript cli">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2015/06/04/tns-debug-android-debug-brk-in-linux">
@@ -66,20 +66,50 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>the nativescript cli<br />
-<code><br />
-$tns debug android --debug-brk<br />
-</code></p>
-<p>The command expect your google chrome executable name is "chrome".<br />
-But in my debian jessie workstation. The executable name is "google-chrome"</p>
-<p><code><br />
-$ln -s /usr/bin/google-chrome ~/bin/chrome<br />
-</code></p>
+    <p>The nativescript cli</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$tns debug android --debug-brk
+</code></pre>
+</div>
+
+<p>The command expect your google chrome executable name is “chrome”.<br />
+But in my debian jessie workstation. The executable name is “google-chrome”</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ln -s /usr/bin/google-chrome ~/bin/chrome
+</code></pre>
+</div>
+
 <p>will fix the problem.</p>
+
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>

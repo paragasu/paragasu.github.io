@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>qooxdoo wrong icon path after  migrate from 2.0 to 3.5</title>
-  <meta name="description" content="It must be in the form below, start by "/**" and end by "*/" and in between start by "*"./*** @assert(sumisi/*)*/Otherwise assert will not be read by JsDoc a...">
+  <title>Qooxdoo wrong icon path after  migrate from 2.0 to 3.5</title>
+  <meta name="description" content="It must be in the form below, start by “/*” and end by “/” and in between start by “*”.">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2014/03/12/qooxdoo-wrong-icon-path-after-migrate-from-2-0-to-3-5">
@@ -61,26 +61,55 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">qooxdoo wrong icon path after  migrate from 2.0 to 3.5</h1>
+    <h1 class="post-title" itemprop="name headline">Qooxdoo wrong icon path after  migrate from 2.0 to 3.5</h1>
     <p class="post-meta"><time datetime="2014-03-12T12:58:37+08:00" itemprop="datePublished">Mar 12, 2014</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">paragasu</span></span></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>It must be in the form below, start by "/**" and end by "*/" and in between start by "*".<br />
-<code><br />
-/**<br />
-* @assert(sumisi/*)<br />
-*/<br />
-</code></p>
-<p>Otherwise assert will not be read by JsDoc and give an error<br />
-<code><br />
-qx.ui.basic.Image[90-0]: Image could not be loaded: sumisi/login.png<br />
-ImageLoader: Not recognized format of external image 'sumisi/login.png'<br />
-</code></p>
+    <p>It must be in the form below, start by “/<em>*” and end by “</em>/” and in between start by “*”.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/**
+* @assert(sumisi/*)
+*/
+</code></pre>
+</div>
+
+<p>Otherwise assert will not be read by JsDoc and give an error.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>qx.ui.basic.Image[90-0]: Image could not be loaded: sumisi/login.png
+ImageLoader: Not recognized format of external image 'sumisi/login.png'
+</code></pre>
+</div>
+
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>

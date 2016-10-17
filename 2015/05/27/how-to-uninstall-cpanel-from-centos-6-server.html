@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>How to uninstall Cpanel from Centos 6 server</title>
-  <meta name="description" content="#yum erase 'centos*'make sure to edit the /etc/yum.conf to remove the packages listed in the exclude section[main]exclude= ..">
+  <meta name="description" content="#yum erase 'centos*'">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2015/05/27/how-to-uninstall-cpanel-from-centos-6-server">
@@ -66,18 +66,46 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p><code><br />
-#yum erase 'centos*'<br />
-<code></p>
-<p>make sure to edit the /etc/yum.conf to remove the packages listed in the exclude section<br />
-<code><br />
-[main]<br />
-exclude= ..<br />
-</code></code></code></p>
+    <div class="highlighter-rouge"><pre class="highlight"><code>#yum erase 'centos*'
+</code></pre>
+</div>
+
+<p>Make sure to edit the <em>/etc/yum.conf</em> to remove the packages listed in the exclude section</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[main]
+exclude= ..
+</code></pre>
+</div>
+
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>

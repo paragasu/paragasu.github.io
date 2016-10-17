@@ -62,23 +62,50 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">Select row in GnomeDbRawGrid</h1>
-    <p class="post-meta"><time datetime="2008-09-30T02:49:55+08:00" itemprop="datePublished">Sep 30, 2008</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">paragasu</span></span></p>
+    <p class="post-meta"><time datetime="2008-09-30T02:49:55+08:00" itemprop="datePublished">Sep 30, 2008</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"></span></span></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>GnomeDbRawGrid come from GtkTreeView widget.</p>
-<p>So we can select row using gtk_tree_view_selection_select_iter() and get the current selected row gtk_tree_view_get_selection().</p>
-<p><code><br />
-GnomeDbRawGrid *grid;<br />
-GtkTreeView *tree_view;</p>
-<p>tree_view = GTK_TREE_VIEW (grid);<br />
-</code><br />
-<a href="http://svn.gnome.org/viewvc/libgnomedb/trunk/libgnomedb/gnome-db-raw-grid.c?view=markup"><br />
-View complete code</a></p>
+    <p>GnomeDbRawGrid come from GtkTreeView widget.
+So we can select row using gtk_tree_view_selection_select_iter() and get the current selected row gtk_tree_view_get_selection().</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>GnomeDbRawGrid *grid;
+GtkTreeView *tree_view;
+tree_view = GTK_TREE_VIEW (grid);
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="http://svn.gnome.org/viewvc/libgnomedb/trunk/libgnomedb/gnome-db-raw-grid.c?view=markup">Gnome db raw grid</a></p>
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>

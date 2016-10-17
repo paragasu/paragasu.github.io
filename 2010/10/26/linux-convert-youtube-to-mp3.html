@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>linux convert youtube to mp3</title>
-  <meta name="description" content="#aptitude install youtube-dl ffmpeg libmp3lame a simple bash script called youtube#!/bin/bashx=/tmp/youtube-dl-$RANDOM-$RANDOM.flvyoutube-dl --output=$x --fo...">
+  <meta name="description" content="#aptitude install youtube-dl ffmpeg libmp3lame">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://paragasu.github.io/2010/10/26/linux-convert-youtube-to-mp3">
@@ -66,26 +66,59 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p><code><br />
-#aptitude install youtube-dl ffmpeg libmp3lame </code></p>
-<p>a simple bash script called youtube<br />
-<code><br />
-#!/bin/bash<br />
-x=/tmp/youtube-dl-$RANDOM-$RANDOM.flv<br />
-youtube-dl --output=$x --format=18 "http://www.youtube.com/watch?v=$1"<br />
-echo "convert flv to mp3"<br />
-ffmpeg -i $x -acodec libmp3lame -ac 2 -ab 128k -vn -y "/home/paragasu/mp3/youtube/$2"<br />
-rm $x<br />
-echo "done" </code></p>
-<p>the fun begin<br />
-<code><br />
-$youtube linkname fileoutput.mp3</code></p>
-<p><a href="http://hubpages.com/hub/Youtube-to-MP3-on-Ubuntu-Linux"><br />
-more</a></p>
+    <div class="highlighter-rouge"><pre class="highlight"><code>#aptitude install youtube-dl ffmpeg libmp3lame
+</code></pre>
+</div>
+
+<p>a simple bash script called youtube</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nv">x</span><span class="o">=</span>/tmp/youtube-dl-<span class="nv">$RANDOM</span>-<span class="nv">$RANDOM</span>.flv
+youtube-dl --output<span class="o">=</span><span class="nv">$x</span> --format<span class="o">=</span>18 <span class="s2">"http://www.youtube.com/watch?v=</span><span class="nv">$1</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"convert flv to mp3"</span>
+ffmpeg -i <span class="nv">$x</span> -acodec libmp3lame -ac 2 -ab 128k -vn -y <span class="s2">"/home/paragasu/mp3/youtube/</span><span class="nv">$2</span><span class="s2">"</span>
+rm <span class="nv">$x</span>
+<span class="nb">echo</span> <span class="s2">"done"</span>
+</code></pre>
+</div>
+
+<p>The fun begin</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$youtube linkname fileoutput.mp3
+</code></pre>
+</div>
+
+<p>Related<br />
+<a href="http://hubpages.com/hub/Youtube-to-MP3-on-Ubuntu-Linux">Youtube to mp3 on ubuntu linux</a></p>
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>

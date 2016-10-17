@@ -66,24 +66,53 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p><code><br />
-$android<br />
-/usr/share/themes/Taqua/gtk-2.0/gtkrc:55: Clearlooks configuration option "sunkenmenubar" is not supported and will be ignored.<br />
-/usr/share/themes/Taqua/gtk-2.0/gtkrc:56: Clearlooks configuration option "menuitemstyle" is not supported and will be ignored.<br />
-/usr/share/themes/Taqua/gtk-2.0/gtkrc:57: Clearlooks configuration option "listviewitemstyle" is not supported and will be ignored</code></p>
-<p>To fix it, uncomment the sunkenmenubar, menuitemstyle and lastviewitemstyle in the /usr/share/themes/Taqua/gtk-2.0/gtkrc<br />
-<code><br />
-engine "clearlooks"<br />
-{<br />
-#sunkenmenubar = 0<br />
-#menuitemstyle = 0<br />
-#listviewitemstyle =0<br />
-}<br />
-</code></p>
+    <div class="highlighter-rouge"><pre class="highlight"><code>$android
+/usr/share/themes/Taqua/gtk-2.0/gtkrc:55: Clearlooks configuration option "sunkenmenubar" is not supported and will be ignored.
+/usr/share/themes/Taqua/gtk-2.0/gtkrc:56: Clearlooks configuration option "menuitemstyle" is not supported and will be ignored.
+/usr/share/themes/Taqua/gtk-2.0/gtkrc:57: Clearlooks configuration option "listviewitemstyle" is not supported and will be ignored
+</code></pre>
+</div>
+
+<p>To fix it, uncomment the sunkenmenubar, menuitemstyle and lastviewitemstyle <br />
+in the /usr/share/themes/Taqua/gtk-2.0/gtkrc</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>engine "clearlooks"
+{
+  #sunkenmenubar = 0
+  #menuitemstyle = 0
+  #listviewitemstyle =0
+}
+</code></pre>
+</div>
 
   </div>
 
 </article>
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+
+    var disqus_config = function () {
+        this.page.url = ;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+     */
+
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//paragasu.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<script id="dsq-count-scr" src="//paragasu.disqus.com/count.js" async></script>
+    
+    
 
       </div>
     </div>
